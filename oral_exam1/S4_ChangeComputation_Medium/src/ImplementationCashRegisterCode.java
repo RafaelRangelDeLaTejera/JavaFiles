@@ -9,11 +9,32 @@ public class ImplementationCashRegisterCode {
 
         /** Promp user to enter item price */
         System.out.print("Enter the Items's price, use decimal point for cents:");
-
-        /** read in from user the next input available */
+        /** read in from user the next input string available */
         String price = input.next();
 
-        CashRegister cashRegister = new CashRegister(price);
+        /**Prompt user to enter the amount of each bill or coin that was given */
+        /** if statement to display the options of the bills or coins depending on the price and prompt the user to type the amount of each unit and then read it in */
+        System.out.print("amount of 20 dollar bills given, enter 0 for none or the number given:");
+        int twentyDollars = input.nextInt();
+        System.out.print("amount of 10 dollar bills given, enter 0 for none or the number given:");
+        int tenDollars = input.nextInt();
+        System.out.print("amount of 5 dollar bills given, enter 0 for none or the number given:");
+        int fiveDollars = input.nextInt();
+        System.out.print("amount of 1 dollar bills given, enter 0 for none or the number given:");
+        int oneDollars = input.nextInt();
+        System.out.print("amount of 25 cent coin (quarter) given, enter 0 for none or the number given:");
+        int twentyFiveCents = input.nextInt();
+        System.out.print("amount of 10 dollar bills given, enter 0 for none or the number given:");
+        int tenCents = input.nextInt();
+        System.out.print("amount of 5 dollar bills given, enter 0 for none or the number given:");
+        int fiveCents = input.nextInt();
+        System.out.print("amount of 1 dollar bills given, enter 0 for none or the number given:");
+        int oneCent = input.nextInt();
+
+
+
+        /** initialize a CashRegister object to perform the cash register functionality */
+        CashRegister cashRegister = new CashRegister(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
 
     }
 }
