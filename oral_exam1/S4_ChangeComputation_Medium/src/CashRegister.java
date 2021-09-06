@@ -2,6 +2,9 @@ import java.util.Locale;
 
 public class CashRegister {
 
+//    static final Boolean twentyDollarBill;
+
+
     /**
      *
      */
@@ -48,7 +51,7 @@ public class CashRegister {
     }
 
     public String changeDollarsToEuro(int dollarsUS, int centsUSD){
-        String euros = "yes";
+        String euros ="";
 
         /** convert dollars to Euros with conversion factor of 1 USD = 0.8419 Euros and keeping the int precision of using whole units and cents of currency separately to avoid double or float imprecision */
         int totalAmountOfCentEuros = (dollarsUS * 8419)/100 + (centsUSD * 8419)/10000;
@@ -68,9 +71,26 @@ public class CashRegister {
             }
         }
 
-        //if (wholeEuros/20 != 0 )
+        /**if statement to check how much of each bill of cent will be returned as change*/
+        int returnTwentyEuroBills = wholeEuros/20;
+        int returnTenEuroBills = wholeEuros/10;
+        int returnFiveEuroBills = wholeEuros/5;
+        int returnOneEuroBills = wholeEuros;
+
+        int returnFiftyEuroCoins = centEuros/50;
+        int returnTwentyEuroCoins = centEuros/20;
+        int returnTenEuroCoins = centEuros/10;
+        int returnFiveEuroCoins = centEuros/5;
+        int returnOneEuroCoins = centEuros;
 
         return euros;
+    }
+
+    /**
+     * method to check what bills the costumer paid with to return change in preferably those same bills
+     */
+    public void checkBillsPayedWith(){
+
     }
 }
 
