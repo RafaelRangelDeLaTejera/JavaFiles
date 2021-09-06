@@ -61,7 +61,51 @@ public class ChangeInEuroCurrencyUnits {
 
     public void printEuroUnits(int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
         /**determine which bills and coins will be used to pay back */
-        if (twentyBills !=0 && this.getTotalEuroCents()/2000 > 0){
+
+        int noOfTwentyEuroBills = 0;
+        int noOfTenEuroBills = 0;
+        int noOfFiveEuroBills = 0;
+        int noOfOneEuroBills = 0;
+        int noOfFiftyCentCoins = 0;
+        int noOfTwentyCentCoins = 0;
+        int noOfTenCentCoins = 0;
+        int noOfFiveCentCoins = 0;
+        int noOfTOneCentCoins = 0;
+
+        noOfTwentyEuroBills = checkForBills(twentyBills,2000);
+        noOfTenEuroBills = checkForBills(tenBills,1000);
+        noOfFiveEuroBills = checkForBills(fiveBills,500);
+        noOfOneEuroBills = checkForBills(oneBills,100);
+        noOfTenCentCoins = checkForBills(tenCent,10);
+        noOfFiveCentCoins= checkForBills(fiveCent,5);
+        noOfTOneCentCoins = checkForBills(oneCent,1);
+
+        if (this.getTotalEuroCents() != 0){
+            noOfTwentyEuroBills += checkForBills(this.getTotalEuroCents()+1,2000);
+            noOfTenEuroBills += checkForBills(this.getTotalEuroCents()+1,1000);
+            noOfFiveEuroBills += checkForBills(this.getTotalEuroCents()+1,500);
+            noOfOneEuroBills += checkForBills(this.getTotalEuroCents()+1,100);
+            noOfFiftyCentCoins += checkForBills(this.getTotalEuroCents()+1,50);
+            noOfTwentyCentCoins += checkForBills(this.getTotalEuroCents()+1,20);
+            noOfTenCentCoins += checkForBills(this.getTotalEuroCents()+1,10);
+            noOfFiveCentCoins += checkForBills(this.getTotalEuroCents()+1,5);
+            noOfTOneCentCoins += checkForBills(this.getTotalEuroCents()+1,1);
+        }
+
+        String changeInEuroUnits = "Number of each Bill and Coin to return to costumer: \n" +
+                "20 Euro Bills: " + noOfTwentyEuroBills + "\n" +
+                "10 Euro Bills: " + noOfTenEuroBills + "\n" +
+                "5 Euro Bills: " + noOfFiveEuroBills + "\n" +
+                "1 Euro Bills: " + noOfOneEuroBills + "\n" +
+                "50 Euro Cents: " + noOfFiftyCentCoins + "\n" +
+                "20 Euro Cents: " + noOfTwentyCentCoins + "\n" +
+                "10 Euro Cents: " + noOfTenCentCoins + "\n" +
+                "5 Euro Cents: " + noOfFiveCentCoins + "\n" +
+                "1 Euro Cents: " + noOfTOneCentCoins + "\n";
+
+        System.out.println(changeInEuroUnits);
+
+        /*if (twentyBills !=0 && this.getTotalEuroCents()/2000 > 0){
             if (twentyBills >= this.getTotalEuroCents()/2000){
                 int noOfTwentyEuroBills = this.getTotalEuroCents()/2000;
                 setTotalEuroCents(getTotalEuroCents()%2000);
@@ -93,8 +137,22 @@ public class ChangeInEuroCurrencyUnits {
         }
         else if (oneCent != 0 && this.getTotalEuroCents() > 0){
             int noOfOneCentCoins = this.getTotalEuroCents();
+        }*/
+    }
+
+    public int checkForBills(int noOfUnit, int valueInCents){
+        if (noOfUnit !=0 && this.getTotalEuroCents()/valueInCents > 0){
+            if (noOfUnit >= this.getTotalEuroCents()/valueInCents){
+                int noOfEuroBills = this.getTotalEuroCents()/valueInCents;
+                this.setTotalEuroCents(getTotalEuroCents()%valueInCents);
+            }
+            else if (noOfUnit < this.getTotalEuroCents()/valueInCents){
+                int noOfEuroBills = noOfUnit;
+                this.setTotalEuroCents(getTotalEuroCents()-valueInCents*noOfEuroBills);
+            }
         }
-    };
+        return noOfUnit;
+    }
 }
 
 
