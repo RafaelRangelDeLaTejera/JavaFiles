@@ -2,31 +2,12 @@ import java.util.Locale;
 
 public class CashRegister {
 
-     final Boolean usedTwentyDollarBill;
-     final Boolean usedTenDollarBills;
-     final Boolean usedFiveDollarBills;
-     final Boolean usedOneDollarBills;
-     final Boolean usedQuarters;
-     final Boolean usedDimes;
-     final Boolean usedNickels;
-     final Boolean usedPennies;
-
 
     /**
      * constructor
      */
     public CashRegister(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies) {
         System.out.println(price);
-
-        /** first check what bills or coins were paid with to see if the change can be later returned in that same unit*/
-        usedTwentyDollarBill = (twentyDollarBills != 0);
-        usedTenDollarBills = (tenDollarBills != 0);
-        usedFiveDollarBills = (fiveDollarBills != 0);
-        usedOneDollarBills = (oneDollarBills != 0);
-        usedQuarters = (quarters != 0);
-        usedDimes = (quarters != 0);
-        usedNickels = (nickels != 0);
-        usedPennies = (pennies != 0);
 
 //        /** to make computations with bills and coin easier have the price in whole and decimal units */
 //        /** get whole units and convert the string value to an int value */
@@ -50,6 +31,7 @@ public class CashRegister {
 //        int changeInUSDollars = dollarsPaid - priceDollars;
 //        int changeInUSCents = centsPaid - priceCents;
         CurrencyUSD changeInUSD = new CurrencyUSD(amountInUSCurrency.substractUSCurrencyAmounts(itemPriceInUSCurrency));
+        ChangeInEuroCurrencyUnits changeForCostumer = new ChangeInEuroCurrencyUnits(changeInUSD,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies);
 
 
     }
@@ -69,7 +51,7 @@ public class CashRegister {
             cents = String.valueOf(centSum);
         }
 
-        totalUSD = String.valueOf(sum) + cents;
+        totalUSD = String.valueOf(sum) + "." + cents;
 
         return totalUSD;
     }

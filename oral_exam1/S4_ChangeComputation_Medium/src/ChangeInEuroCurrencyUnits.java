@@ -53,6 +53,7 @@ public class ChangeInEuroCurrencyUnits {
                 resultCentEuros = 0;
                 resultWholeEuros++;
             }
+            System.out.println(getTotalEuroCents());
         this.setWholeEuros(resultWholeEuros);
         this.setCentEuros(resultCentEuros);
 
