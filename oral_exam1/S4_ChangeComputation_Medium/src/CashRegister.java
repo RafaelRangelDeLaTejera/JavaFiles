@@ -32,20 +32,45 @@ public class CashRegister {
 
     public int sumDollars(int twentyDollars, int tenDollars, int fiveDollars, int oneDollar, int twentyFiveCents, int tenCents, int fiveCents, int oneCent) {
 
-
         /**get the sum of the dollars from the cents, by summing all the cents up and dividing them by a 100 using int division, since a 100 cents are 1 dollar*/
-        int dollarCentSum = (twentyFiveCents + tenCents + fiveCents + oneCent)/100;
+        int dollarCentSum = (twentyFiveCents*25 + tenCents*10 + fiveCents*5 + oneCent)/100;
 
-        int sum = twentyDollars + tenDollars + fiveDollars + oneDollar + dollarCentSum;
+        int sum = twentyDollars*20 + tenDollars*10 + fiveDollars*5 + oneDollar + dollarCentSum;
 
         return sum;
     }
 
     public int sumCents(int twentyFiveCents, int tenCents, int fiveCents, int oneCent) {
         /** get the total remaining cents on the amount paid with using the modulus operand */
-        int centSum = (twentyFiveCents + tenCents + fiveCents + oneCent)%100;
+        int centSum = (twentyFiveCents*25 + tenCents*10 + fiveCents*5 + oneCent)%100;
 
         return centSum;
+    }
+
+    public String changeDollarsToEuro(int dollarsUS, int centsUSD){
+        String euros = "yes";
+
+        /** convert dollars to Euros with conversion factor of 1 USD = 0.8419 Euros and keeping the int precision of using whole units and cents of currency separately to avoid double or float imprecision */
+        int totalAmountOfCentEuros = (dollarsUS * 8419)/100 + (centsUSD * 8419)/10000;
+
+        int wholeEuros = totalAmountOfCentEuros/100; //dont need to worry about USD cent because they cant add up to one euro since one dollar is just 0.84 of a dollar
+        int centEuros = totalAmountOfCentEuros%100;
+
+        /**check if exact amount was reached, if not then go over by smallest amount (one cent Euro)*/
+        if (((dollarsUS * 8419)%100) != 0 || ((centsUSD * 8419)%10000 != 0));
+        {
+            centEuros++;
+
+            if (centEuros%100 == 0) //in case the cents added up to one Euro when the cent was added
+            {
+                centEuros = 0;
+                wholeEuros ++;
+            }
+        }
+
+        //if (wholeEuros/20 != 0 )
+
+        return euros;
     }
 }
 
