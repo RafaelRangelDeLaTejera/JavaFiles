@@ -20,7 +20,8 @@ public class CurrencyUSD {
             String decimalNumber = dollarAmount.substring(dollarAmount.indexOf(".")+1);
             totalUSCents = Integer.parseInt(wholeNumber)*100+Integer.parseInt(decimalNumber);
         }
-        else{
+        else
+        {
             totalUSCents = Integer.parseInt(dollarAmount)*100;
         }
 
