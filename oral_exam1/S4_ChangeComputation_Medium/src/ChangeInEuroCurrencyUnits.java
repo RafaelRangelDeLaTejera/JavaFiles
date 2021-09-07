@@ -1,11 +1,20 @@
 public class ChangeInEuroCurrencyUnits {
 
     private int totalEuroCents = 0;
+    private String unitsOfChangeInEuro;
 
     public ChangeInEuroCurrencyUnits(CurrencyUSD changeInDollars, int usedTwentyDollarBills, int usedTenDollarBills, int usedFiveDollarBills, int usedOneDollarBills, int usedQuarters, int usedDimes, int usedNickels, int usedPennies) {
 
         changeUSDToEuros(changeInDollars);
-        printEuroUnits(usedTwentyDollarBills,usedTenDollarBills,usedFiveDollarBills,usedOneDollarBills,usedQuarters,usedDimes,usedNickels,usedPennies);
+        setUnitsOfChangeInEuro(printEuroUnits(usedTwentyDollarBills,usedTenDollarBills,usedFiveDollarBills,usedOneDollarBills,usedQuarters,usedDimes,usedNickels,usedPennies));
+    }
+
+    public String getUnitsOfChangeInEuro() {
+        return unitsOfChangeInEuro;
+    }
+
+    public void setUnitsOfChangeInEuro(String unitsOfChangeInEuro) {
+        this.unitsOfChangeInEuro = unitsOfChangeInEuro;
     }
 
     public int getTotalEuroCents() {
@@ -35,7 +44,7 @@ public class ChangeInEuroCurrencyUnits {
         }
     }
 
-    public void printEuroUnits(int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
+    public String printEuroUnits(int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
         /**determine which bills and coins will be used to pay back */
 
         int noOfTwentyEuroBills = 0;
@@ -80,6 +89,7 @@ public class ChangeInEuroCurrencyUnits {
                 "1 Euro Cents: " + noOfTOneCentCoins + "\n";
 
         System.out.println(changeInEuroUnits);
+    return changeInEuroUnits;
     }
 
     public int checkForBills(int noOfUnit, int valueInCents){

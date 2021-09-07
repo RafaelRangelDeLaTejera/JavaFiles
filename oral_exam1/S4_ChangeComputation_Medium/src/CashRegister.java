@@ -3,9 +3,12 @@ import java.util.Locale;
 public class CashRegister {
 
 
+    private String changeInEuros;
     /**
      * constructor
      */
+
+
     public CashRegister(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies) {
         System.out.println(price);
 
@@ -20,7 +23,8 @@ public class CashRegister {
         CurrencyUSD changeInUSD = new CurrencyUSD(amountInUSCurrency.substractUSCurrencyAmounts(itemPriceInUSCurrency));
         changeInUSD.printUSD();
         ChangeInEuroCurrencyUnits changeForCostumer = new ChangeInEuroCurrencyUnits(changeInUSD,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies);
-
+        changeInEuros = changeForCostumer.getUnitsOfChangeInEuro();
+        System.out.println(changeInEuros);
 
     }
 
@@ -42,6 +46,26 @@ public class CashRegister {
         totalUSD = String.valueOf(sum) + "." + cents;
 
         return totalUSD;
+    }
+
+    public String getChage(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies){
+        System.out.println(price);
+
+        CurrencyUSD itemPriceInUSCurrency = new CurrencyUSD(price);
+        itemPriceInUSCurrency.printUSD();
+
+        /**get the sum of the dollars and cents the costumer paid using the sumDollars and sumCents instance methods*/
+
+        CurrencyUSD amountInUSCurrency = new CurrencyUSD(sumTotalDollarsAndCents(twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
+        amountInUSCurrency.printUSD();
+
+        CurrencyUSD changeInUSD = new CurrencyUSD(amountInUSCurrency.substractUSCurrencyAmounts(itemPriceInUSCurrency));
+        changeInUSD.printUSD();
+        ChangeInEuroCurrencyUnits changeForCostumer = new ChangeInEuroCurrencyUnits(changeInUSD,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies);
+        changeInEuros = changeForCostumer.getUnitsOfChangeInEuro();
+        System.out.println(changeInEuros);
+
+        return changeInEuros;
     }
 }
 
