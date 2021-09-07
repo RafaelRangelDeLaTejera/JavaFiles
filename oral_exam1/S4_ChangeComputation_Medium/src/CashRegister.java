@@ -4,9 +4,16 @@ public class CashRegister {
 
 
     private String changeInEuros;
+
+    public CashRegister() {
+        changeInEuros = "0.00";
+    }
+
     /**
      * constructor
      */
+
+
 
 
     public CashRegister(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies) {
@@ -48,7 +55,7 @@ public class CashRegister {
         return totalUSD;
     }
 
-    public String getChage(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies){
+    public String computeChange(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies){
         System.out.println(price);
 
         CurrencyUSD itemPriceInUSCurrency = new CurrencyUSD(price);

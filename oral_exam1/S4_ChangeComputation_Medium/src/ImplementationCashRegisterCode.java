@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class ImplementationCashRegisterCode {
     public static void main(String[] args) {
 
+
         /** create input object of the scanner class to read in from the user
          * the input object is initialized with the Scanner constructor that takes in System.in which will take in input from the user and change it into desired variable*/
         Scanner input = new Scanner(System.in);
@@ -34,7 +35,10 @@ public class ImplementationCashRegisterCode {
 
 
         /** initialize a CashRegister object to perform the cash register functionality */
-        CashRegister cashRegister = new CashRegister(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
+        //CashRegister cashRegister = new CashRegister(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
+
+        CashRegister cashRegister = new CashRegister();
+        cashRegister.computeChange(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
 
     }
 }
