@@ -66,16 +66,16 @@ public class ChangeInEuroCurrencyUnits {
         noOfFiveCentCoins= determineUnits(fiveCent,5);
         noOfTOneCentCoins = determineUnits(oneCent,1);
 
-        if (this.getTotalEuroCents() != 0){
-            noOfTwentyEuroBills += determineUnits(this.getTotalEuroCents()+1,2000);
-            noOfTenEuroBills += determineUnits(this.getTotalEuroCents()+1,1000);
-            noOfFiveEuroBills += determineUnits(this.getTotalEuroCents()+1,500);
-            noOfOneEuroBills += determineUnits(this.getTotalEuroCents()+1,100);
-            noOfFiftyCentCoins += determineUnits(this.getTotalEuroCents()+1,50);
-            noOfTwentyCentCoins += determineUnits(this.getTotalEuroCents()+1,20);
-            noOfTenCentCoins += determineUnits(this.getTotalEuroCents()+1,10);
-            noOfFiveCentCoins += determineUnits(this.getTotalEuroCents()+1,5);
-            noOfTOneCentCoins += determineUnits(this.getTotalEuroCents()+1,1);
+        if (getTotalEuroCents() != 0){
+            noOfTwentyEuroBills += determineUnits(noOfTwentyEuroBills+1,2000);
+            noOfTenEuroBills += determineUnits(noOfTenEuroBills+1,1000);
+            noOfFiveEuroBills += determineUnits(noOfFiveEuroBills +1,500);
+            noOfOneEuroBills += determineUnits(noOfOneEuroBills+1,100);
+            noOfFiftyCentCoins += determineUnits(noOfFiftyCentCoins+1,50);
+            noOfTwentyCentCoins += determineUnits(noOfTwentyCentCoins+1,20);
+            noOfTenCentCoins += determineUnits(noOfTenCentCoins+1,10);
+            noOfFiveCentCoins += determineUnits(noOfFiveCentCoins+1,5);
+            noOfTOneCentCoins += determineUnits(noOfTOneCentCoins+1,1);
         }
 
 //        String changeInEuroUnits = "Number of each Bill and Coin to return to costumer: \n" +
@@ -106,14 +106,14 @@ public class ChangeInEuroCurrencyUnits {
 
     public int determineUnits(int noOfUnit, int valueInCents){
         int noOfEuroBills = 0;
-        if (noOfUnit !=0 && this.getTotalEuroCents()/valueInCents > 0){
-            if (noOfUnit >= this.getTotalEuroCents()/valueInCents){
-                 noOfEuroBills = this.getTotalEuroCents()/valueInCents;
-                this.setTotalEuroCents(getTotalEuroCents()%valueInCents);
+        if (noOfUnit !=0 && getTotalEuroCents()/valueInCents > 0){
+            if (noOfUnit >= getTotalEuroCents()/valueInCents){
+                 noOfEuroBills = getTotalEuroCents()/valueInCents;
+                setTotalEuroCents(getTotalEuroCents()%valueInCents);
             }
-            else if (noOfUnit < this.getTotalEuroCents()/valueInCents){
+            else if (noOfUnit < getTotalEuroCents()/valueInCents){
                  noOfEuroBills = noOfUnit;
-                this.setTotalEuroCents(getTotalEuroCents()-valueInCents*noOfEuroBills);
+                setTotalEuroCents(getTotalEuroCents()-valueInCents*noOfEuroBills);
             }
         }
         return noOfEuroBills;
