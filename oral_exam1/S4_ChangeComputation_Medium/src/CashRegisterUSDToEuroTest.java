@@ -19,6 +19,7 @@ class CashRegisterUSDToEuroTest {
     @Test
     void changeFromUSToEuroCurrency() {
         assertEquals(50,cashRegister.changeFromUSToEuroCurrency(59));
+        assertEquals(0,cashRegister.changeFromUSToEuroCurrency(0));
     }
 
     @Test
@@ -27,7 +28,7 @@ class CashRegisterUSDToEuroTest {
 
     @Test
     void displayUnitsOfChangeInEuroCurrency() {
-        assertEquals(", 1 Fifty Euro Cent coins",cashRegister.displayUnitsOfChangeInEuroCurrency(50,0,1,1,0,0,0,0,0));
+        assertEquals("Return to costumer, 1 Fifty Euro Cent coins",cashRegister.displayUnitsOfChangeInEuroCurrency(50,0,1,1,0,0,0,0,0));
 
     }
 
@@ -65,6 +66,21 @@ class CashRegisterUSDToEuroTest {
 
         cashRegister.computeChange("1",1,0,0,0,0,0,0,0);
         assertEquals("Change amount: 16.00 euros\nReturn to costumer, 1 Ten Euro Bills, 1 Five Euro Bills, 1 One Euro Bills",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("20",0,1,2,0,0,0,0,0);
+        assertEquals("Change amount: 0.00 euros\nNo bills or coins to return",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("4.12",1,0,0,0,0,0,0,0);
+        assertEquals("Change amount: 13.37 euros\nReturn to costumer, 1 Ten Euro Bills, 3 One Euro Bills, 1 Twenty Euro Cent coins, 1 Ten Euro Cent coins, 1 Five Euro Cent coins, 2 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("21.99",0,3,0,0,0,0,1,0);
+        assertEquals("Change amount: 6.79 euros\nReturn to costumer, 1 Five Euro Bills, 1 One Euro Bills, 1 Fifty Euro Cent coins, 1 Twenty Euro Cent coins, 1 Five Euro Cent coins, 4 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("429.81",0,0,80,30,0,0,0,0);
+        assertEquals("Change amount: 0.16 euros\nReturn to costumer, 1 Ten Euro Cent coins, 1 Five Euro Cent coins, 1 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("500.02",0,0,110,0,0,0,0,0);
+        assertEquals("Change amount: 42.08 euros\nReturn to costumer, 8 Five Euro Bills, 2 One Euro Bills, 1 Five Euro Cent coins, 3 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
 
     }
 }

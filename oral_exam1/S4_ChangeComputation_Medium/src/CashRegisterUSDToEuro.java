@@ -48,10 +48,11 @@ public class CashRegisterUSDToEuro {
 
         changeInEuroCents = (centsUS*conversionRate)/10000;
 
-        if ((centsUS*conversionRate)%10000 != 0) ;
+        if ((centsUS*conversionRate)%10000 != 0)  //(centsUS*conversionRate)%10000 != 0
         {
             changeInEuroCents++;
         }
+
 
         return changeInEuroCents;
     }
@@ -80,68 +81,72 @@ public class CashRegisterUSDToEuro {
     public String displayUnitsOfChangeInEuroCurrency(int totalChangeInCents, int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
         /**determine which bills and coins will be used to pay back */
 
-        setDisplayChangeInEuroUnits("");
-
-        int centsCount = totalChangeInCents;
-
-        int noOfTwentyEuroBills = 0;
-        int noOfTenEuroBills = 0;
-        int noOfFiveEuroBills = 0;
-        int noOfOneEuroBills = 0;
-        int noOfFiftyCentCoins = 0;
-        int noOfTwentyCentCoins = 0;
-        int noOfTenCentCoins = 0;
-        int noOfFiveCentCoins = 0;
-        int noOfTOneCentCoins = 0;
-
-        noOfTwentyEuroBills = determineUnits(totalChangeInCents,twentyBills,2000);
-        totalChangeInCents -= noOfTwentyEuroBills*2000;
-        noOfTenEuroBills = determineUnits(totalChangeInCents,tenBills,1000);
-        totalChangeInCents -= noOfTenEuroBills*1000;
-        noOfFiveEuroBills = determineUnits(totalChangeInCents,fiveBills,500);
-        totalChangeInCents -= noOfFiveEuroBills*500;
-        noOfOneEuroBills = determineUnits(totalChangeInCents,oneBills,100);
-        totalChangeInCents -= noOfOneEuroBills*100;
-
-        if (totalChangeInCents != 0){
-            noOfTwentyEuroBills += totalChangeInCents/2000;
-            totalChangeInCents = totalChangeInCents%2000;
-
-            noOfTenEuroBills += totalChangeInCents/1000;
-            totalChangeInCents = totalChangeInCents%1000;
-
-            noOfFiveEuroBills += totalChangeInCents/500;
-            totalChangeInCents = totalChangeInCents%500;
-
-            noOfOneEuroBills += totalChangeInCents/100;
-            totalChangeInCents = totalChangeInCents%100;
-
-            noOfFiftyCentCoins += totalChangeInCents/50;
-            totalChangeInCents = totalChangeInCents%50;
-
-            noOfTwentyCentCoins += totalChangeInCents/20;
-            totalChangeInCents = totalChangeInCents%20;
-
-            noOfTenCentCoins += totalChangeInCents/10;
-            totalChangeInCents = totalChangeInCents%10;
-
-            noOfFiveCentCoins += totalChangeInCents/5;
-            totalChangeInCents = totalChangeInCents%5;
-
-            noOfTOneCentCoins += totalChangeInCents;
-            totalChangeInCents -= totalChangeInCents;
+        if (totalChangeInCents == 0 ){
+            setDisplayChangeInEuroUnits("No bills or coins to return");
         }
+        else {
+            setDisplayChangeInEuroUnits("Return to costumer");
 
-        checkUnits("Twenty Euro Bills",noOfTwentyEuroBills);
-        checkUnits("Ten Euro Bills",noOfTenEuroBills);
-        checkUnits("Five Euro Bills",noOfFiveEuroBills);
-        checkUnits("One Euro Bills",noOfOneEuroBills);
-        checkUnits("Fifty Euro Cent coins",noOfFiftyCentCoins);
-        checkUnits("Twenty Euro Cent coins",noOfTwentyCentCoins);
-        checkUnits("Ten Euro Cent coins",noOfTenCentCoins);
-        checkUnits("Five Euro Cent coins",noOfFiveCentCoins);
-        checkUnits("One Euro Cent coins",noOfTOneCentCoins);
+            int centsCount = totalChangeInCents;
 
+            int noOfTwentyEuroBills = 0;
+            int noOfTenEuroBills = 0;
+            int noOfFiveEuroBills = 0;
+            int noOfOneEuroBills = 0;
+            int noOfFiftyCentCoins = 0;
+            int noOfTwentyCentCoins = 0;
+            int noOfTenCentCoins = 0;
+            int noOfFiveCentCoins = 0;
+            int noOfTOneCentCoins = 0;
+
+            noOfTwentyEuroBills = determineUnits(totalChangeInCents, twentyBills, 2000);
+            totalChangeInCents -= noOfTwentyEuroBills * 2000;
+            noOfTenEuroBills = determineUnits(totalChangeInCents, tenBills, 1000);
+            totalChangeInCents -= noOfTenEuroBills * 1000;
+            noOfFiveEuroBills = determineUnits(totalChangeInCents, fiveBills, 500);
+            totalChangeInCents -= noOfFiveEuroBills * 500;
+            noOfOneEuroBills = determineUnits(totalChangeInCents, oneBills, 100);
+            totalChangeInCents -= noOfOneEuroBills * 100;
+
+            if (totalChangeInCents != 0) {
+                noOfTwentyEuroBills += totalChangeInCents / 2000;
+                totalChangeInCents = totalChangeInCents % 2000;
+
+                noOfTenEuroBills += totalChangeInCents / 1000;
+                totalChangeInCents = totalChangeInCents % 1000;
+
+                noOfFiveEuroBills += totalChangeInCents / 500;
+                totalChangeInCents = totalChangeInCents % 500;
+
+                noOfOneEuroBills += totalChangeInCents / 100;
+                totalChangeInCents = totalChangeInCents % 100;
+
+                noOfFiftyCentCoins += totalChangeInCents / 50;
+                totalChangeInCents = totalChangeInCents % 50;
+
+                noOfTwentyCentCoins += totalChangeInCents / 20;
+                totalChangeInCents = totalChangeInCents % 20;
+
+                noOfTenCentCoins += totalChangeInCents / 10;
+                totalChangeInCents = totalChangeInCents % 10;
+
+                noOfFiveCentCoins += totalChangeInCents / 5;
+                totalChangeInCents = totalChangeInCents % 5;
+
+                noOfTOneCentCoins += totalChangeInCents;
+                totalChangeInCents -= totalChangeInCents;
+            }
+
+            checkUnits("Twenty Euro Bills", noOfTwentyEuroBills);
+            checkUnits("Ten Euro Bills", noOfTenEuroBills);
+            checkUnits("Five Euro Bills", noOfFiveEuroBills);
+            checkUnits("One Euro Bills", noOfOneEuroBills);
+            checkUnits("Fifty Euro Cent coins", noOfFiftyCentCoins);
+            checkUnits("Twenty Euro Cent coins", noOfTwentyCentCoins);
+            checkUnits("Ten Euro Cent coins", noOfTenCentCoins);
+            checkUnits("Five Euro Cent coins", noOfFiveCentCoins);
+            checkUnits("One Euro Cent coins", noOfTOneCentCoins);
+        }
         //System.out.println(getDisplayChangeInEuroUnits());
 
         return getDisplayChangeInEuroUnits();
@@ -187,7 +192,7 @@ public class CashRegisterUSDToEuro {
 
         amountToReturn(changeInEuroCents);
 
-        setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + "Return to costumer" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
+        setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
 
         //System.out.print(displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
     }
