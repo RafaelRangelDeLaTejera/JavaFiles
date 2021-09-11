@@ -20,6 +20,8 @@ class CashRegisterUSDToEuroTest {
     void changeFromUSToEuroCurrency() {
         assertEquals(50,cashRegister.changeFromUSToEuroCurrency(59));
         assertEquals(0,cashRegister.changeFromUSToEuroCurrency(0));
+        assertEquals(1012,cashRegister.changeFromUSToEuroCurrency(1201));
+        assertEquals(1498,cashRegister.changeFromUSToEuroCurrency(1779));
     }
 
     @Test
