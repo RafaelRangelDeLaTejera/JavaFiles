@@ -37,7 +37,7 @@ public class ImplementationCashRegisterCode {
         /** initialize a CashRegister object to perform the cash register functionality */
         //CashRegister cashRegister = new CashRegister(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
 
-        CashRegister cashRegister = new CashRegister();
+        CashRegisterUSDToEuro cashRegister = new CashRegisterUSDToEuro();
         cashRegister.computeChange(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
 
     }

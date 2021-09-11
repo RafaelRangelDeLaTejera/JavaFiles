@@ -194,6 +194,7 @@ public class CashRegisterUSDToEuro {
 
         setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
 
+        System.out.print(getDisplayChangeInEuroUnits());
         //System.out.print(displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
     }
 }
