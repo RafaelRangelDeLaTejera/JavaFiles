@@ -1,5 +1,7 @@
 public class CashRegisterUSDToEuro {
 
+    private final int conversionRate = 8419;
+
     private String displayChangeInEuroUnits;
 
     public CashRegisterUSDToEuro() {
@@ -44,9 +46,9 @@ public class CashRegisterUSDToEuro {
     public int changeFromUSToEuroCurrency(int centsUS){
         int changeInEuroCents;
 
-        changeInEuroCents = (centsUS*8419)/10000;
+        changeInEuroCents = (centsUS*conversionRate)/10000;
 
-        if ((centsUS*8419)%10000 != 0) ;
+        if ((centsUS*conversionRate)%10000 != 0) ;
         {
             changeInEuroCents++;
         }
@@ -54,22 +56,31 @@ public class CashRegisterUSDToEuro {
         return changeInEuroCents;
     }
 
-    public void printAmount(int totalCents){
+    public String amountToReturn(int totalCents){
 
+        String amount;
         int wholeUnits = totalCents/100;
         int decimalUnits = totalCents%100;
 
         if (decimalUnits == 0){
-            System.out.println(wholeUnits +"."+decimalUnits);
+            amount = wholeUnits + ".00";
+        }
+        else if (decimalUnits < 10)
+        {
+            amount = wholeUnits + ".0" + decimalUnits;
         }
         else
         {
-            System.out.println(wholeUnits +"."+decimalUnits);
+            amount = wholeUnits + "." + decimalUnits;
         }
+
+        return amount;
     }
 
-    public void displayUnitsOfChangeInEuroCurrency(int totalChangeInCents, int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
+    public String displayUnitsOfChangeInEuroCurrency(int totalChangeInCents, int twentyBills, int tenBills, int fiveBills, int oneBills, int twentyFiveCent, int tenCent, int fiveCent, int oneCent){
         /**determine which bills and coins will be used to pay back */
+
+        setDisplayChangeInEuroUnits("");
 
         int centsCount = totalChangeInCents;
 
@@ -121,19 +132,19 @@ public class CashRegisterUSDToEuro {
             totalChangeInCents -= totalChangeInCents;
         }
 
-        setDisplayChangeInEuroUnits("Give back to costumer");
-
-        checkUnits("twenty Euro Bills",noOfTwentyEuroBills);
+        checkUnits("Twenty Euro Bills",noOfTwentyEuroBills);
         checkUnits("Ten Euro Bills",noOfTenEuroBills);
         checkUnits("Five Euro Bills",noOfFiveEuroBills);
         checkUnits("One Euro Bills",noOfOneEuroBills);
-        checkUnits("Fifty Euro Cents",noOfFiftyCentCoins);
-        checkUnits("twenty Euro Cents",noOfTwentyCentCoins);
-        checkUnits("ten Euro Cents",noOfTenCentCoins);
-        checkUnits("Five Euro Cents",noOfFiveCentCoins);
-        checkUnits("One Euro Cents",noOfTOneCentCoins);
+        checkUnits("Fifty Euro Cent coins",noOfFiftyCentCoins);
+        checkUnits("Twenty Euro Cent coins",noOfTwentyCentCoins);
+        checkUnits("Ten Euro Cent coins",noOfTenCentCoins);
+        checkUnits("Five Euro Cent coins",noOfFiveCentCoins);
+        checkUnits("One Euro Cent coins",noOfTOneCentCoins);
 
-        System.out.println(getDisplayChangeInEuroUnits());
+        //System.out.println(getDisplayChangeInEuroUnits());
+
+        return getDisplayChangeInEuroUnits();
 
     }
 
@@ -174,8 +185,10 @@ public class CashRegisterUSDToEuro {
 
         int changeInEuroCents = changeFromUSToEuroCurrency(changeInUSCents);
 
-        printAmount(changeInEuroCents);
+        amountToReturn(changeInEuroCents);
 
-        displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies);
+        setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + "Return to costumer" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
+
+        //System.out.print(displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
     }
 }

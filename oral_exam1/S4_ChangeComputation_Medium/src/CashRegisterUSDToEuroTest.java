@@ -27,19 +27,44 @@ class CashRegisterUSDToEuroTest {
 
     @Test
     void displayUnitsOfChangeInEuroCurrency() {
+        assertEquals(", 1 Fifty Euro Cent coins",cashRegister.displayUnitsOfChangeInEuroCurrency(50,0,1,1,0,0,0,0,0));
 
     }
 
-    @Test
-    void determineUnits() {
-    }
-
-    @Test
-    void checkUnits() {
-    }
-
+    /** Method to use in order to use the CashRegisterUSDToEuro.java class, first input the item price as a string using a decimal point and then number of bills or coins the costumer paid with,
+     *  just the number, input it into the method after the price in the order twenty dollars, ten dollars, five dollars, one dollar, quarter, dime, nickel and pennie.
+      */
     @Test
     void computeChange() {
-        assertEquals("Give back to costumer, 1 fifty Euro cent coin",cashRegister.computeChange("14.41",);)
+        cashRegister.computeChange("14.41",0,1,1,0,0,0,0,0);
+        assertEquals("Change amount: 0.50 euros\nReturn to costumer, 1 Fifty Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("46.85",4,1,0,0,0,0,0,20);
+        assertEquals("Change amount: 36.50 euros\nReturn to costumer, 1 Twenty Euro Bills, 1 Ten Euro Bills, 1 Five Euro Bills, 1 One Euro Bills, 1 Fifty Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("1264.14",8,40,100,2,0,4,100,20001);
+        assertEquals("Change amount: 2.76 euros\nReturn to costumer, 2 One Euro Bills, 1 Fifty Euro Cent coins, 1 Twenty Euro Cent coins, 1 Five Euro Cent coins, 1 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("11",0,0,0,10,0,0,50,0);
+        assertEquals("Change amount: 1.27 euros\nReturn to costumer, 1 One Euro Bills, 1 Twenty Euro Cent coins, 1 Five Euro Cent coins, 2 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("123.02",5,0,0,20,4,0,50,0);
+        assertEquals("Change amount: 0.41 euros\nReturn to costumer, 2 Twenty Euro Cent coins, 1 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("51.0",0,8,0,0,0,1,0,1);
+        assertEquals("Change amount: 24.51 euros\nReturn to costumer, 2 Ten Euro Bills, 4 One Euro Bills, 1 Fifty Euro Cent coins, 1 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("72.41",1,2,2,20,21,1,1,6);
+        assertEquals("Change amount: 2.57 euros\nReturn to costumer, 2 One Euro Bills, 1 Fifty Euro Cent coins, 1 Five Euro Cent coins, 2 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("111.23",0,0,22,0,5,0,0,6);
+        assertEquals("Change amount: 0.07 euros\nReturn to costumer, 1 Five Euro Cent coins, 2 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("41.29",0,10,4,0,0,0,0,0);
+        assertEquals("Change amount: 66.27 euros\nReturn to costumer, 6 Ten Euro Bills, 1 Five Euro Bills, 1 One Euro Bills, 1 Twenty Euro Cent coins, 1 Five Euro Cent coins, 2 One Euro Cent coins",cashRegister.getDisplayChangeInEuroUnits());
+
+        cashRegister.computeChange("1",1,0,0,0,0,0,0,0);
+        assertEquals("Change amount: 16.00 euros\nReturn to costumer, 1 Ten Euro Bills, 1 Five Euro Bills, 1 One Euro Bills",cashRegister.getDisplayChangeInEuroUnits());
+
     }
 }
