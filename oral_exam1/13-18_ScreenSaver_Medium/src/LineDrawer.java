@@ -4,13 +4,14 @@ import java.util.Random;
 
 public class LineDrawer extends JPanel {
     private final Color[] colors = {Color.BLUE, Color.GREEN, Color.MAGENTA, Color.WHITE, Color.ORANGE, Color.YELLOW};
-    int x1, x2, y1, y2;
-    Random randomNumber = new Random();
+    private Random randomNumber = new Random();
 
     @Override
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
+        int x1, x2, y1, y2;
 
         for (int i = 0; i < 99; i++) {
 
