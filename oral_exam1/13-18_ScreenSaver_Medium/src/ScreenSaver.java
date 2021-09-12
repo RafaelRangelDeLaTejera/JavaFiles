@@ -1,16 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.lang.Math;
 
 public class ScreenSaver extends JFrame {
-
-    //private int count = 0;
 
     private final LineDrawer panel;
 
     public ScreenSaver() {
 
-        super("Using a JDesktopPane");
+        super("Multiple line drawer cool eye effect screensaver");
 
         panel = new LineDrawer();
         panel.setBackground(Color.black);
@@ -19,9 +16,4 @@ public class ScreenSaver extends JFrame {
 
     }
 
-
-
-//    public int randomCoordinateGenerator(){
-//        int coordinate = (Math.random() *10) + 1;
-//    }
 }
