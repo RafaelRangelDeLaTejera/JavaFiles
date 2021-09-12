@@ -14,8 +14,7 @@ public class ScreenSaver extends JFrame {
 
         panel = new LineDrawer();
         panel.setBackground(Color.black);
-
-            add(panel);
+        add(panel);
 
 
     }
