@@ -13,6 +13,7 @@ public class ScreenSaver extends JFrame {
         panel.setBackground(Color.black);
         add(panel);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

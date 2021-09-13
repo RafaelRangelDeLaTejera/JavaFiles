@@ -2,9 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ *
+ */
 public class LineDrawer extends JPanel {
     private final Color[] colors = {Color.BLUE, Color.GREEN, Color.MAGENTA, Color.WHITE, Color.ORANGE, Color.YELLOW};
-    private Random randomNumber = new Random();
+    private final Random randomNumber = new Random();
 
     @Override
     public void paintComponent(Graphics g) {
@@ -18,10 +21,10 @@ public class LineDrawer extends JPanel {
 
             g.setColor(colors[randomNumber.nextInt(6)]);
 
-            x1 = randomNumber.nextInt(getWidth());
-            x2 = randomNumber.nextInt(getWidth());
-            y1 = randomNumber.nextInt(getHeight());
-            y2 = randomNumber.nextInt(getHeight());
+            x1 = randomNumber.nextInt(2001);
+            x2 = randomNumber.nextInt(2001);
+            y1 = randomNumber.nextInt(1001);
+            y2 = randomNumber.nextInt(1001);
 
             if (x1 == x2) {
                 x2 = x2 / 2;
