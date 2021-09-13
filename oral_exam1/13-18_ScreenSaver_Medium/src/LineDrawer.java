@@ -2,13 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-/**
- *
+/** class that when created draws a 100 lines on the container and then clears it out and draws them again and just keeps continuously drawing.
+ * @extends JPanel
  */
 public class LineDrawer extends JPanel {
     private final Color[] colors = {Color.BLUE, Color.GREEN, Color.MAGENTA, Color.WHITE, Color.ORANGE, Color.YELLOW};
     private final Random randomNumber = new Random();
 
+    /**
+     * overrides paintComponent method from the extended JPanel class, this method first constructs a panel and then draws 100 lines using a for loop and the method drawLine of abstract class Graphics, after those lines are drawn, the method calls method repaint from the JPanel class to repeat the process, which means it clears out the panel and draws 100 lines again
+     * @param g Graphics object for graphics context to allow application to draw
+     */
     @Override
     public void paintComponent(Graphics g) {
 
