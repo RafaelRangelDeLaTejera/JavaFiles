@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * implementation class for the CashRegisterUSDToEuro class.
+ * This class interact with the user directly through the terminal asking for direct input and then using a CashRegister object to pass in the values
+ * inputted by the user to the computeChange method as parameters for the change in Euros to be computed and display the bills and coins to be returned.
+ */
 public class ImplementationCashRegisterCode {
     public static void main(String[] args) {
 
@@ -34,8 +39,8 @@ public class ImplementationCashRegisterCode {
 
 
 
-        /** initialize a CashRegister object to perform the cash register functionality */
-        //CashRegister cashRegister = new CashRegister(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
+        /** initialize a CashRegister object to call the computeChange method from the CashRegister class and pass in the values the user provided to calculate the change in Euros
+         * and display the Euro bills and coins to be returned */
 
         CashRegisterUSDToEuro cashRegister = new CashRegisterUSDToEuro();
         cashRegister.computeChange(price,twentyDollars,tenDollars,fiveDollars,oneDollars,twentyFiveCents,tenCents,fiveCents,oneCent);
