@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"CashRegisterUSDToEuro"},{"p":"<Unnamed>","l":"CashRegisterUSDToEuroTest"},{"p":"<Unnamed>","l":"ImplementationCashRegisterCode"}]

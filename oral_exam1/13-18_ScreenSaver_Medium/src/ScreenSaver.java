@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * When object of ScreenSaver class is created, an invisible frame is created where the LineDrawer object will draw 100 lines continuously in a container with a black background.
+ * When object of ScreenSaver class is created, an invisible frame is created where the LineDrawer object will draw 100 lines and then clear the screen and start over
+ * continuously in a container with a black background.
  * @extends JFrame
  */
 public class ScreenSaver extends JFrame {
