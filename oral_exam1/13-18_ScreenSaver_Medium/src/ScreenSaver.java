@@ -15,13 +15,13 @@ public class ScreenSaver extends JFrame {
      */
     public ScreenSaver() {
 
-        super("Multiple line drawer cool eye effect screensaver");
+        super("Multiple line drawer cool eye effect screensaver"); //call the super class JFrame constructor and pass in the title to create an invisible frame with the passed in title
 
-        LineDrawer panel = new LineDrawer();
-        panel.setBackground(Color.black);
-        add(panel);
+        LineDrawer panel = new LineDrawer(); //create a new LineDrawer object to have a container in the ScreenSaver frame
+        panel.setBackground(Color.black); //set the background color of the LineDrawer panel to black
+        add(panel); //add the LineDrawer panel to the ScreenSaver frame as a container
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //have the program end when the window gets closed
 
     }
 

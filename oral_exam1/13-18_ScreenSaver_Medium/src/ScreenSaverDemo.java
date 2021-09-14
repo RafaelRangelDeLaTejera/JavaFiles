@@ -6,8 +6,8 @@ import javax.swing.*;
  */
 public class ScreenSaverDemo {
     public static void main(String[] args) {
-        ScreenSaver screenSaver = new ScreenSaver();
-        screenSaver.setSize(2000, 1000);
-        screenSaver.setVisible(true);
+        ScreenSaver screenSaver = new ScreenSaver();//create new ScreenSaver object
+        screenSaver.setSize(2000, 1000);//set screenSaver size to fit the appropriate screen
+        screenSaver.setVisible(true); //make the screenSaver frame visible
     }
 }
