@@ -239,9 +239,10 @@ public class CashRegisterUSDToEuro {
     }
 
     /**
-     *
-     * @param Unit
-     * @param unitNumber
+     * method to check what bills and coins need to be givento user, if any value of that unit needs to be given to costumer, the methods adds the value with proper formating to the displayChangeInEuro
+     * to let the user know what number of that bill or coint they need to give to costumer
+     * @param Unit string that holds the name of the bill or coin to check
+     * @param unitNumber number of that bill or coin that was used
      */
     public void checkUnits(String Unit, int unitNumber){
         if (unitNumber!=0){
@@ -251,16 +252,18 @@ public class CashRegisterUSDToEuro {
 
 
     /**
-     *
-     * @param price
-     * @param twentyDollarBills
-     * @param tenDollarBills
-     * @param fiveDollarBills
-     * @param oneDollarBills
-     * @param quarters
-     * @param dimes
-     * @param nickels
-     * @param pennies
+     *method that gets called when you want to use the CashRegister class. Pass in the price of the item in USD and the amount of each bill and coin that the costumer paid with. The method will compute the
+     * change to return to user and convert it to Euro currency, then display the Euro bills or coins that need to be given to costumer for the change, if possible the program will give back the unit bills
+     * the costumer paid with. If the change conversion from USD to Euro is not exact, the program will go over the smallest Euro unit, one cent , to avoid any loss for the costumer.
+     * @param price string holding the item price in USD, the price should be entered with a decimal point if it includes cents
+     * @param twentyDollarBills int holding the number of twenty dollar bills paid with
+     * @param tenDollarBills int holding the number of ten dollar bills paid with
+     * @param fiveDollarBills int holding the number of five dollar bills paid with
+     * @param oneDollarBills int holding the number of one dollar bills paid with
+     * @param quarters int holding the number of quarters paid with
+     * @param dimes int holding the number of dimes paid with
+     * @param nickels int holding the number of nickels paid with
+     * @param pennies int holding the number of pennies paid with
      */
     public void computeChange(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies){
 
@@ -279,6 +282,6 @@ public class CashRegisterUSDToEuro {
         setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills)+"\n");
 
         System.out.print(getDisplayChangeInEuroUnits());
-        //System.out.print(displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies));
+
     }
 }

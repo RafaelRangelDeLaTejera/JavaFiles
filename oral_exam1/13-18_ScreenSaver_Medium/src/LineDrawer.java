@@ -6,7 +6,15 @@ import java.util.Random;
  * @extends JPanel
  */
 public class LineDrawer extends JPanel {
+    /**
+     * Array of Color objects that holds the 6 option of colors to draw the lines in
+     */
     private final Color[] colors = {Color.BLUE, Color.GREEN, Color.MAGENTA, Color.WHITE, Color.ORANGE, Color.YELLOW};
+
+    /**
+     * new Random object creation to get random numbers in the paintComponent method in order to randomly pick a color and the position of the lines by
+     * calling the nextInt method from the randomNumber Random object
+     */
     private final Random randomNumber = new Random();
 
     /**
@@ -25,7 +33,7 @@ public class LineDrawer extends JPanel {
 
             g.setColor(colors[randomNumber.nextInt(6)]);
 
-            x1 = randomNumber.nextInt(2001);
+            x1 = randomNumber.nextInt(2001); 
             x2 = randomNumber.nextInt(2001);
             y1 = randomNumber.nextInt(1001);
             y2 = randomNumber.nextInt(1001);
