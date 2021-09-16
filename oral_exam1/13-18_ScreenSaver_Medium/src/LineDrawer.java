@@ -25,7 +25,7 @@ public class LineDrawer extends JPanel {
     public void paintComponent(Graphics g) {
 
         //call the super class paintComponent method to paint the panel, pass a copy of the graphics g to protect the paint components
-        super.paintComponent(g);
+        super.paintComponent(g); //sets up the Gui to show the painted objects
 
         int x1, x2, y1, y2; //variables to hold coordinates to draw lines
 
@@ -36,10 +36,10 @@ public class LineDrawer extends JPanel {
             g.setColor(colors[randomNumber.nextInt(6)]); //pick a color for the line using a random number
 
             //pick random coordinates for the lines to be drawn, the coordinates work on a Frame of size 2000x1000 to make sure lines are in frame
-            x1 = randomNumber.nextInt(2001);
-            x2 = randomNumber.nextInt(2001);
-            y1 = randomNumber.nextInt(1001);
-            y2 = randomNumber.nextInt(1001);
+            x1 = randomNumber.nextInt(getWidth());
+            x2 = randomNumber.nextInt(getWidth());
+            y1 = randomNumber.nextInt(getHeight());
+            y2 = randomNumber.nextInt(getHeight());
 
 
             //if statements to avoid having the line be a dot to have at least the x or y coordinate be different
