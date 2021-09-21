@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CashRegisterUSDToEuroTest {
 
+    //create new cashRegisterUSDToEuro in order to test the methods of the class.
     CashRegisterUSDToEuro cashRegister = new CashRegisterUSDToEuro();
 
     /**

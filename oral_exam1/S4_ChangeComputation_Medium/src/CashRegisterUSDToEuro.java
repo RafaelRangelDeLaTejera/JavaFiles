@@ -54,6 +54,7 @@ public class CashRegisterUSDToEuro {
      */
     public int sumTotalUSCentsPaid(int twentyDollars, int tenDollars, int fiveDollars, int oneDollar, int twentyFiveCents, int tenCents, int fiveCents, int oneCent){
 
+        //get the amount of cents for every bill and coin paid with and add them up
         int cents = twentyDollars*2000 + tenDollars*1000 + fiveDollars*500 + oneDollar*100 + twentyFiveCents*25 + tenCents*10 + fiveCents*5 + oneCent;
 
         return cents;
@@ -68,14 +69,16 @@ public class CashRegisterUSDToEuro {
      */
     public int totalPriceInCents(String dollarAmount) {
 
-        int priceCents = 0;
+        //variable to return the amount of cents.
+        int priceCents ;
 
+        //if statement to get the total cents from a passed in amount that has a decimal point
         if (dollarAmount.contains(".") && dollarAmount.substring(dollarAmount.indexOf(".")+1) != "00" && dollarAmount.substring(dollarAmount.indexOf(".")+1) != "0"){
-            String wholeNumber = dollarAmount.substring(0, dollarAmount.indexOf("."));
-            String decimalNumber = dollarAmount.substring(dollarAmount.indexOf(".")+1);
-            priceCents = Integer.parseInt(wholeNumber)*100+Integer.parseInt(decimalNumber);
+            String wholeNumber = dollarAmount.substring(0, dollarAmount.indexOf(".")); //go over string until a decimal point is reached and get the total amount of whole dollars from the quantity
+            String decimalNumber = dollarAmount.substring(dollarAmount.indexOf(".")+1); //go over the string from the decimal point on forward and get the cents that way.
+            priceCents = Integer.parseInt(wholeNumber)*100+Integer.parseInt(decimalNumber); //compute the total price in cents from previously obtained strings
         }
-        else
+        else //for when there was an exact amount of Dollars passed in
         {
             priceCents = Integer.parseInt(dollarAmount)*100;
         }
@@ -91,11 +94,12 @@ public class CashRegisterUSDToEuro {
      * @return the value of the US cents in Euro cents
      */
     public int changeFromUSToEuroCurrency(int centsUS){
+
         int changeInEuroCents;
 
-        changeInEuroCents = (centsUS*conversionRate)/10000;
+        changeInEuroCents = (centsUS*conversionRate)/10000; //conversion from USD to Euros
 
-        if ((centsUS*conversionRate)%10000 != 0)  //(centsUS*conversionRate)%10000 != 0
+        if ((centsUS*conversionRate)%10000 != 0)  //add one cent for when the exact amount from conversion was not reached
         {
             changeInEuroCents++;
         }
@@ -112,13 +116,13 @@ public class CashRegisterUSDToEuro {
     public String amountToReturn(int totalCents){
 
         String amount;
-        int wholeUnits = totalCents/100;
-        int decimalUnits = totalCents%100;
+        int wholeUnits = totalCents/100; //get the whole Euros to return
+        int decimalUnits = totalCents%100; //get the cents
 
-        if (decimalUnits == 0){
+        if (decimalUnits == 0){ //when the amount is exact and no cents need to be returned
             amount = wholeUnits + ".00";
         }
-        else if (decimalUnits < 10)
+        else if (decimalUnits < 10) //when the amounts extra cents are less than 10
         {
             amount = wholeUnits + ".0" + decimalUnits;
         }
@@ -144,12 +148,12 @@ public class CashRegisterUSDToEuro {
         /**determine which bills and coins will be used to pay back */
 
         if (totalChangeInCents == 0 ){
-            setDisplayChangeInEuroUnits("No bills or coins to give");
+            setDisplayChangeInEuroUnits("No bills or coins to give"); //When there is no change to be given back, just set the displayChangeInEuroUnits to "No bills or coins to give" to display there is no change to be given
         }
         else {
-            setDisplayChangeInEuroUnits("Give to costumer");
+            setDisplayChangeInEuroUnits("Give to costumer"); //set the first phrase on the displayChangeInEuroUnits private variable to start the string that will be printed to the screen
 
-            int centsCount = totalChangeInCents;
+            //TODO int centsCount = totalChangeInCents;
 
             int noOfTwentyEuroBills = 0;
             int noOfTenEuroBills = 0;
@@ -196,7 +200,7 @@ public class CashRegisterUSDToEuro {
                 totalChangeInCents = totalChangeInCents % 5;
 
                 noOfTOneCentCoins += totalChangeInCents;
-                totalChangeInCents -= totalChangeInCents;
+                //TODO totalChangeInCents -= totalChangeInCents;
             }
 
             checkUnits("Twenty Euro Bills", noOfTwentyEuroBills);
@@ -223,16 +227,14 @@ public class CashRegisterUSDToEuro {
      */
     public int determineUnits(int totalCents, int noOfUnit, int valueInCents){
         int noOfEuroBills = 0;
-        if (noOfUnit !=0 && totalCents/valueInCents > 0){
-            if (noOfUnit >= totalCents/valueInCents){
+
+        if (noOfUnit !=0 && totalCents/valueInCents > 0){ //if the unit the costumer paid with can be used to return change
+            if (noOfUnit >= totalCents/valueInCents){ //if the user paid with more or the same as the value that can be used to return change, give back the maximum amount of that unit
                 noOfEuroBills = totalCents/valueInCents;
 
             }
-            else if (noOfUnit < totalCents/valueInCents){
+            else if (noOfUnit < totalCents/valueInCents){ //if more of that unit ca nbe returned to the user but the user paid with less amount of that unit, then just return number of bills the user paid with
                 noOfEuroBills = noOfUnit;
-            }
-            else if (noOfUnit == 0){
-                noOfEuroBills = 0;
             }
         }
         return noOfEuroBills;
@@ -245,7 +247,7 @@ public class CashRegisterUSDToEuro {
      * @param unitNumber number of that bill or coin that was used
      */
     public void checkUnits(String Unit, int unitNumber){
-        if (unitNumber!=0){
+        if (unitNumber!=0){ //edit the displayChangeInEuroUnits according to the bills that need to be returned
             setDisplayChangeInEuroUnits(getDisplayChangeInEuroUnits() + ", " + unitNumber + " " + Unit);
         }
     }
@@ -267,20 +269,22 @@ public class CashRegisterUSDToEuro {
      */
     public void computeChange(String price, int twentyDollarBills, int tenDollarBills, int fiveDollarBills, int oneDollarBills, int quarters, int dimes, int nickels, int pennies){
 
-        int priceInUSCents = totalPriceInCents(price);
+        int priceInUSCents = totalPriceInCents(price); //get the price in just cents
 
-        /**get the sum of the dollars and cents the costumer paid using the sumDollars and sumCents instance methods*/
 
+        //get the total sum of the dollars and cents the costumer paid using the sumDollars and sumCents instance methods
         int amountPaidInUSCents = sumTotalUSCentsPaid(twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills, quarters, dimes, nickels, pennies);
 
+        //get the change amount in US cents
          int changeInUSCents = amountPaidInUSCents - priceInUSCents;
 
+         //compute the change in Euro cents
         int changeInEuroCents = changeFromUSToEuroCurrency(changeInUSCents);
 
-        amountToReturn(changeInEuroCents);
-
+        //set the string to the desired display to indicate to user with what bills and coins they should give bathe change in
         setDisplayChangeInEuroUnits("Change amount: " + amountToReturn(changeInEuroCents) + " euros" + "\n" + displayUnitsOfChangeInEuroCurrency(changeInEuroCents,twentyDollarBills, tenDollarBills, fiveDollarBills, oneDollarBills)+"\n");
 
+        //display the string with the message
         System.out.print(getDisplayChangeInEuroUnits());
 
     }
