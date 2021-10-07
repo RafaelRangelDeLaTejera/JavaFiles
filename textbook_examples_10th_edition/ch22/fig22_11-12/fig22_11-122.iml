@@ -2,8 +2,14 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../extra_credit/S21_HangmanGUI_Hard">
+      <sourceFolder url="file://$MODULE_DIR$/../../../extra_credit/S21_HangmanGUI_Hard/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../quizzes/Fig23_14-15">
+      <sourceFolder url="file://$MODULE_DIR$/../../../quizzes/Fig23_14-15/src" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$" type="java-resource" relativeOutputPath="src" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$" type="java-resource" relativeOutputPath="src" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -6,10 +6,12 @@ import java.security.SecureRandom;
 public class Producer implements Runnable {
     private static final SecureRandom generator = new SecureRandom();
     private final Buffer sharedLocation; // reference to shared object
+    private int producerExecuted; //check what producer is inputing the number
 
     // constructor
-    public Producer(Buffer sharedLocation) {
+    public Producer(Buffer sharedLocation,int threadProducer) {
         this.sharedLocation = sharedLocation;
+        producerExecuted = threadProducer;
     }
 
     // store values from 1 to 10 in sharedLocation
@@ -20,6 +22,7 @@ public class Producer implements Runnable {
             try // sleep 0 to 3 seconds, then place value in Buffer
             {
                 Thread.sleep(generator.nextInt(3000)); // random sleep
+                System.out.printf("Producer " + producerExecuted + " prints\n ");
                 sharedLocation.blockingPut(count); // set value in buffer
                 sum += count; // increment sum of values
             } catch (InterruptedException exception) {
@@ -28,7 +31,7 @@ public class Producer implements Runnable {
         }
 
         System.out.printf(
-                "Producer done producing%nTerminating Producer%n");
+                "Producer " + producerExecuted + " done producing%nTerminating Producer%n");
     }
 } // end class Producer
 

@@ -7,14 +7,14 @@ public class BlockingBuffer implements Buffer {
     private final ArrayBlockingQueue<Integer> buffer; // shared buffer
 
     public BlockingBuffer() {
-        buffer = new ArrayBlockingQueue<Integer>(1);
+        buffer = new ArrayBlockingQueue<Integer>(2);
     }
 
     // place value into buffer
     public void blockingPut(int value) throws InterruptedException {
         buffer.put(value); // place value in buffer
-        System.out.printf("%s%2d\t%s%d%n", "Producer writes ", value,
-                "Buffer cells occupied: ", buffer.size());
+        System.out.printf(" " + value+
+                "Buffer cells occupied: " + buffer.size() + " ");
     }
 
     // return value from buffer
