@@ -13,8 +13,8 @@ public class BlockingBuffer implements Buffer {
     // place value into buffer
     public void blockingPut(int value) throws InterruptedException {
         buffer.put(value); // place value in buffer
-        System.out.printf(" " + value+
-                "Buffer cells occupied: " + buffer.size() + " ");
+        System.out.printf(
+                "Buffer cells occupied: " + buffer.size() + " \n");
     }
 
     // return value from buffer
