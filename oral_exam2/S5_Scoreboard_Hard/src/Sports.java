@@ -2,6 +2,7 @@ public abstract class Sports {
 private int currentPeriod;
 private String[] teams = new String[2];
 private int[] score = new int[2];
+private boolean gameOver;
 
     public boolean isGameOver() {
         return gameOver;
@@ -11,18 +12,15 @@ private int[] score = new int[2];
         this.gameOver = gameOver;
     }
 
-    private boolean gameOver;
+
 
     /** superclass sports constructor
      * */
-    public Sports(String team1,String team2,int noOfPeriods) {
+    public Sports(String team1,String team2) {
         teams[0] = team1; //team 1
         teams[1] = team2;//team 2
 
-        score[0] = 0; //team 1 score
-        score[1] = 0;//team 2 score
-
-        gameOver = true;//start game
+        gameOver = false;//start game
     }
 
     /** set the teams */
@@ -40,7 +38,11 @@ private int[] score = new int[2];
     /** get score*/
     public int[] getScore() {
         return score;
-        //teams[0] + ": " + score[0] + " - " + teams[1] + ": " + score[1]
+    }
+
+    /** get scoreboard*/
+    public String getScoreBoard(){
+        return teams[0] + ": " + score[0] + " - " + teams[1] + ": " + score[1];
     }
 
     public void setScore(int teamNO, int points){
@@ -54,11 +56,15 @@ private int[] score = new int[2];
     abstract public String getScoringMethods();
 
     /** start game method*/
-    abstract public void startTheGame();
+    public void startTheGame(){
+        setCurrenPeriod(1);
+    }
 
     /** method to end the current period of game  */
-    abstract public void endCurrentPeriod();
-
+    public void endCurrentPeriod() {
+        setCurrenPeriod(getCurrentPeriod()+1);
+        checkGameOver();
+    }
     /** method to get the lenght of the period*/
     abstract public String getLengthOfPeriod();
 
