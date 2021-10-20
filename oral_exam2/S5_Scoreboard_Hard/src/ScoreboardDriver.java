@@ -9,7 +9,7 @@ public class ScoreboardDriver {
 
         // Promp user to enter item price
         System.out.print("Enter the number for the game played\n" +
-                         "1 for Soccer\n 2 for Basketball\n 3 for Hockey\n 4 for Football");
+                         "1 for Soccer\n2 for Basketball\n3 for Hockey\n4 for Football\n");
 
         // read in from user the next input string available
         int sportIndex = input.nextInt();
@@ -45,6 +45,7 @@ public class ScoreboardDriver {
         game.startTheGame();
 
         while(!game.isGameOver()){
+            System.out.print("Current " + game.getPeriodName()+": "+game.getCurrentPeriod()+"\n");
             System.out.print(game.getScoreBoard()+"\n");
             System.out.print(game.getScoringMethods());
 
@@ -52,13 +53,9 @@ public class ScoreboardDriver {
 
             game.addScore(option);
         }
-        System.out.print("game over thank you");
+        System.out.print("Final quarter completed, the game ended\n" + game.getScoreBoard() + "\n"
+                         + "Winner " + game.winningTeam());
 
     }
 }
 
-//todo
-//fix teams bugs, the index of the tems should be 0 and 1
-//add new line at the end of every statement
-//add the current game period on the top of the scoreboard
-//do multiple testing

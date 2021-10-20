@@ -21,19 +21,19 @@ public class Football extends Sports{
             setScore(1,getScore()[0] +2);
         }
         else if (scoringMethodNo == 6){
-            setScore(2,getScore()[0] +7);
+            setScore(2,getScore()[1] +7);
         }
         else if (scoringMethodNo == 7){
-            setScore(2,getScore()[0] +3);
+            setScore(2,getScore()[1] +3);
         }
         else if (scoringMethodNo == 8){
-            setScore(2,getScore()[0] +1);
+            setScore(2,getScore()[1] +1);
         }
         else if (scoringMethodNo == 9){
-            setScore(2,getScore()[0] +2);
+            setScore(2,getScore()[1] +2);
         }
         else if (scoringMethodNo == 10){
-            setScore(2,getScore()[0] +2);
+            setScore(2,getScore()[1] +2);
         }
         else if (scoringMethodNo == 11){
             endCurrentPeriod();
@@ -53,7 +53,7 @@ public class Football extends Sports{
                 "8 for " + getTeams(2) + " extra point\n" +
                 "9 for " + getTeams(2) + " two point conversion\n" +
                 "10 for " + getTeams(2) + " safety\n" +
-                "11 to end quarter";
+                "11 to end quarter\n";
     }
 
     @Override

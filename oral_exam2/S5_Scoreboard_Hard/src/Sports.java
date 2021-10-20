@@ -46,7 +46,7 @@ private boolean gameOver;
     }
 
     public void setScore(int teamNO, int points){
-        score[teamNO] = points;
+        score[teamNO-1] = points;
     }
 
     /** abstract method to add score according to each subclass */
@@ -89,7 +89,7 @@ private boolean gameOver;
             return teams[1];
         }
         else{
-            return "no winner, game tied" ;
+            return "no winner, game tied\n" ;
         }
     }
 }

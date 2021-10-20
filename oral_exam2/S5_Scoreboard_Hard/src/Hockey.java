@@ -9,7 +9,7 @@ public class Hockey extends Sports{
             setScore(1,getScore()[0] +1); //team 1 scores touchdown
         }
         else if (scoringMethodNo == 2){
-            setScore(2,getScore()[0] +1);
+            setScore(2,getScore()[1] +1);
         }
         else if (scoringMethodNo == 3){
             endCurrentPeriod();
@@ -20,12 +20,12 @@ public class Hockey extends Sports{
     public String getScoringMethods() {
         return  "1 for " + getTeams(1) + " goal\n" +
                 "2 for " + getTeams(2) + " goal\n" +
-                "3 to end quarter";
+                "3 to end quarter\n";
     }
 
     @Override
     public String getLengthOfPeriod() {
-        return "20 minutes";
+        return "20 minutes\n";
     }
 
     @Override

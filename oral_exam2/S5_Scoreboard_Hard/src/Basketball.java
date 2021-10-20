@@ -15,13 +15,13 @@ public class Basketball extends Sports{
             setScore(1,getScore()[0] +1);
         }
         else if (scoringMethodNo == 4){
-            setScore(2,getScore()[0] +2);
+            setScore(2,getScore()[1] +2);
         }
         else if (scoringMethodNo == 5){
-            setScore(3,getScore()[0] +3);
+            setScore(2,getScore()[1] +3);
         }
         else if (scoringMethodNo == 6){
-            setScore(4,getScore()[0] +1);
+            setScore(2,getScore()[1] +1);
         }
         else if (scoringMethodNo == 7){
             endCurrentPeriod();
@@ -36,12 +36,12 @@ public class Basketball extends Sports{
                 "4 for " + getTeams(2) + " two pointer\n" +
                 "5 for " + getTeams(2) + " three pointer\n" +
                 "6 for " + getTeams(2) + " free throw\n" +
-                "7 to end quarter";
+                "7 to end quarter\n";
     }
 
     @Override
     public String getLengthOfPeriod() {
-        return "12 minutes";
+        return "12 minutes\n";
     }
 
     @Override
