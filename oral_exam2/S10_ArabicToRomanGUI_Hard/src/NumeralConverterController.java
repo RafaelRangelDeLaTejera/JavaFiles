@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 
-public class ArabicToRomanController {
+public class NumeralConverterController {
 
     private String arabicNumber;
     private String romanNumber;
@@ -20,13 +20,13 @@ public class ArabicToRomanController {
         arabic.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                roman.setText(t1);
+                roman.setText(ConversionLogic.convertArabicToRoman(t1));
             }
         });
         roman.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                arabic.setText(t1);
+                //arabic.setText(t1);
             }
         });
     }
