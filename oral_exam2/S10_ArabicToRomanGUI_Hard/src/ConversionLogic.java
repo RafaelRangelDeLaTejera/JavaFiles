@@ -41,10 +41,14 @@ public class ConversionLogic {
 
     public static String convertRomanToArabic(String romanNumeral){
 
-        value = 0;
-        String temporalString;
 
-        while(romanNumeral.substring(0,1) != " "){
+System.out.print("in function");
+        value = 0;
+        romanNumeral+=" ";
+
+
+        while(romanNumeral.length() > 1){
+            System.out.print("in while");
             if (romanNumeral.substring(0,1) == "M"){
                 value+=1000;
                 romanNumeral = romanNumeral.substring(1);
@@ -110,3 +114,9 @@ public class ConversionLogic {
         return String.valueOf(value);
     }
 }
+
+//todo
+//instead of substring compare characters using char at
+//handle exceptions
+//make sure user inputs valid bounds
+//make sure user inputs valid roman numeral format

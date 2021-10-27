@@ -32,7 +32,12 @@ public class NumeralConverterController {
         roman.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-               // arabic.setText(ConversionLogic.convertRomanToArabic(t1));
+               try {
+                   arabic.setText(ConversionLogic.convertRomanToArabic(t1));
+               }
+               catch (Exception e){
+                   arabic.setText(t1);
+               }
             }
         });
     }
