@@ -43,22 +43,22 @@ public class ConversionLogic {
 
 
 System.out.print("in function");
+
         value = 0;
         romanNumeral+=" ";
 
-
         while(romanNumeral.length() > 1){
             System.out.print("in while");
-            if (romanNumeral.substring(0,1) == "M"){
+            if (romanNumeral.charAt(0) == 'M'){
                 value+=1000;
                 romanNumeral = romanNumeral.substring(1);
             }
-            else if (romanNumeral.substring(0,1) == "C"){
-                if (romanNumeral.substring(1,2) == "D"){
+            else if (romanNumeral.charAt(0) == 'C'){
+                if (romanNumeral.charAt(2) == 'D'){
                     value+=400;
                     romanNumeral = romanNumeral.substring(2);
                 }
-                else if (romanNumeral.substring(0,1) == "M"){
+                else if (romanNumeral.charAt(2) == 'M'){
                     value+=900;
                     romanNumeral = romanNumeral.substring(2);
                 }
@@ -67,16 +67,16 @@ System.out.print("in function");
                     romanNumeral = romanNumeral.substring(1);
                 }
             }
-            else if (romanNumeral.substring(0,1) == "D"){
+            else if (romanNumeral.charAt(0) == 'D'){
                 value +=500;
                 romanNumeral = romanNumeral.substring(1);
             }
-            else if (romanNumeral.substring(0,1) == "X"){
-                if (romanNumeral.substring(1,2) == "L"){
+            else if (romanNumeral.charAt(0) == 'X'){
+                if (romanNumeral.charAt(1) == 'L'){
                     value+=40;
                     romanNumeral = romanNumeral.substring(2);
                 }
-                else if (romanNumeral.substring(0,1) == "C"){
+                else if (romanNumeral.charAt(1) == 'C'){
                     value+=90;
                     romanNumeral = romanNumeral.substring(2);
                 }
@@ -85,16 +85,16 @@ System.out.print("in function");
                     romanNumeral = romanNumeral.substring(1);
                 }
             }
-            else if (romanNumeral.substring(0,1) == "L"){
+            else if (romanNumeral.charAt(0) == 'L'){
                 value +=50;
                 romanNumeral = romanNumeral.substring(1);
             }
-            else if (romanNumeral.substring(0,1) == "I"){
-                if (romanNumeral.substring(1,2) == "V"){
+            else if (romanNumeral.charAt(0) == 'I'){
+                if (romanNumeral.charAt(1) == 'V'){
                     value+=4;
                     romanNumeral = romanNumeral.substring(2);
                 }
-                else if (romanNumeral.substring(0,1) == "X"){
+                else if (romanNumeral.charAt(1) == 'X'){
                     value+=9;
                     romanNumeral = romanNumeral.substring(2);
                 }
@@ -103,7 +103,7 @@ System.out.print("in function");
                     romanNumeral = romanNumeral.substring(1);
                 }
             }
-            else if (romanNumeral.substring(0,1) == "V"){
+            else if (romanNumeral.charAt(0) == 'V'){
                 value +=5;
                 romanNumeral = romanNumeral.substring(1);
             }
@@ -116,7 +116,6 @@ System.out.print("in function");
 }
 
 //todo
-//instead of substring compare characters using char at
 //handle exceptions
 //make sure user inputs valid bounds
 //make sure user inputs valid roman numeral format
