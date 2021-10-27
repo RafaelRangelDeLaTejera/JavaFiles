@@ -14,9 +14,9 @@ public class ConversionLogic {
         value = Integer.valueOf(Arabic);
         String romanNumeral = "";
 
-//        if (value == 0){
-//            throw new Exception(); //return exception when passed in Arabic number is just 0 from the beginning
-//        }
+        if (value == 0){
+            throw new Exception(); //return exception when passed in Arabic number is just 0 from the beginning
+        }
 
 
         while(value != 0 ){
@@ -57,20 +57,20 @@ if (romanNumeral.length() == 0){
 
         while(romanNumeral.length() > 1){
             System.out.print("in while");
-            if (romanNumeral.charAt(0) == 'M'){
+            if (romanNumeral.charAt(0) == 'M' ){
                 value+=1000;
                 romanNumeral = romanNumeral.substring(1);
 
 //                //todo check for invalid characters
-//                if (romanNumeral.)
+                    countM++; //there can only be max 3 M symbols in a roman input numeral so keep count
 
             }
             else if (romanNumeral.charAt(0) == 'C'){
-                if (romanNumeral.charAt(2) == 'D'){
+                if (romanNumeral.charAt(1) == 'D'){
                     value+=400;
                     romanNumeral = romanNumeral.substring(2);
                 }
-                else if (romanNumeral.charAt(2) == 'M'){
+                else if (romanNumeral.charAt(1) == 'M'){
                     value+=900;
                     romanNumeral = romanNumeral.substring(2);
                 }
@@ -118,9 +118,6 @@ if (romanNumeral.length() == 0){
             else if (romanNumeral.charAt(0) == 'V'){
                 value +=5;
                 romanNumeral = romanNumeral.substring(1);
-            }
-            else {
-                throw new Exception();
             }
 
         }
