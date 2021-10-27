@@ -1,6 +1,6 @@
 public class ConversionLogic {
     private static int value;
-    private static final String[] units = {"I","II","III","IV","VI","VII","VIII","IX"};
+    private static final String[] units = {"I","II","III","IV","V","VI","VII","VIII","IX"};
     private static final String[] tens = {"X","XX","XXX","XL","L","LX","LXX","LXXX","XC"};
     private static final String[] hundreds = {"C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
     private static final String thousands = "M";
@@ -22,16 +22,17 @@ public class ConversionLogic {
                 }
                 value = value%1000;
             }
-            if (value >= 100){
+            else if (value >= 100){
                 romanNumeral += hundreds[value/100-1];
                 value = value%100;
             }
-            if (value >= 10){
+            else if (value >= 10){
                 romanNumeral += tens[value/10-1];
                 value = value%10;
             }
+            else {
             romanNumeral += units[value-1];
-            value = 0;
+            value = 0;}
 
         }
 
@@ -39,6 +40,73 @@ public class ConversionLogic {
     }
 
     public static String convertRomanToArabic(String romanNumeral){
-        return "hello";
+
+        value = 0;
+        String temporalString;
+
+        while(romanNumeral.substring(0,1) != " "){
+            if (romanNumeral.substring(0,1) == "M"){
+                value+=1000;
+                romanNumeral = romanNumeral.substring(1);
+            }
+            else if (romanNumeral.substring(0,1) == "C"){
+                if (romanNumeral.substring(1,2) == "D"){
+                    value+=400;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else if (romanNumeral.substring(0,1) == "M"){
+                    value+=900;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else {
+                    value+=100;
+                    romanNumeral = romanNumeral.substring(1);
+                }
+            }
+            else if (romanNumeral.substring(0,1) == "D"){
+                value +=500;
+                romanNumeral = romanNumeral.substring(1);
+            }
+            else if (romanNumeral.substring(0,1) == "X"){
+                if (romanNumeral.substring(1,2) == "L"){
+                    value+=40;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else if (romanNumeral.substring(0,1) == "C"){
+                    value+=90;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else {
+                    value+=10;
+                    romanNumeral = romanNumeral.substring(1);
+                }
+            }
+            else if (romanNumeral.substring(0,1) == "L"){
+                value +=50;
+                romanNumeral = romanNumeral.substring(1);
+            }
+            else if (romanNumeral.substring(0,1) == "I"){
+                if (romanNumeral.substring(1,2) == "V"){
+                    value+=4;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else if (romanNumeral.substring(0,1) == "X"){
+                    value+=9;
+                    romanNumeral = romanNumeral.substring(2);
+                }
+                else {
+                    value+=1;
+                    romanNumeral = romanNumeral.substring(1);
+                }
+            }
+            else if (romanNumeral.substring(0,1) == "V"){
+                value +=5;
+                romanNumeral = romanNumeral.substring(1);
+            }
+
+        }
+
+
+        return String.valueOf(value);
     }
 }

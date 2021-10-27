@@ -20,13 +20,19 @@ public class NumeralConverterController {
         arabic.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                roman.setText(ConversionLogic.convertArabicToRoman(t1));
+                try{
+                    roman.setText(ConversionLogic.convertArabicToRoman(t1));
+                }
+                catch (Exception e){
+                    roman.setText(t1);
+                }
+
             }
         });
         roman.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                //arabic.setText(t1);
+               // arabic.setText(ConversionLogic.convertRomanToArabic(t1));
             }
         });
     }
