@@ -9,9 +9,11 @@ public class NumeralConverter extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("NumeralConverter.fxml")); //lead fxml file
+        Parent design = FXMLLoader.load(getClass().getResource("NumeralConverter.fxml")); //load fxml file
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(design); //create new scene object with the loaded fxml of the scene builder design
+
+        //set parameters of the stage which is the window that will show our application, and show it
         stage.setTitle("ARABIC/ROMAN CONVERTER");
         stage.setScene(scene);
         stage.show();

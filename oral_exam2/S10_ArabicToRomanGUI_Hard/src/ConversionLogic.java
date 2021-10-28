@@ -5,31 +5,26 @@ public class ConversionLogic {
     private static final String[] hundreds = {"C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
     private static final String thousands = "M";
 
-    public ConversionLogic() {
-       // value = 0;
-    }
+    public ConversionLogic(){}
 
     public static String convertArabicToRoman(String Arabic) throws Exception {
 
         if (Arabic.length()<1){
-            System.out.print("in exception");
-            throw new Exception();
+            throw new Exception(); //throw exception when the passed in string is a null string
         }
 
 
-       int value = Integer.parseInt(Arabic);
+        int value = Integer.parseInt(Arabic);
         String romanNumeral = "";
 
-        System.out.print("in function arabic to roman");
         if (value <= 0 || value > 3999 || Arabic.charAt(0) == '0' ){
             System.out.print(Arabic.charAt(0));
-            throw new Exception(); //return exception when passed in Arabic number is just 0 from the beginning
+            throw new Exception(); //return exception when passed in Arabic number is outside of bounds or begins with a 0
 
         }
 
 
         while(value != 0 ){
-            System.out.print("in while arabic to roman");
             if (value >= 1000){
                 for (int i = 1; i <= value/1000; i++){
                     romanNumeral += thousands;
@@ -49,22 +44,16 @@ public class ConversionLogic {
             value = 0;}
 
         }
-
-        System.out.print("return succesfull");
         return romanNumeral;
     }
 
     public static String convertRomanToArabic(String romanNumeral) throws Exception {
 
+        String savedCopy = romanNumeral;
 
-System.out.print("in function");
-
-String savedCopy = romanNumeral;
-
-if (romanNumeral.length() == 0 ){
-    System.out.print("in function");
-    throw new Exception();
-}
+        if (romanNumeral.length() == 0 ){
+            throw new Exception();
+        }
 
        int  value = 0;
         romanNumeral+=" ";
@@ -131,27 +120,18 @@ if (romanNumeral.length() == 0 ){
                 romanNumeral = romanNumeral.substring(1);
             }
             else {
-                throw new Exception();
+                throw new Exception(); //throw exception for invalid character
             }
 
         }
 
-
-        if (convertArabicToRoman(String.valueOf(value)).equals(savedCopy)){ //if passed in roman numeral is not in the right format
-            System.out.print(value);
-        System.out.print("finish");
+        //validate passed in roman numeral
+        if (convertArabicToRoman(String.valueOf(value)).equals(savedCopy)){ //if passed in roman numeral is not in the right format throw exception
             return String.valueOf(value);
         }
         else{
-            System.out.print(savedCopy);
             throw new Exception();
         }
     }
 }
 
-//todo
-//handle exceptions
-//make sure user inputs valid bounds
-//make sure user inputs valid roman numeral format
-//todo
-//fix bug where invalid input does not work for both text fields make sure that both text fields are coordinated meaning that they both change properly
