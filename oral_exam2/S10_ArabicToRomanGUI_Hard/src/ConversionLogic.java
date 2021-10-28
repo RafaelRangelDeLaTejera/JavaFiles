@@ -14,8 +14,11 @@ public class ConversionLogic {
        int value = Integer.valueOf(Arabic);
         String romanNumeral = "";
 
-        if (value == 0){
+
+        if (value <= 0 || value > 3999 || Arabic.charAt(0) == '0'){
+            System.out.print(Arabic.charAt(0));
             throw new Exception(); //return exception when passed in Arabic number is just 0 from the beginning
+
         }
 
 
@@ -140,3 +143,5 @@ if (romanNumeral.length() == 0){
 //handle exceptions
 //make sure user inputs valid bounds
 //make sure user inputs valid roman numeral format
+//todo
+//fix bug where invalid input does not work for both text fields make sure that both text fields are coordinated meaning that they both change properly
