@@ -36,7 +36,13 @@ public class NumeralConverterController {
                    arabic.setText(ConversionLogic.convertRomanToArabic(t1));
                }
                catch (Exception e){
-                   arabic.setText(t1);
+                   if (t1.length()==0){
+                       arabic.setText(t1);
+                   }
+                   else {
+                       arabic.setText("invalid input");
+                   }
+
                }
             }
         });

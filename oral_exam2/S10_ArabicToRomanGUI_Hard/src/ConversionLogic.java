@@ -1,17 +1,17 @@
 public class ConversionLogic {
-    private static int value;
+    //private static int value;
     private static final String[] units = {"I","II","III","IV","V","VI","VII","VIII","IX"};
     private static final String[] tens = {"X","XX","XXX","XL","L","LX","LXX","LXXX","XC"};
     private static final String[] hundreds = {"C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
     private static final String thousands = "M";
 
     public ConversionLogic() {
-        value = 0;
+       // value = 0;
     }
 
     public static String convertArabicToRoman(String Arabic) throws Exception {
 
-        value = Integer.valueOf(Arabic);
+       int value = Integer.valueOf(Arabic);
         String romanNumeral = "";
 
         if (value == 0){
@@ -44,15 +44,17 @@ public class ConversionLogic {
     }
 
     public static String convertRomanToArabic(String romanNumeral) throws Exception {
-        //todo
-        int countI =0, countV = 0, countX = 0, countL = 0, countC = 0, countD = 0, countM = 0;
+
+
 System.out.print("in function");
+
+String savedCopy = romanNumeral;
 
 if (romanNumeral.length() == 0){
     throw new Exception();
 }
 
-        value = 0;
+       int  value = 0;
         romanNumeral+=" ";
 
         while(romanNumeral.length() > 1){
@@ -60,9 +62,6 @@ if (romanNumeral.length() == 0){
             if (romanNumeral.charAt(0) == 'M' ){
                 value+=1000;
                 romanNumeral = romanNumeral.substring(1);
-
-//                //todo check for invalid characters
-                    countM++; //there can only be max 3 M symbols in a roman input numeral so keep count
 
             }
             else if (romanNumeral.charAt(0) == 'C'){
@@ -119,57 +118,21 @@ if (romanNumeral.length() == 0){
                 value +=5;
                 romanNumeral = romanNumeral.substring(1);
             }
+            else {
+                throw new Exception();
+            }
 
         }
 
 
-        return String.valueOf(value);
-    }
-
-    public static boolean checkRomanValidity(String romanNumeral){
-
-        boolean valid = true;
-        int countI =0, countV = 0, countX = 0, countL = 0, countC = 0, countD = 0, countM = 0;
-
-        for (int i = 0; i < romanNumeral.length(); i ++){
-            //if (romanNumeral.charAt(i) != 'I'|| romanNumeral.charAt(i) != 'V'||romanNumeral.charAt(i) != 'X'||romanNumeral.charAt(i) != 'L'||romanNumeral.charAt(i) != 'C'||romanNumeral.charAt(i) != 'D'||romanNumeral.charAt(i) != 'M')
-
-            if (romanNumeral.charAt(i) == 'I')
-            {
-                countI++;
-            }
-            else if (romanNumeral.charAt(i) == 'V')
-            {
-                countV++;
-            }
-            else if (romanNumeral.charAt(i) == 'X')
-            {
-                countX++;
-            }
-            else if (romanNumeral.charAt(i) == 'L')
-            {
-                countL++;
-            }
-            else if (romanNumeral.charAt(i) == 'C')
-            {
-                countC++;
-            }
-            else if (romanNumeral.charAt(i) == 'D')
-            {
-                countD++;
-            }
-            else if (romanNumeral.charAt(i) == 'M')
-            {
-                countM++;
-            }
-            else //if character is not a valid Roman numeral symbol
-            {
-                valid = false; //return false for invalid Roman Numeral
-                i = romanNumeral.length(); //exit loop
-            }
+        if (convertArabicToRoman(String.valueOf(value)).equals(savedCopy)){ //if passed in roman numeral is not in the right format
+            System.out.print(value);
+            return String.valueOf(value);
         }
-        return valid;
-
+        else{
+            System.out.print(savedCopy);
+            throw new Exception();
+        }
     }
 }
 
