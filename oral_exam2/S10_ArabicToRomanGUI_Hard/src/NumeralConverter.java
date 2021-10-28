@@ -8,7 +8,8 @@ public class NumeralConverter extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("NumeralConverter.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("NumeralConverter.fxml")); //lead fxml file
 
         Scene scene = new Scene(root);
         stage.setTitle("ARABIC/ROMAN CONVERTER");

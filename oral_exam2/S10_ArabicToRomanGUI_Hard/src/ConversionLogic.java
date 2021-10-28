@@ -11,11 +11,17 @@ public class ConversionLogic {
 
     public static String convertArabicToRoman(String Arabic) throws Exception {
 
-       int value = Integer.valueOf(Arabic);
+        if (Arabic.length()<1){
+            System.out.print("in exception");
+            throw new Exception();
+        }
+
+
+       int value = Integer.parseInt(Arabic);
         String romanNumeral = "";
 
-
-        if (value <= 0 || value > 3999 || Arabic.charAt(0) == '0'){
+        System.out.print("in function arabic to roman");
+        if (value <= 0 || value > 3999 || Arabic.charAt(0) == '0' ){
             System.out.print(Arabic.charAt(0));
             throw new Exception(); //return exception when passed in Arabic number is just 0 from the beginning
 
@@ -23,6 +29,7 @@ public class ConversionLogic {
 
 
         while(value != 0 ){
+            System.out.print("in while arabic to roman");
             if (value >= 1000){
                 for (int i = 1; i <= value/1000; i++){
                     romanNumeral += thousands;
@@ -43,6 +50,7 @@ public class ConversionLogic {
 
         }
 
+        System.out.print("return succesfull");
         return romanNumeral;
     }
 
@@ -53,7 +61,8 @@ System.out.print("in function");
 
 String savedCopy = romanNumeral;
 
-if (romanNumeral.length() == 0){
+if (romanNumeral.length() == 0 ){
+    System.out.print("in function");
     throw new Exception();
 }
 
@@ -130,6 +139,7 @@ if (romanNumeral.length() == 0){
 
         if (convertArabicToRoman(String.valueOf(value)).equals(savedCopy)){ //if passed in roman numeral is not in the right format
             System.out.print(value);
+        System.out.print("finish");
             return String.valueOf(value);
         }
         else{
