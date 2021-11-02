@@ -59,7 +59,7 @@ public class ConversionLogic {
         romanNumeral+=" ";
 
         while(romanNumeral.length() > 1){
-            System.out.print("in while");
+
             if (romanNumeral.charAt(0) == 'M' ){
                 value+=1000;
                 romanNumeral = romanNumeral.substring(1);

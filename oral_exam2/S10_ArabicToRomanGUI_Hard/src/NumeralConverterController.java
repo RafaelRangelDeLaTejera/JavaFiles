@@ -47,7 +47,7 @@ public class NumeralConverterController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                try {
-                   arabic.setText(ConversionLogic.convertRomanToArabic(t1));
+                   arabic.setText(ConversionLogic.convertRomanToArabic(t1)); //pull out of if statement in case this does not work
                    validationMessage.setVisible(false);
                }
                catch (Exception e){
