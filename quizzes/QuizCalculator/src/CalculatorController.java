@@ -1,69 +1,174 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class CalculatorController {
 
-    @FXML
-    private TextField sevenButton;
+    String text = "";
 
     @FXML
-    private TextField eightButton;
+    private Button sevenButton;
 
     @FXML
-    private TextField nineButton;
+    private Button eightButton;
 
     @FXML
-    private TextField divideButton;
+    private Button nineButton;
 
     @FXML
-    private TextField fourButton;
+    private Button divideButton;
 
     @FXML
-    private TextField fiveButton;
+    private Button fourButton;
 
     @FXML
-    private TextField sixButton;
+    private Button fiveButton;
 
     @FXML
-    private TextField multiplyButton;
+    private Button sixButton;
 
     @FXML
-    private TextField oneButton;
+    private Button multiplyPressed;
 
     @FXML
-    private TextField ceroButton;
+    private Button oneButton;
 
     @FXML
-    private TextField twoButton;
+    private Button twoButton;
 
     @FXML
-    private TextField clearButton;
+    private Button threeButton;
 
     @FXML
-    private TextField threeButton;
+    private Button minusButton;
 
     @FXML
-    private TextField equalButton;
+    private Button ceroButton;
 
     @FXML
-    private TextField plusButton;
+    private Button clearButton;
 
     @FXML
-    private TextField minusButton;
+    private Button equalButton;
 
     @FXML
-    private TextField expButton;
+    private Button plusButton;
 
     @FXML
-    private TextField cosButton;
+    private Button squareButton;
 
     @FXML
-    private TextField sinButton;
+    private Button sinButton;
 
     @FXML
-    private TextField squareButton;
+    private Button cosButton;
+
+    @FXML
+    private Button exponentButton;
 
     @FXML
     private TextField result;
+
+    @FXML
+    void ceroPressed(ActionEvent event) {
+
+
+    }
+
+    @FXML
+    private void clearPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cosPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void dividePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void eightPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equalPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exponentPresed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fivePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void fourPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void minusPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void multiplicationPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ninePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void plusPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sevenPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sinButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sixPressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void squarePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void threePressed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void twoPressed(ActionEvent event) {
+
+    }
 
 }
