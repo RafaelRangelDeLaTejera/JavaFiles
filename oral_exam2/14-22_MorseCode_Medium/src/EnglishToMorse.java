@@ -18,13 +18,14 @@ public class EnglishToMorse {
             }
             else {
                 int characterIndex = englishPhrase.charAt(i);
-                if (characterIndex > 65 && characterIndex < 90){
+                System.out.print(characterIndex + " ");
+                if (characterIndex >= 65 && characterIndex <= 90){
                     encodedPhrase = encodedPhrase + code[characterIndex-55] + " ";
                 }
-                else if (characterIndex < 10){
-                    encodedPhrase = encodedPhrase + code[characterIndex] + " ";
+                else if (characterIndex >= 48 && characterIndex <= 57){
+                    encodedPhrase = encodedPhrase + code[characterIndex-48] + " ";
                 }
-                else if (characterIndex > 97 && characterIndex < 122){
+                else if (characterIndex >= 97 && characterIndex <= 122){
                     encodedPhrase = encodedPhrase + code[characterIndex-87] + " ";
                 }
                 else {
