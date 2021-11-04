@@ -1,11 +1,11 @@
-public class ConversionLogic {
+public class NumeralConverterModel {
     //private static int value;
     private static final String[] units = {"I","II","III","IV","V","VI","VII","VIII","IX"};
     private static final String[] tens = {"X","XX","XXX","XL","L","LX","LXX","LXXX","XC"};
     private static final String[] hundreds = {"C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
     private static final String thousands = "M";
 
-    public ConversionLogic(){}
+    public NumeralConverterModel(){}
 
     public static String convertArabicToRoman(String Arabic) throws Exception {
 

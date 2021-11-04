@@ -2,7 +2,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.text.Text;
 
 public class NumeralConverterController {
@@ -25,9 +24,9 @@ public class NumeralConverterController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 try{
-                    roman.setText(ConversionLogic.convertArabicToRoman(t1)); //try to convert the input roman numerals to arabic numbers
+                    roman.setText(NumeralConverterModel.convertArabicToRoman(t1)); //try to convert the input roman numerals to arabic numbers
 
-                    validationMessage.setVisible(false); //set the validation message to false if succesfully converted numbers
+                    validationMessage.setVisible(false); //hide the validation message if successfully converted numbers
                 }
                 catch (Exception e){ //if the numbers could not be changed smoothly then the output text on the other text field will be set to the same string as the one the user input
 
@@ -47,7 +46,7 @@ public class NumeralConverterController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                try {
-                   arabic.setText(ConversionLogic.convertRomanToArabic(t1)); //pull out of if statement in case this does not work
+                   arabic.setText(NumeralConverterModel.convertRomanToArabic(t1)); //pull out of if statement in case this does not work
                    validationMessage.setVisible(false);
                }
                catch (Exception e){
