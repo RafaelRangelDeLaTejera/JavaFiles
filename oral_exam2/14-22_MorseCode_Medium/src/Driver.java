@@ -5,5 +5,6 @@ public class Driver {
 
         System.out.print(testEnToMorse.encodeToMorse("Hello 12 p"));
 
+        System.out.print(testEnToMorse.decipherToEnglish(".... . .-.. .-.. ---   .... --- .--   .- .-. .   -.-- --- ..-"));
     }
 }
