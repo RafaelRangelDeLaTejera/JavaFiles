@@ -123,9 +123,12 @@ public class CalculatorController {
 
     @FXML
     void equalPressed(ActionEvent event) {
+
         value = CalculatorModel.computeResult(operations);
+        System.out.print(value);
         result.setText(String.valueOf(value));
-        operations = "";
+        operations = String.valueOf(value);
+
     }
 
     @FXML
