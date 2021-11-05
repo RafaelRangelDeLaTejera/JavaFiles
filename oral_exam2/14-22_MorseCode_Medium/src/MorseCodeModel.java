@@ -1,11 +1,11 @@
-public class EnglishToMorse {
+public class MorseCodeModel {
 
     private static final String[] code = {"-----",".----",
             "..---","...--","....-",".....","-....","--...","---..","----.",".-","=...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
             ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
 
 
-    public EnglishToMorse() {}
+    public MorseCodeModel() {}
 
     public static String encodeToMorse(String englishPhrase){
 

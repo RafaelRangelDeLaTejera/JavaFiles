@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class NumeralConverterApp extends Application {
+public class DecipherMorseCodeApp extends Application {
 
     public static void main(String[] args){
         Application.launch(args); //launch the NumeralConverter application
@@ -15,12 +15,12 @@ public class NumeralConverterApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("NumeralConverter.fxml")); //load fxml file
+            Parent root = FXMLLoader.load(getClass().getResource("MorseCodeController.fxml")); //load fxml file
 
             Scene scene = new Scene(root); //create new scene object with the loaded fxml of the scene builder design
 
             //set parameters of the stage which is the window that will show our application, and show it
-            stage.setTitle("ARABIC/ROMAN CONVERTER");
+            stage.setTitle("Morse Code app");
             stage.setScene(scene);
             stage.show();
         }
