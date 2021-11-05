@@ -1,10 +1,8 @@
 public class Driver {
     public static void main(String[] args) {
 
-        EnglishToMorse testEnToMorse = new EnglishToMorse();
+        System.out.print(EnglishToMorse.encodeToMorse("Hello 12 p"));
 
-        System.out.print(testEnToMorse.encodeToMorse("Hello 12 p"));
-
-        System.out.print(testEnToMorse.decipherToEnglish(".... . .-.. .-.. ---   .... --- .--   .- .-. .   -.-- --- ..-"));
+        System.out.print(EnglishToMorse.decipherToEnglish(".... . .-.. .-.. ---   .... --- .--   .- .-. .   -.-- --- ..-"));
     }
 }

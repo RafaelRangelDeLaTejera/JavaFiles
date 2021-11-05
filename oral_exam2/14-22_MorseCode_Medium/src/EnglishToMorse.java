@@ -1,16 +1,13 @@
 public class EnglishToMorse {
 
-    //private String encodedPhrase;
     private static final String[] code = {"-----",".----",
             "..---","...--","....-",".....","-....","--...","---..","----.",".-","=...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
             ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
 
 
-    public EnglishToMorse() {
-        //encodedPhrase = "";
-    }
+    public EnglishToMorse() {}
 
-    public String encodeToMorse(String englishPhrase){
+    public static String encodeToMorse(String englishPhrase){
 
         String encodedPhrase = "";
 
@@ -39,7 +36,7 @@ public class EnglishToMorse {
         return encodedPhrase;
     }
 
-    public String decipherToEnglish(String code){
+    public static String decipherToEnglish(String code){
         String englishWord = "";
         String singleCharacter = "";
 
@@ -48,25 +45,18 @@ public class EnglishToMorse {
                 singleCharacter+=code.charAt(i);
             }
             else if ((i+1) < code.length() && (i+2) < code.length()){
-                if (code.charAt(i) == ' ' && code.charAt(i+1)==' ' && code.charAt(i+2) == ' '){
+                if (code.charAt(i) == ' ' && code.charAt(i+1)==' ' && code.charAt(i+2) == ' ' && singleCharacter != ""){
                     englishWord+=convertCodedChar(singleCharacter);
                     singleCharacter = "";
                     englishWord+=' ';
                     i+=2;
 
                 }
-                else if (code.charAt(i) == ' '){
+                else if (code.charAt(i) == ' ' && singleCharacter != ""){
                 englishWord+=convertCodedChar(singleCharacter);
                 singleCharacter = "";
                 }
             }
-
-
-
-
-//            while (code.charAt(i) != ' '){
-//                singleCharacter+=code.charAt(i);
-//            }
         }
 
         englishWord+=convertCodedChar(singleCharacter);
@@ -74,19 +64,17 @@ public class EnglishToMorse {
         return englishWord;
     }
 
-    public int findIndexOfCode(String findThis){
+    public static char convertCodedChar(String codedChar){
+        int index = -1; //initialize to value that does not represent an index of the code array just so the compiler allows for index to be used in if statement
+
         int e = 0;
         while (e < code.length){
-            if (findThis.equals(code[e])){
-                return e;
+            if (codedChar.equals(code[e])){
+               index = e;
+                e = code.length;
             }
             e++;
         }
-        return -1;
-    }
-
-    public char convertCodedChar(String codedChar){
-        int index = findIndexOfCode(codedChar);
 
         if (index >= 0 && index <= 9){
             index +=48;
