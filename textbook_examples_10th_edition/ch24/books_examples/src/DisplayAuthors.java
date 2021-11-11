@@ -5,14 +5,14 @@ import java.sql.*;
 
 public class DisplayAuthors {
     public static void main(String args[]) {
-        final String DATABASE_URL = "jdbc:derby:books";
+        final String DATABASE_URL = "jdbc:mysql://s-l112.engr.uiowa.edu:3306/swd_db000";
         final String SELECT_QUERY =
                 "SELECT authorID, firstName, lastName FROM authors";
 
         // use try-with-resources to connect to and query the database
         try (
                 Connection connection = DriverManager.getConnection(
-                        DATABASE_URL, "deitel", "deitel");
+                        DATABASE_URL, "swd_group000", "swd_group000-xyz-21");
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_QUERY)) {
             // get ResultSet's meta data
