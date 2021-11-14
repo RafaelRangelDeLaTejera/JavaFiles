@@ -10,12 +10,13 @@ public class DecipherMorseCodeApp extends Application {
 
     public static void main(String[] args){
         Application.launch(args); //launch the NumeralConverter application
+
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MorseCodeController.fxml")); //load fxml file
+            Parent root = FXMLLoader.load(getClass().getResource("DecipherMorseCode.fxml")); //load fxml file
 
             Scene scene = new Scene(root); //create new scene object with the loaded fxml of the scene builder design
 

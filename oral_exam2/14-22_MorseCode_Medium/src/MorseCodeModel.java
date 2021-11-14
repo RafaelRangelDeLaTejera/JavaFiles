@@ -52,7 +52,7 @@ public class MorseCodeModel {
                     i+=2;
 
                 }
-                else if (code.charAt(i) == ' ' && singleCharacter != ""){
+                else if (code.charAt(i) == ' ' && !singleCharacter.equals("")){
                 englishWord+=convertCodedChar(singleCharacter);
                 singleCharacter = "";
                 }
@@ -86,3 +86,8 @@ public class MorseCodeModel {
         return (char)index;
     }
 }
+
+//todo
+//handle exceptions
+//for text to morse allow text to be read after severa spaces
+//for morse to text, make sure the spaces are read in
