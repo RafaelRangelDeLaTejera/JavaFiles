@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
@@ -18,7 +16,7 @@ public class Driver {
         int turkeyWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the turkey unit: ");
         // read in from user the next input string available
-        int turkeyEnjoyment = input.nextInt();
+        double turkeyEnjoyment = input.nextInt();
 
         FoodItem turkey = new FoodItem(turkeyWeight,turkeyEnjoyment);
 
@@ -27,7 +25,7 @@ public class Driver {
         int pieWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the pumpkin pie unit: ");
         // read in from user the next input string available
-        int pieEnjoyment = input.nextInt();
+        double pieEnjoyment = input.nextInt();
 
         FoodItem pumpkinPie = new FoodItem(pieWeight,pieEnjoyment);
 
@@ -36,7 +34,7 @@ public class Driver {
         int potatoesWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the mashed potatoes unit: ");
         // read in from user the next input string available
-        int potatoesEnjoyment = input.nextInt();
+        double potatoesEnjoyment = input.nextDouble();
 
         FoodItem mashedPotatoes = new FoodItem(potatoesWeight,potatoesEnjoyment);
 
@@ -45,7 +43,7 @@ public class Driver {
         int gravyWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the gravy unit: ");
         // read in from user the next input string available
-        int gravyEnjoyment = input.nextInt();
+        double gravyEnjoyment = input.nextDouble();
 
         FoodItem gravy = new FoodItem(gravyWeight,gravyEnjoyment);
 
@@ -54,7 +52,7 @@ public class Driver {
         int stuffingWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the stuffing unit: ");
         // read in from user the next input string available
-        int stuffingEnjoyment = input.nextInt();
+        double stuffingEnjoyment = input.nextDouble();
 
         FoodItem stuffing = new FoodItem(stuffingWeight,stuffingEnjoyment);
 
@@ -63,7 +61,7 @@ public class Driver {
         int cranberriesWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the cranberries unit: ");
         // read in from user the next input string available
-        int cranberriesEnjoyment = input.nextInt();
+        double cranberriesEnjoyment = input.nextDouble();
 
         FoodItem cranberries = new FoodItem(cranberriesWeight,cranberriesEnjoyment);
 
@@ -72,7 +70,7 @@ public class Driver {
         int casseroleWeight = input.nextInt();
         System.out.print("Enter the enjoyment of the casserole unit: ");
         // read in from user the next input string available
-        int casseroleEnjoyment = input.nextInt();
+        double casseroleEnjoyment = input.nextDouble();
 
         FoodItem casserole = new FoodItem(casseroleWeight,casseroleEnjoyment);
 
@@ -83,7 +81,7 @@ public class Driver {
 
         FoodItem[] foods = {turkey,pumpkinPie,mashedPotatoes,gravy,stuffing,cranberries,casserole};
 
-        int optimalEnjoyment = ThanskgivingStomachOptimization.optimizationAlgorithm(foods, capacity);
+        double optimalEnjoyment = ThanksgivingStomachOptimization.optimizationAlgorithm(foods, capacity);
         System.out.print(optimalEnjoyment);
 
     }

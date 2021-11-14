@@ -1,8 +1,8 @@
 public class FoodItem {
     private int weight;
-    private int enjoyment;
+    private double enjoyment;
 
-    public FoodItem(int weight, int enjoyment) { //argument constructor
+    public FoodItem(int weight, double enjoyment) { //argument constructor
         this.weight = weight;
         this.enjoyment = enjoyment;
     }
@@ -20,11 +20,11 @@ public class FoodItem {
         this.weight = weight;
     }
 
-    public int getEnjoyment() {
+    public double getEnjoyment() {
         return enjoyment;
     }
 
-    public void setEnjoyment(int enjoyment) {
+    public void setEnjoyment(double enjoyment) {
         this.enjoyment = enjoyment;
     }
 }
