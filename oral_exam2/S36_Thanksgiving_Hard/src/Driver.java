@@ -74,15 +74,13 @@ public class Driver {
 
         FoodItem casserole = new FoodItem(casseroleWeight,casseroleEnjoyment,"casserole");
 
-        System.out.print("Enter the capacity of the Stomach");
+        System.out.print("Enter the capacity of the Stomach: ");
         double capacity = input.nextDouble();
-
-        //ArrayList foods = new ArrayList<FoodItem>();
 
         FoodItem[] foods = {turkey,pumpkinPie,mashedPotatoes,gravy,stuffing,cranberries,casserole};
 
         double optimalEnjoyment = ThanksgivingStomachOptimization.optimizationAlgorithm(foods, capacity);
-        System.out.print(optimalEnjoyment);
+        System.out.print("Optimal enjoyment: " + optimalEnjoyment);
 
     }
 }

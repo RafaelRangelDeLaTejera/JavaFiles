@@ -17,10 +17,6 @@ public class ThanksgivingStomachOptimization {
            // int amount = capacity/foodList[i].getWeight(); // get the unit amount that can fit in the stomach
             enjoymentPerVolumeUnit = foodList[i].getEnjoyment()/foodList[i].getWeight();
 
-                //System.out.print(optimalEnjoyment + " " + capacity + " ");
-
-            // double itemEnjoyment = amount*foodList[i].getEnjoyment(); //get the total enjoyment level reached
-
             if (maxEnjoymentPerVolumeUnit <= enjoymentPerVolumeUnit && capacity!=0){
                 maxEnjoymentPerVolumeUnit = enjoymentPerVolumeUnit;
                 maxItemIndex = i;
@@ -30,17 +26,16 @@ public class ThanksgivingStomachOptimization {
 
         if (maxItemIndex != -1){ //check that a max enjoyment item with appropriate volume was found
 
-        int amount = (int)(capacity/foodList[maxItemIndex].getWeight());
+        int amount = ((int)(capacity/foodList[maxItemIndex].getWeight()));
             optimalEnjoyment+= amount*foodList[maxItemIndex].getEnjoyment();
             capacity = capacity - amount*foodList[maxItemIndex].getWeight(); //reduce the capacity left
 
-            System.out.print(optimalEnjoyment + " " + capacity + " ");
+            System.out.print(optimalEnjoyment + " " + capacity + " " + foodList[maxItemIndex].getName() + " ");
 
             optimalEnjoyment+=optimizationAlgorithm(foodList,capacity);
         }
 
-            return optimalEnjoyment;
-
+            return optimalEnjoyment; //base case, no max enjoyment item was found
 
     }
 }
