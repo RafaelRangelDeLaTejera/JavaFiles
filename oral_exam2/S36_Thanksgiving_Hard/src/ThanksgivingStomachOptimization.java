@@ -28,7 +28,7 @@ public class ThanksgivingStomachOptimization {
 
         }
 
-        if (maxItemIndex != -1){ //check that a max enjoyment item was found
+        if (maxItemIndex != -1){ //check that a max enjoyment item with appropriate volume was found
 
         int amount = (int)(capacity/foodList[maxItemIndex].getWeight());
             optimalEnjoyment+= amount*foodList[maxItemIndex].getEnjoyment();
