@@ -13,69 +13,69 @@ public class Driver {
 
         System.out.print("Enter the weight of the turkey unit: ");
         // read in from user the next input string available
-        int turkeyWeight = input.nextInt();
+        double turkeyWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the turkey unit: ");
         // read in from user the next input string available
-        double turkeyEnjoyment = input.nextInt();
+        double turkeyEnjoyment = input.nextDouble();
 
-        FoodItem turkey = new FoodItem(turkeyWeight,turkeyEnjoyment);
+        FoodItem turkey = new FoodItem(turkeyWeight,turkeyEnjoyment,"turkey");
 
         System.out.print("Enter the weight of the pumpkin pie unit: ");
         // read in from user the next input string available
-        int pieWeight = input.nextInt();
+        double pieWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the pumpkin pie unit: ");
         // read in from user the next input string available
-        double pieEnjoyment = input.nextInt();
+        double pieEnjoyment = input.nextDouble();
 
-        FoodItem pumpkinPie = new FoodItem(pieWeight,pieEnjoyment);
+        FoodItem pumpkinPie = new FoodItem(pieWeight,pieEnjoyment,"pie");
 
         System.out.print("Enter the weight of the mashed potatoes unit: ");
         // read in from user the next input string available
-        int potatoesWeight = input.nextInt();
+        double potatoesWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the mashed potatoes unit: ");
         // read in from user the next input string available
         double potatoesEnjoyment = input.nextDouble();
 
-        FoodItem mashedPotatoes = new FoodItem(potatoesWeight,potatoesEnjoyment);
+        FoodItem mashedPotatoes = new FoodItem(potatoesWeight,potatoesEnjoyment,"potatoes");
 
         System.out.print("Enter the weight of the gravy unit: ");
         // read in from user the next input string available
-        int gravyWeight = input.nextInt();
+        double gravyWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the gravy unit: ");
         // read in from user the next input string available
         double gravyEnjoyment = input.nextDouble();
 
-        FoodItem gravy = new FoodItem(gravyWeight,gravyEnjoyment);
+        FoodItem gravy = new FoodItem(gravyWeight,gravyEnjoyment,"gravy");
 
         System.out.print("Enter the weight of the stuffing unit: ");
         // read in from user the next input string available
-        int stuffingWeight = input.nextInt();
+        double stuffingWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the stuffing unit: ");
         // read in from user the next input string available
         double stuffingEnjoyment = input.nextDouble();
 
-        FoodItem stuffing = new FoodItem(stuffingWeight,stuffingEnjoyment);
+        FoodItem stuffing = new FoodItem(stuffingWeight,stuffingEnjoyment,"stuffing");
 
         System.out.print("Enter the weight of the cranberries unit: ");
         // read in from user the next input string available
-        int cranberriesWeight = input.nextInt();
+        double cranberriesWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the cranberries unit: ");
         // read in from user the next input string available
         double cranberriesEnjoyment = input.nextDouble();
 
-        FoodItem cranberries = new FoodItem(cranberriesWeight,cranberriesEnjoyment);
+        FoodItem cranberries = new FoodItem(cranberriesWeight,cranberriesEnjoyment,"cranberries");
 
         System.out.print("Enter the weight of the casserole unit: ");
         // read in from user the next input string available
-        int casseroleWeight = input.nextInt();
+        double casseroleWeight = input.nextDouble();
         System.out.print("Enter the enjoyment of the casserole unit: ");
         // read in from user the next input string available
         double casseroleEnjoyment = input.nextDouble();
 
-        FoodItem casserole = new FoodItem(casseroleWeight,casseroleEnjoyment);
+        FoodItem casserole = new FoodItem(casseroleWeight,casseroleEnjoyment,"casserole");
 
         System.out.print("Enter the capacity of the Stomach");
-        int capacity = input.nextInt();
+        double capacity = input.nextDouble();
 
         //ArrayList foods = new ArrayList<FoodItem>();
 

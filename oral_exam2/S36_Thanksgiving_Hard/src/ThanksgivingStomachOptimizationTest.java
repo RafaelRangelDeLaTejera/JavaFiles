@@ -6,13 +6,13 @@ class ThanksgivingStomachOptimizationTest {
 
     @Test
     void optimizationAlgorithm() {
-        FoodItem turkey = new FoodItem();
-        FoodItem pie = new FoodItem();
-        FoodItem potatoes = new FoodItem();
-        FoodItem gravy = new FoodItem();
-        FoodItem stuffing = new FoodItem();
-        FoodItem cranberries = new FoodItem();
-        FoodItem casserole = new FoodItem();
+        FoodItem turkey = new FoodItem("turkey");
+        FoodItem pie = new FoodItem("pie");
+        FoodItem potatoes = new FoodItem("potatoes");
+        FoodItem gravy = new FoodItem("gravy");
+        FoodItem stuffing = new FoodItem("stuffing");
+        FoodItem cranberries = new FoodItem("cranberries");
+        FoodItem casserole = new FoodItem("casserole");
 
         FoodItem[] foods = {turkey,pie,potatoes,gravy,stuffing,cranberries,casserole};
 

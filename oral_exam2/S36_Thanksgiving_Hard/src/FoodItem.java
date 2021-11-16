@@ -1,18 +1,21 @@
 public class FoodItem {
-    private int weight;
+    private double weight;
     private double enjoyment;
+    private String name;
 
-    public FoodItem(int weight, double enjoyment) { //argument constructor
+    public FoodItem(double weight, double enjoyment, String name) { //argument constructor
         this.weight = weight;
         this.enjoyment = enjoyment;
+        this.name = name;
     }
 
-    public FoodItem(){ //no argument constructor
+    public FoodItem(String name){
         weight = 0;
         enjoyment = 0;
+        this.name = name;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -26,5 +29,13 @@ public class FoodItem {
 
     public void setEnjoyment(double enjoyment) {
         this.enjoyment = enjoyment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
