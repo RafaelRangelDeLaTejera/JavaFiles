@@ -5,18 +5,18 @@ public class Slave implements Runnable{
 
     private final CircularBufferCoefficients sharedBufferCoefficients; // reference to shared object
     private final CircularBufferRoots sharedBufferRoots;
-    private static boolean control;
+    //private static boolean control;
 
     public Slave(CircularBufferCoefficients circularBufferCoefficients,CircularBufferRoots sharedBufferRoots) {
         this.sharedBufferCoefficients = circularBufferCoefficients;
         this.sharedBufferRoots = sharedBufferRoots;
-        control = true;
+        //control = true;
     }
 
     @Override
     public void run() {
 
-        while(control){
+        while(true){
         try {
 
             //Thread.sleep(100);
@@ -70,7 +70,7 @@ public class Slave implements Runnable{
 
     }
 
-    public static void setControl(boolean control) {
-        Slave.control = control;
-    }
+//    public static void setControl(boolean control) {
+//        Slave.control = control;
+//    }
 }

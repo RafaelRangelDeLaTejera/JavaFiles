@@ -29,41 +29,26 @@ public class Master {
 
         Random randomNumber = new Random();//object to create random numbers for coefficients
 
-        for (int i = 0; i < 30; i++){
+        for (int i = 0; i < 30; i++) {
 
-            try { //useb separeta foor
+            try {
                 System.out.print(i);
 
                 Thread.sleep(100);
-                sharedBufferCoefficients.putCoefficients(7, -9, -8);
+                sharedBufferCoefficients.putCoefficients(1, 4, 4);
 
                 Thread.sleep(100);
                 String[] roots = sharedBufferRoots.getRoots();
-                System.out.print(  " " + roots[0] + roots[1] + "\n");
+                System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
 
 
-
-
+            } catch (Exception e) {
+                System.out.print("In exception master");
+                // Thread.currentThread().interrupt();
             }
-            catch (Exception e){System.out.print("In exception master");
-               // Thread.currentThread().interrupt();
-                }
-       }
+        }
 
-//        for (int i = 0; i < 30; i++){
-//
-//            try { //useb separeta foor
-//                Thread.sleep(100);
-//                System.out.print(  " " + sharedBufferRoots.getRoots() + "\n");
-//
-//            }
-//            catch (Exception e){System.out.print("In exception master");
-//                Thread.currentThread().interrupt();}
-//        }
-
-
-Slave.setControl(false);
-        //executorService.awaitTermination(1, TimeUnit.MINUTES);
+        executorService.awaitTermination(1, TimeUnit.MILLISECONDS);
         System.exit(0);
 
         }
