@@ -5,7 +5,7 @@ public class CircularBufferRoots {
     private final ArrayBlockingQueue<String[]> bufferRoots; // shared buffer
 
     public CircularBufferRoots() {
-        bufferRoots = new ArrayBlockingQueue<String[]>(1,true);
+        bufferRoots = new ArrayBlockingQueue<String[]>(1);
     }
 
     // place root values into buffer

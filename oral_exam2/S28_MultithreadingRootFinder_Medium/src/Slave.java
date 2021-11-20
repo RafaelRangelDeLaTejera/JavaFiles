@@ -1,15 +1,19 @@
+import java.util.HashMap;
+
 public class Slave implements Runnable{
 
     private final CircularBufferCoefficients sharedBufferCoefficients; // reference to shared object
     private final CircularBufferRoots sharedBufferRoots;
-    private final int slaveNo;
-    private int countSolvedSets;
+    private int slaveNo = 0;
+    private static int countSolvedSets;
+    private static boolean control;
+    private static HashMap<Integer,Integer> slaveThreads = new HashMap<>();
 
     public Slave(CircularBufferCoefficients circularBufferCoefficients, CircularBufferRoots sharedBufferRoots, int slaveNo) {
         this.sharedBufferCoefficients = circularBufferCoefficients;
         this.sharedBufferRoots = sharedBufferRoots;
         this.slaveNo = slaveNo;
-        countSolvedSets = 0;
+        slaveThreads.put(slaveNo,0);
     }
 
     @Override
@@ -18,11 +22,11 @@ public class Slave implements Runnable{
         while(true){
             try {
 
-                Thread.sleep(100);
+               // Thread.sleep(100);
 
                 double[] coefficients = sharedBufferCoefficients.getCoefficients();
 
-                countSolvedSets++;
+                slaveThreads.put(slaveNo,slaveThreads.get(slaveNo)+1);
 
                 double a = coefficients[0]; //get the three coefficient for the quadratic equation
                 double b = coefficients[1];
@@ -52,10 +56,10 @@ public class Slave implements Runnable{
 
                 System.out.print("\nright before put roots\n");
 
-                Thread.sleep(100);
+//                Thread.sleep(100);
                 sharedBufferRoots.putRoots(x1, x2);
 
-                System.out.print("\nout\n");
+                System.out.print(countSolvedSets + "Sets solved by slave " + slaveNo);
 
             } catch (Exception e) {
                 System.out.print("in exception ");
@@ -64,15 +68,9 @@ public class Slave implements Runnable{
                // e.printStackTrace();
             }
         }
-
-        System.out.print(countSolvedSets + "Sets solved by slave " + slaveNo);
     }
 
-    public int getCountSolvedSets() {
-        return countSolvedSets;
-    }
-
-    public int getSlaveNo() {
-        return slaveNo;
+    public static HashMap<Integer, Integer> getSlaveThreads() {
+        return slaveThreads;
     }
 }

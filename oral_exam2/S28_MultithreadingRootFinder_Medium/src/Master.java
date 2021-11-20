@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -12,8 +13,8 @@ public class Master {
 
         //have user select option
         Scanner input = new Scanner(System.in); //create scanner object to read in from user
-        System.out.print("Input 1 to generate and solve 30 sets of randomly generated coefficients and print all roots," +
-                "or input 2 to generate and solve 3000 sets of coefficients and print Statistics of slave thread usage");
+        System.out.print("Input 1 to generate and solve 30 sets of randomly generated coefficients and print all roots,\n" +
+                "or input 2 to generate and solve 3000 sets of coefficients and print Statistics of slave thread usage: ");
 
         int option = input.nextInt();
 
@@ -49,12 +50,20 @@ public class Master {
                     String[] roots = sharedBufferRoots.getRoots();
                     System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
 
+                   // Slave.setControl();
 
                 } catch (Exception e) {
                     System.out.print("In exception master");
                     // Thread.currentThread().interrupt();
                 }
             }
+
+            HashMap<Integer,Integer> threads = Slave.getSlaveThreads();
+
+            for (int x = 1; x <= 10; x++){
+                System.out.print("slave " + x + " solved " + threads.get(x) + " sets\n");
+            }
+
         }
         else if (option == 2){
             for (int i = 0; i < 3000; i++) {
@@ -65,7 +74,8 @@ public class Master {
                     sharedBufferCoefficients.putCoefficients(1, 4, 4);
 
                     String[] roots = sharedBufferRoots.getRoots();
-                   // System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
+                    System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
+
 
 
                 } catch (Exception e) {
@@ -73,8 +83,6 @@ public class Master {
                     // Thread.currentThread().interrupt();
                 }
             }
-
-
         }
         else {
             System.out.print("invalid input, run program again");
