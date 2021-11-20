@@ -5,8 +5,6 @@ public class Slave implements Runnable{
     private final CircularBufferCoefficients sharedBufferCoefficients; // reference to shared object
     private final CircularBufferRoots sharedBufferRoots;
     private int slaveNo = 0;
-    private static int countSolvedSets;
-    private static boolean control;
     private static HashMap<Integer,Integer> slaveThreads = new HashMap<>();
 
     public Slave(CircularBufferCoefficients circularBufferCoefficients, CircularBufferRoots sharedBufferRoots, int slaveNo) {
@@ -21,9 +19,6 @@ public class Slave implements Runnable{
 
         while(true){
             try {
-
-               // Thread.sleep(100);
-
                 double[] coefficients = sharedBufferCoefficients.getCoefficients();
 
                 slaveThreads.put(slaveNo,slaveThreads.get(slaveNo)+1);
@@ -31,7 +26,6 @@ public class Slave implements Runnable{
                 double a = coefficients[0]; //get the three coefficient for the quadratic equation
                 double b = coefficients[1];
                 double c = coefficients[2];
-                System.out.print("int slave ");
 
                 String x1, x2;
 
@@ -42,8 +36,8 @@ public class Slave implements Runnable{
                 if (underRootResult < 0) { //if result is imaginary number
                     double imaginaryPart = Math.sqrt(-1 * underRootResult) / (2 * a);
 
-                    x1 = rightPartResult + " + " + imaginaryPart + "i";
-                    x2 = rightPartResult + " - " + imaginaryPart + "i";
+                    x1 = rightPartResult + " + i " + imaginaryPart ;
+                    x2 = rightPartResult + " - i " + imaginaryPart ;
 
                 } else {
                     double leftPart = Math.sqrt(underRootResult)/(2*a);
@@ -54,18 +48,11 @@ public class Slave implements Runnable{
                     x2 = Double.toString(root2);
                 }
 
-                System.out.print("\nright before put roots\n");
-
-//                Thread.sleep(100);
                 sharedBufferRoots.putRoots(x1, x2);
 
-                System.out.print(countSolvedSets + "Sets solved by slave " + slaveNo);
-
             } catch (Exception e) {
-                System.out.print("in exception ");
-                //Thread.currentThread().interrupt();
-
-               // e.printStackTrace();
+                System.out.print("in exception slave");
+                Thread.currentThread().interrupt();
             }
         }
     }

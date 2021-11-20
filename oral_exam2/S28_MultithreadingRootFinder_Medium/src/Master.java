@@ -41,20 +41,33 @@ public class Master {
             for (int i = 0; i < 30; i++) {
 
                 try {
-                    System.out.print(i);
+                    System.out.print(i+": ");
 
                     Thread.sleep(100);
-                    sharedBufferCoefficients.putCoefficients(1, 4, 4);
+                    sharedBufferCoefficients.putCoefficients(randomNumber.nextDouble(), randomNumber.nextDouble(), randomNumber.nextDouble());
 
                     Thread.sleep(100);
                     String[] roots = sharedBufferRoots.getRoots();
                     System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
 
-                   // Slave.setControl();
+                } catch (Exception e) {
+                    System.out.print("In exception master");
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        else if (option == 2){
+            for (int i = 0; i < 3002; i++) {
+
+                try {
+
+                    sharedBufferCoefficients.putCoefficients(randomNumber.nextDouble(), randomNumber.nextDouble(), randomNumber.nextDouble());
+
+                    String[] roots = sharedBufferRoots.getRoots();
 
                 } catch (Exception e) {
                     System.out.print("In exception master");
-                    // Thread.currentThread().interrupt();
+                    Thread.currentThread().interrupt();
                 }
             }
 
@@ -65,30 +78,11 @@ public class Master {
             }
 
         }
-        else if (option == 2){
-            for (int i = 0; i < 3000; i++) {
-
-                try {
-                    System.out.print(i);
-
-                    sharedBufferCoefficients.putCoefficients(1, 4, 4);
-
-                    String[] roots = sharedBufferRoots.getRoots();
-                    System.out.print("root 1 = " + roots[0] + ", root 2 = " + roots[1] + "\n");
-
-
-
-                } catch (Exception e) {
-                    System.out.print("In exception master");
-                    // Thread.currentThread().interrupt();
-                }
-            }
-        }
         else {
             System.out.print("invalid input, run program again");
         }
 
-        executorService.awaitTermination(1, TimeUnit.MILLISECONDS);
+        //executorService.awaitTermination(1, TimeUnit.MILLISECONDS);
         System.exit(0);
 
         }
