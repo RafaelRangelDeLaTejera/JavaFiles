@@ -57,7 +57,7 @@ public class Master {
             }
         }
         else if (option == 2){
-            for (int i = 0; i < 3002; i++) {
+            for (int i = 0; i < 3000; i++) {
 
                 try {
 
