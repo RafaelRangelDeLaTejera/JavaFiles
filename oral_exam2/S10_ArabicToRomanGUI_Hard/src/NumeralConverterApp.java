@@ -29,3 +29,5 @@ public class NumeralConverterApp extends Application {
         }
     }
 }
+//todo
+//set text from invalid input to not editable

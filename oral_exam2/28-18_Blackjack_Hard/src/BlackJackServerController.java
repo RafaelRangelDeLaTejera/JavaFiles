@@ -8,6 +8,9 @@ public class BlackJackServerController {
 
     @FXML
     public void initialize() {
+        int playerTotal = 0;
+
+        int dealerTotal = 0;
 
     }
 
