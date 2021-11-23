@@ -53,6 +53,9 @@ public class BlackJackClientController implements Runnable{
     @FXML
     public void initialize() {
 
+
+
+
         playAgainButton.setVisible(false);
 
         int playerTotal = 0;

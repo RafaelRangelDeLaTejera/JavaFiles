@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class BlackJackClientApp extends Application {
@@ -23,6 +24,14 @@ public class BlackJackClientApp extends Application {
             stage.setTitle("BlackJack Game");
             stage.setScene(scene);
             stage.show();
+
+            if (args.length == 0)
+                application = new Client("127.0.0.1"); // connect to localhost
+            else
+                application = new Client(args[0]); // use args to connect
+
+            application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            application.runClient(); // run client application
         }
         catch (IOException e){
             System.out.print(e.getMessage());
