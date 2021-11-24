@@ -14,7 +14,7 @@ public class BlackJackServer extends JFrame {
     private  int totalPlayers = 0;
     private BlackJackGame currentGame = new BlackJackGame();
     private int dealerTotal;
-    private int numberOfPlayers = 0;
+    //private int numberOfPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private ServerSocket dealer; // server socket to listen to clients and establich connections
     private ExecutorService game;
@@ -30,9 +30,7 @@ public class BlackJackServer extends JFrame {
         add(new JScrollPane(gameDetails), BorderLayout.CENTER);
         setSize(150, 150); // set size of window
         setVisible(true); // show window
-    }
 
-    public void startServer(){
         gameDetails.setText("Waiting for connection\n");
         game = Executors.newCachedThreadPool();
 
@@ -40,6 +38,17 @@ public class BlackJackServer extends JFrame {
             dealer = new ServerSocket(23765, 100); // set up ServerSocket
         } catch (IOException ioException) {
             ioException.printStackTrace();
+        }
+    }
+
+    public void startServer(){
+        try // wait for connection, create Player, start runnable
+        {
+            players.add(new Player(dealer.accept()));
+            game.execute(players.get(totalPlayers-1)); // execute player runnable
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            System.exit(1);
         }
     }
 

@@ -12,8 +12,8 @@ import java.net.Socket;
 
 public class BlackJackClientController implements Runnable{
 
-    private ObjectOutputStream output; // output stream to server
-    private ObjectInputStream input; // input stream from server
+    public ObjectOutputStream output; // output stream to server
+    public ObjectInputStream input; // input stream from server
     public String hostName; // host server for this application
     private Socket connection; // socket to communicate with server
 
@@ -97,10 +97,11 @@ public class BlackJackClientController implements Runnable{
 
         try // connect to server and get streams
         {
+
             // make connection to server
             connection = new Socket(
                     InetAddress.getByName(hostName), 23765);
-
+            System.out.print("connected");
             // get streams for input and output
             // set up output stream for objects
             output = new ObjectOutputStream(connection.getOutputStream());
@@ -108,7 +109,7 @@ public class BlackJackClientController implements Runnable{
 
             // set up input stream for objects
             input = new ObjectInputStream(connection.getInputStream());
-
+            System.out.print("end of start client method");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
