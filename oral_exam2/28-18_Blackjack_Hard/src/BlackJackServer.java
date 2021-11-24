@@ -42,14 +42,17 @@ public class BlackJackServer extends JFrame {
     }
 
     public void startServer(){
-        try // wait for connection, create Player, start runnable
-        {
-            players.add(new Player(dealer.accept()));
-            game.execute(players.get(totalPlayers-1)); // execute player runnable
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            System.exit(1);
+        while(true){
+            try // wait for connection, create Player, start runnable
+            {
+                players.add(new Player(dealer.accept()));
+                game.execute(players.get(totalPlayers-1)); // execute player runnable
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                System.exit(1);
+            }
         }
+
     }
 
 
