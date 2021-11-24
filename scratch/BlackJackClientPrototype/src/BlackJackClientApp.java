@@ -7,15 +7,27 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BlackJackClientApp extends Application {
+    public static void main(String[] args) {
 
-    public BlackJackClientApp(String hostName) {
-        new BlackJackClientController(hostName);
+
+        Application.launch();
+
     }
+
+    FXMLLoader loader;
+    BlackJackClientController controllerInstance;
+    private String hostName = "127.0.0.1";
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("BlackJackClient.fxml")); //load fxml file
+
+            loader = new FXMLLoader();
+            Parent root = loader.load(getClass().getResource("BlackJackClient.fxml").openStream()); //load fxml file
+
+            controllerInstance = (BlackJackClientController) loader.getController();
 
             Scene scene = new Scene(root); //create new scene object with the loaded fxml of the scene builder design
 
@@ -24,6 +36,8 @@ public class BlackJackClientApp extends Application {
             stage.setScene(scene);
             stage.show();
 
+            controllerInstance.hostName = this.hostName;
+            controllerInstance.startClient();
 
 
         }

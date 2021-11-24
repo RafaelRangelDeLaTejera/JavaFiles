@@ -14,12 +14,9 @@ public class BlackJackClientController implements Runnable{
 
     private ObjectOutputStream output; // output stream to server
     private ObjectInputStream input; // input stream from server
-    private String hostName; // host server for this application
+    public String hostName; // host server for this application
     private Socket connection; // socket to communicate with server
 
-    public BlackJackClientController(String hostName) {
-        this.hostName = hostName;
-    }
 
     @FXML
     private Button hitButton;
@@ -60,7 +57,7 @@ public class BlackJackClientController implements Runnable{
 
         int dealerTotal = 0;
 
-        startClient();
+        ;
     }
 
     //on action methods
@@ -97,6 +94,7 @@ public class BlackJackClientController implements Runnable{
     }
 
     public void startClient(){
+
         try // connect to server and get streams
         {
             // make connection to server
@@ -115,9 +113,7 @@ public class BlackJackClientController implements Runnable{
             ioException.printStackTrace();
         }
 
-//        // create and start worker thread for this client
-//        ExecutorService worker = Executors.newFixedThreadPool(1);
-//        worker.execute(this); // execute client
+
     }
 
     
