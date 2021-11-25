@@ -14,7 +14,6 @@ public class BlackJackServer extends JFrame {
     private  int totalPlayers = 0;
     private BlackJackGame currentGame = new BlackJackGame();
     private int dealerTotal;
-    //private int numberOfPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private ServerSocket dealer; // server socket to listen to clients and establich connections
     private ExecutorService game;
@@ -63,7 +62,7 @@ public class BlackJackServer extends JFrame {
         private ObjectOutputStream output; // output to client
         private int cardSum = 0;
         private int dealerSum = 0;
-        private boolean turn = true; // whether its the players turn
+        private boolean isGameOver = false; // whether its the players turn
 
         public Player(Socket connection) {
             this.connection = connection;
@@ -86,6 +85,17 @@ public class BlackJackServer extends JFrame {
 
             gameDetails.setText(gameDetails.getText()+"Player " + totalPlayers + " connected\n");
 
+            String message;
+// while game not over
+            while (!isGameOver) {
+
+                try {
+                    message = (String) input.readObject();
+                    gameDetails.setText(gameDetails.getText()+message);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
 
         }
 
