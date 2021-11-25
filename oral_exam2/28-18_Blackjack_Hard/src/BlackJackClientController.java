@@ -76,7 +76,7 @@ public class BlackJackClientController implements Runnable{
     @FXML
     void doublePressed(ActionEvent event) {
         try {
-            output.writeObject("double");
+            output.writeObject("doublePressed");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
