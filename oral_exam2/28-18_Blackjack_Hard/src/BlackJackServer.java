@@ -86,17 +86,23 @@ public class BlackJackServer extends JFrame {
             gameDetails.setText(gameDetails.getText()+"Player " + totalPlayers + " connected\n");
 
             String message;
+            try{
+                while (!isGameOver) {
 
-            while (!isGameOver) {
-
-                try {
-                    message = (String) input.readObject();
-                    gameDetails.setText(gameDetails.getText()+message);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
+                    try {
+                        message = (String) input.readObject();
+                        gameDetails.setText(gameDetails.getText() + message);
+                    } catch (ClassNotFoundException exception) {
+                        exception.printStackTrace();
+                    }
                 }
             }
-
+            catch (IOException ioException){
+                ioException.printStackTrace();
+            }
+            finally{
+                closeConnection();
+            }
         }
 
         // send message to client
@@ -119,7 +125,7 @@ public class BlackJackServer extends JFrame {
                 output.close(); // close output stream
                 input.close(); // close input stream
                 connection.close(); // close socket
-                System.exit(0);
+
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
