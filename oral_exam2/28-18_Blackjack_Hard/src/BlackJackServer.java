@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -63,7 +62,7 @@ public class BlackJackServer extends JFrame {
         private ObjectOutputStream output; // output to client
         private int cardSum = 0;
         private int dealerSum = 0;
-        private boolean isGameOver = false; // whether its the players turn
+        private boolean isGameOver = false;
 
         public Player(Socket connection) {
             this.connection = connection;
@@ -83,51 +82,21 @@ public class BlackJackServer extends JFrame {
 
         @Override
         public void run() {
+
             gameDetails.setText(gameDetails.getText()+"Player " + totalPlayers + " connected\n");
-            boolean play = true;
 
-            while(play){ //while the socket is open is open
+            String message;
 
-                //initial conditions for the beginning of the game
-                Deck cardDeck = new Deck();
-                HashMap<Integer,Cards> usedCards = new HashMap<>();
-                int bet = 0;
-                int playerCount = 0;
-                int dealerCount = 0;
+            while (!isGameOver) {
 
-                String message;
-
-                // while current game not over
-                while (!isGameOver) {
-
-                    try {
-                        message = (String) input.readObject(); //read in message from the client, this will indicate what the server needs to do next
-                        gameDetails.setText(gameDetails.getText()+message);
-
-                        if (message == "double"){
-
-                        }
-                        else if (message == "hit"){
-
-                        }
-                        else if (message == "out"){
-
-                        }
-                        else if (message == "stay"){
-
-                        }
-
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-
-                }
-
-                usedCards.clear();
-                if (message == "playAgain"){
-
+                try {
+                    message = (String) input.readObject();
+                    gameDetails.setText(gameDetails.getText()+message);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
+
         }
 
         // send message to client
@@ -144,12 +113,13 @@ public class BlackJackServer extends JFrame {
 
         // close streams and socket
         private void closeConnection() {
-            gameDetails.setText(gameDetails.getText()+"\nTerminating connection\n");
+            gameDetails.setText(gameDetails.getText()+"\nTerminating connection with player \n");
 
             try {
                 output.close(); // close output stream
                 input.close(); // close input stream
                 connection.close(); // close socket
+                System.exit(0);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

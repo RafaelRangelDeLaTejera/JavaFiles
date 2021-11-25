@@ -64,7 +64,6 @@ public class BlackJackClientController implements Runnable{
 
     @FXML
     void playAgainPressed(ActionEvent event) {
-
         try {
             output.writeObject("playAgainPressed");
         } catch (IOException ioException) {
@@ -76,10 +75,11 @@ public class BlackJackClientController implements Runnable{
     @FXML
     void doublePressed(ActionEvent event) {
         try {
-            output.writeObject("double");
+            output.writeObject("doublePressed");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+
     }
 
     @FXML
@@ -100,6 +100,7 @@ public class BlackJackClientController implements Runnable{
 
     @Override
     public void run() {
+
 
     }
 

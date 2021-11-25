@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class BlackJackClientController implements Runnable{
+public class BlackJackClientControllerdemo implements Runnable{
 
     public ObjectOutputStream output; // output stream to server
     public ObjectInputStream input; // input stream from server
