@@ -106,7 +106,7 @@ public class BlackJackClientController implements Runnable{
 
     public void startClient(){
 
-        try // connect to server and get streams
+        try // connect to server and get streams yes
         {
 
             // make connection to server
