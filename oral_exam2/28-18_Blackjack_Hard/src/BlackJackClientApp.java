@@ -41,7 +41,8 @@ public class BlackJackClientApp extends Application {
 
             controllerInstance.hostName = this.hostName;
             controllerInstance.startClient();
-// create and start worker thread for this client
+
+            // create and start worker thread for this client
              worker = Executors.newFixedThreadPool(1);
             worker.execute(controllerInstance); // execute client
 

@@ -60,7 +60,7 @@ public class BlackJackClientController implements Runnable{
 
 
 
-        playAgainButton.setVisible(false);
+
 
         int playerTotal = 0;
 
@@ -136,29 +136,36 @@ public class BlackJackClientController implements Runnable{
     @Override
     public void run() {
         System.out.print("in run");
-        //HashMap<String,Integer> messageFromServer;
+        HashMap<String,Integer> messageFromServer;
+        Deck referenceDeck = new Deck();
 
 
 
         while (isGame){
             System.out.print("inside run while loop");
-//            try {
-//                System.out.print("in run");
-//                messageFromServer = (HashMap<String, Integer>) input.readObject();
-//
-//                if(messageFromServer.get("card") == 0){
-//                    playAgainButton.setVisible(true);
-//                    doubleButton.setVisible(false);
-//                    hitButton.setVisible(false);
-//                    outButton.setVisible(false);
-//                    stayButton.setVisible(false);
-//                }
-//                else {
-//                    betAvailable.setText("Bet available: " + messageFromServer);
-//                }
-//            } catch (IOException | ClassNotFoundException ioException) {
-//                ioException.printStackTrace();
-//            }
+            try {
+                System.out.print("in run");
+                messageFromServer = (HashMap<String, Integer>) input.readObject();
+
+                if(messageFromServer.get("card") == 0){
+                    playAgainButton.setVisible(true);
+                    System.out.print("inside the if statement");
+                    doubleButton.setVisible(false);
+                    hitButton.setVisible(false);
+                    outButton.setVisible(false);
+                    stayButton.setVisible(false);
+                }
+                else {
+                    betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
+                    bet.setText("Bet: " + messageFromServer.get("keyBet"));
+                    dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
+                    playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
+                    cardDealt.setText(referenceDeck.getCardName(messageFromServer.get("keyCard")));
+                }
+
+            } catch (IOException | ClassNotFoundException ioException) {
+                System.out.print("connection lost");
+            }
 
 
         }

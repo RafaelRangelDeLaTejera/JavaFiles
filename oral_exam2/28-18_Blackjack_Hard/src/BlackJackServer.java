@@ -106,11 +106,11 @@ public class BlackJackServer extends JFrame {
 
             //send the amount available to bet
             try {
-                information.put("playerTotal",0);
-                information.put("dealerTotal",0);
-                information.put("betAvailable",10);
-                information.put("bet",0);
-                information.put("card",0);
+                information.put("keyPlayerTotal",0);
+                information.put("keyDealerTotal",0);
+                information.put("keyBetAvailable",10);
+                information.put("keyBet",0);
+                information.put("keyCard",0);
                 output.writeObject(information);
                 output.flush();
             } catch (IOException ioException) {

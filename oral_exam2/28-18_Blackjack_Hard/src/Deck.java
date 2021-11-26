@@ -29,4 +29,22 @@ public class Deck {
     public Cards[] getDeck() {
         return deck;
     }
+
+    public String getCardName(int index){
+        if (index == 0| index == 13|index == 26|index == 39){
+            return "Ace of " + deck[index].getType();
+        }
+        else if (index == 10| index == 23 |index ==36 |index==49){
+            return "Jack of " + deck[index].getType();
+        }
+        else if (index == 11|index == 24|index==37|index == 50){
+            return "Queen of " + deck[index].getType();
+        }
+        else if (index == 12|index == 25|index == 38|index == 51){
+            return "King of " + deck[index].getType();
+        }
+        else {
+            return deck[index].getValue() + " of " + deck[index].getType();
+        }
+    }
 }
