@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -7,6 +8,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BlackJackClientController">
@@ -18,9 +20,9 @@
   </columnConstraints>
   <rowConstraints>
       <RowConstraints />
-    <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="286.0" minHeight="10.0" prefHeight="242.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="292.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -53,7 +55,6 @@
             <Button fx:id="outButton" mnemonicParsing="false" onAction="#outPressed" prefHeight="26.0" prefWidth="105.0" text="OUT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TextArea fx:id="cardDealt" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <GridPane GridPane.columnIndex="3" GridPane.rowIndex="2">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="34.0" />
@@ -61,17 +62,38 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="27.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="145.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="playerTotal" editable="false" text="Player Total: " GridPane.columnIndex="1">
+            <TextField fx:id="dealerTotal" editable="false" text="Dealer Total:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <effect>
                   <DropShadow />
                </effect>
             </TextField>
-            <TextField fx:id="dealerTotal" editable="false" text="Dealer Total:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane hgap="1.0" prefHeight="138.0" prefWidth="146.0" vgap="1.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextArea fx:id="dealerCard2" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <TextArea fx:id="dealerCard3" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                  <TextArea fx:id="dealerCard1" editable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="dealerCard4" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <TextArea fx:id="dealerCard5" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="dealerCard6" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Text fx:id="headerDealerCards" strokeType="OUTSIDE" strokeWidth="0.0" text="Dealer Cards" textAlignment="CENTER" wrappingWidth="148.474609375" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="playerTotal" editable="false" text="Player Total:" GridPane.columnIndex="1">
                <effect>
                   <DropShadow />
                </effect>
@@ -95,7 +117,15 @@
                   <DropShadow />
                </effect>
             </TextField>
-            <TextField fx:id="betAvailableButton" editable="false" text="Bet available: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="betAvailable" editable="false" text="Bet available: " GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <effect>
+                  <DropShadow />
+               </effect></TextField>
+            <Text fx:id="textForUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Game started" wrappingWidth="157.359375" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -108,9 +138,39 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="playAgainButton" mnemonicParsing="false" onAction="#playAgainPressed" prefHeight="26.0" prefWidth="204.0" text="PLAY AGAIN" GridPane.rowIndex="1" />
+            <Button fx:id="playAgainButton" mnemonicParsing="false" onAction="#playAgainPressed" prefHeight="26.0" prefWidth="204.0" text="PLAY " GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Card " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Text fx:id="headerYourCards" strokeType="OUTSIDE" strokeWidth="0.0" text="Your cards" textAlignment="CENTER" wrappingWidth="200.9033203125" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <GridPane hgap="1.0" vgap="1.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <children>
+            <TextArea fx:id="card1" editable="false" prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="card2" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <TextArea fx:id="card3" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <TextArea fx:id="card4" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <TextArea fx:id="card5" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="card6" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextArea fx:id="card7" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <TextArea fx:id="card8" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="card9" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextArea fx:id="card10" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <TextArea fx:id="card11" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="card12" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
    </children>
 </GridPane>

@@ -62,4 +62,3 @@ public class BlackJackClientApp extends Application {
     }
 }
 
-//todo find a way to stop the thread before when you close the window
