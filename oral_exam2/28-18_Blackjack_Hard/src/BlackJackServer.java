@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -58,11 +60,18 @@ public class BlackJackServer extends JFrame {
     // private inner class Player manages each Player as a runnable so that program can run in parallel
     public  class Player implements Runnable {
         private Socket connection; // connection to client
+        //these streams will write arrays to the clients
         private ObjectInputStream input; // input from client
         private ObjectOutputStream output; // output to client
         private int cardSum = 0;
         private int dealerSum = 0;
         private boolean isGameOver = false;
+        private int[] informationArray = new int[5];//0 - Bet
+                                                            //1 - Bet available
+                                                            //2 - Player total
+                                                            //3 - Dealer total
+                                                            //4 - Card message
+        private HashMap<String,Integer> information = new HashMap<>();
 
         public Player(Socket connection) {
             this.connection = connection;
@@ -85,6 +94,30 @@ public class BlackJackServer extends JFrame {
 
             gameDetails.setText(gameDetails.getText()+"Player " + totalPlayers + " connected\n");
 
+            //initial conditions for game
+            int playerTotal = 0;
+            int dealerTotal = 0;
+            int playerBettingLot = 10;
+            int bet = 0;
+            Cards CardDrawn;
+            Deck gameDeck = new Deck();
+            HashMap<Cards, Integer> usedCards = new HashMap<>();
+            Random randomNumber = new Random();
+
+            //send the amount available to bet
+            try {
+                information.put("playerTotal",0);
+                information.put("dealerTotal",0);
+                information.put("betAvailable",10);
+                information.put("bet",0);
+                information.put("card",0);
+                output.writeObject(information);
+                output.flush();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            //draw cards
+
             String message;
             try{
                 while (!isGameOver) {
@@ -92,6 +125,22 @@ public class BlackJackServer extends JFrame {
                     try {
                         message = (String) input.readObject();
                         gameDetails.setText(gameDetails.getText() + message);
+
+                        if(message == "double"){
+
+                        }
+                        else if(message == "hit"){
+
+                        }
+                        else if(message == "stay"){
+
+                        }
+                        else if (message == "out"){
+
+                        }
+                        else if (message == "playAgain"){
+
+                        }
                     } catch (ClassNotFoundException exception) {
                         exception.printStackTrace();
                     }

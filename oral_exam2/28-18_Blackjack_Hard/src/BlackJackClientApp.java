@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class BlackJackClientApp extends Application {
     public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class BlackJackClientApp extends Application {
 
     FXMLLoader loader;
     BlackJackClientController controllerInstance;
+    ExecutorService worker;
     private String hostName = "127.0.0.1";
 
 
@@ -38,6 +41,9 @@ public class BlackJackClientApp extends Application {
 
             controllerInstance.hostName = this.hostName;
             controllerInstance.startClient();
+// create and start worker thread for this client
+             worker = Executors.newFixedThreadPool(1);
+            worker.execute(controllerInstance); // execute client
 
 
         }
@@ -45,4 +51,14 @@ public class BlackJackClientApp extends Application {
             System.out.print(e.getMessage());
         }
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        controllerInstance.closeConnection();
+        controllerInstance.isGame = false;
+        worker.shutdownNow();
+    }
 }
+
+//todo find a way to stop the thread before when you close the window
