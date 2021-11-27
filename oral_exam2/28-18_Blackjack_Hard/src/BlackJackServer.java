@@ -15,8 +15,6 @@ import java.util.concurrent.Executors;
 public class BlackJackServer extends JFrame {
 
     private  int totalPlayers = 0;
-    private BlackJackGame currentGame = new BlackJackGame();
-    private int dealerTotal;
     private ArrayList<Player> players = new ArrayList<>();
     private ServerSocket dealer; // server socket to listen to clients and establich connections
     private ExecutorService game;
@@ -64,8 +62,6 @@ public class BlackJackServer extends JFrame {
         //these streams will write arrays to the clients
         private ObjectInputStream input; // input from client
         private ObjectOutputStream output; // output to client
-        private int cardSum = 0;
-        private int dealerSum = 0;
         private boolean isGameOver = false;
         //private HashMap<String,Integer> information = new HashMap<>();
 
@@ -183,29 +179,30 @@ public class BlackJackServer extends JFrame {
 
                             HashMap<String,Integer> information = new HashMap<>();
 
-                            if (playerTotal<21){
+                         //   if (playerTotal<21){
                                 //initial conditions to start game
                                 information.put("keyPlayerTotal", playerTotal);
                                 information.put("keyDealerTotal", dealerTotal);
                                 information.put("keyBetAvailable", playerBettingLot);
                                 information.put("keyBet", bet);
                                 information.put("keyPlayerCard", newIndexPlayerCard);
-                            }
-                            else { //end game if player busts or gets a blackjack
-                                if (playerTotal == 21 ){
-                                    playerBettingLot += bet*2;
-                                }
-
-                                bet=0;
-                                information.put("keyPlayerTotal", playerTotal);
-                                information.put("keyDealerTotal", dealerTotal);
-                                information.put("keyBetAvailable", playerBettingLot);
-                                information.put("keyBet", bet);
-                                information.put("keyTurnEnded",1); //indication to end the turn
-                            }
-
+                          //  }
+//                            else { //end game if player busts or gets a blackjack
+//                                if (playerTotal == 21 ){
+//                                    playerBettingLot += bet*2;
+//                                }
+//
+//                                bet=0;
+//                                information.put("keyPlayerTotal", playerTotal);
+//                                information.put("keyDealerTotal", dealerTotal);
+//                                information.put("keyBetAvailable", playerBettingLot);
+//                                information.put("keyBet", bet);
+//                                information.put("keyTurnEnded",1); //indication to end the turn
+//                            }
                             output.writeObject(information);
                             output.flush();
+
+
                         }
                         if(message.equals("stay")){ //ends the players turn
 
@@ -251,8 +248,6 @@ public class BlackJackServer extends JFrame {
 
                             if (playerTotal == 21 | (playerTotal < 21 && playerTotal > dealerTotal) | dealerTotal > 21){
                                 playerBettingLot += bet*2;
-
-
                             }
 
                             bet=0;

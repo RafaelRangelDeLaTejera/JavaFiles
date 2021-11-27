@@ -214,8 +214,6 @@ public class BlackJackClientController implements Runnable{
     }
 
 
-
-
     @Override
     public void run() {
 
@@ -226,6 +224,7 @@ public class BlackJackClientController implements Runnable{
         int dealerCards = 0; //keep track of the cards the dealer has
         int indexDownwardCard = -1; //to compile
         int numberDownwardCardArea = -1; //to compile
+        boolean endOfTurn = false;
 
 
         while (isGame){
@@ -264,6 +263,10 @@ public class BlackJackClientController implements Runnable{
                     playerCards++;
 
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
+
+                    if(messageFromServer.get("keyPlayerTotal") >= 21){
+                        endOfTurn = true;
+                    }
                 }
                 else if (messageFromServer.containsKey("keyDealerCard")){
                     dealerCardAreas[numberDownwardCardArea].setText(referenceDeck.getCardName(indexDownwardCard)); //turn downward card around
@@ -275,7 +278,7 @@ public class BlackJackClientController implements Runnable{
                     }
 
                 }
-                else {
+                else if (!messageFromServer.containsKey("keyTurnEnded")){
                     doubleButton.setVisible(false);//you can only double once
                     textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
@@ -283,7 +286,10 @@ public class BlackJackClientController implements Runnable{
                     dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
                 }
-                if (messageFromServer.containsKey("keyTurnEnded")){
+                else if (messageFromServer.containsKey("keyTurnEnded")){
+                    endOfTurn = true;
+                }
+                if (endOfTurn){
 
                     playerCards = 0;
                     dealerCards = 0;
@@ -319,6 +325,8 @@ public class BlackJackClientController implements Runnable{
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
                     bet.setText("Bet: ");
                     betAvailable.setText("Available to bet: " + messageFromServer.get("keyBetAvailable"));
+                    
+                    endOfTurn = false;
                 }
 
             } catch (IOException | ClassNotFoundException ioException) {
