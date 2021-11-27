@@ -39,7 +39,7 @@ public class BlackJackClientApp extends Application {
             stage.setScene(scene);
             stage.show();
 
-            controllerInstance.hostName = this.hostName;
+            controllerInstance.setHostName(this.hostName);
             controllerInstance.startClient();
 
             // create and start worker thread for this client
@@ -57,7 +57,7 @@ public class BlackJackClientApp extends Application {
     public void stop() throws Exception {
         super.stop();
         controllerInstance.closeConnection();
-        controllerInstance.isGame = false;
+        controllerInstance.setIsGame(false);
         worker.shutdownNow();
     }
 }

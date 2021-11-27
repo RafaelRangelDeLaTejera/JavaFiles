@@ -18,11 +18,11 @@ import java.util.concurrent.Executors;
 public class BlackJackClientController implements Runnable{
 
     //this streams will only write strings to be read by the server
-    public ObjectOutputStream output; // output stream to server
-    public ObjectInputStream input; // input stream from server
-    public String hostName; // host server for this application
+    private ObjectOutputStream output; // output stream to server
+    private ObjectInputStream input; // input stream from server
+    private String hostName; // host server for this application
     private Socket connection; // socket to communicate with server
-    public boolean isGame = true ;
+    private boolean isGame = true ;
 
 
 
@@ -278,17 +278,18 @@ public class BlackJackClientController implements Runnable{
                     }
 
                 }
-                else if (!messageFromServer.containsKey("keyTurnEnded")){
-                    doubleButton.setVisible(false);//you can only double once
+                else if (messageFromServer.containsKey("keyTurnEnded")){
+                    endOfTurn = true;
+                }
+                else  {
                     textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
                     bet.setText("Bet: " + messageFromServer.get("keyBet"));
                     dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
+                    doubleButton.setVisible(false);//you can only double once
                 }
-                else if (messageFromServer.containsKey("keyTurnEnded")){
-                    endOfTurn = true;
-                }
+
                 if (endOfTurn){
 
                     playerCards = 0;
@@ -321,8 +322,9 @@ public class BlackJackClientController implements Runnable{
                     if (messageFromServer.get("keyBetAvailable") < 0){
                         textForUser.setText(textForUser.getText() + " Ups you have a dept with us");
                     }
-                    dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
-                    playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
+
+                    dealerTotal.setText("Dealer Total: " + dealerFinalTotal);
+                    playerTotal.setText("Player total: " + playerFinalTotal);
                     bet.setText("Bet: ");
                     betAvailable.setText("Available to bet: " + messageFromServer.get("keyBetAvailable"));
 
@@ -345,7 +347,7 @@ public class BlackJackClientController implements Runnable{
 
             // make connection to server
             connection = new Socket(
-                    InetAddress.getByName(hostName), 23765);
+                    InetAddress.getByName(this.getHostName()), 23765);
             System.out.print("connected");
             // get streams for input and output
             // set up output stream for objects
@@ -378,8 +380,16 @@ public class BlackJackClientController implements Runnable{
 
     }
 
-    
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public void setIsGame(Boolean isGame){
+        this.isGame = isGame;
+    }
 }
 
-//todo automaticly win when 21 reached
-//todo test

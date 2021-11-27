@@ -177,28 +177,21 @@ public class BlackJackServer extends JFrame {
 
                             playerTotal += gameDeck.getCardValue(newIndexPlayerCard);
 
+                            if (playerTotal == 21 ){
+                                playerBettingLot += bet*2;
+                            }
+
+
                             HashMap<String,Integer> information = new HashMap<>();
 
-                         //   if (playerTotal<21){
-                                //initial conditions to start game
+
                                 information.put("keyPlayerTotal", playerTotal);
                                 information.put("keyDealerTotal", dealerTotal);
                                 information.put("keyBetAvailable", playerBettingLot);
                                 information.put("keyBet", bet);
                                 information.put("keyPlayerCard", newIndexPlayerCard);
-                          //  }
-//                            else { //end game if player busts or gets a blackjack
-//                                if (playerTotal == 21 ){
-//                                    playerBettingLot += bet*2;
-//                                }
-//
-//                                bet=0;
-//                                information.put("keyPlayerTotal", playerTotal);
-//                                information.put("keyDealerTotal", dealerTotal);
-//                                information.put("keyBetAvailable", playerBettingLot);
-//                                information.put("keyBet", bet);
-//                                information.put("keyTurnEnded",1); //indication to end the turn
-//                            }
+
+
                             output.writeObject(information);
                             output.flush();
 
