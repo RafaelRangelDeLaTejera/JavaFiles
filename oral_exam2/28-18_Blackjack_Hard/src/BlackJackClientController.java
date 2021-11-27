@@ -24,6 +24,8 @@ public class BlackJackClientController implements Runnable{
     private Socket connection; // socket to communicate with server
     public boolean isGame = true ;
 
+
+
     private TextArea[] playerCardAreas;
     private TextArea[] dealerCardAreas;
 
@@ -37,9 +39,6 @@ public class BlackJackClientController implements Runnable{
 
     @FXML
     private Button doubleButton;
-
-    @FXML
-    private Button outButton;
 
     @FXML
     private TextField betAvailable;
@@ -139,7 +138,6 @@ public class BlackJackClientController implements Runnable{
         //and also not showing the buttons and card headers, only the play button
         doubleButton.setVisible(false);
         hitButton.setVisible(false);
-        outButton.setVisible(false);
         stayButton.setVisible(false);
         headerDealerCards.setVisible(false);
         headerYourCards.setVisible(false);
@@ -163,8 +161,9 @@ public class BlackJackClientController implements Runnable{
         playAgainButton.setVisible(false);
         doubleButton.setVisible(true);
         hitButton.setVisible(true);
-        outButton.setVisible(true);
         stayButton.setVisible(true);
+        headerYourCards.setVisible(true);
+        headerDealerCards.setVisible(true);
 
     }
 
@@ -184,16 +183,8 @@ public class BlackJackClientController implements Runnable{
         try {
             output.writeObject("hit");
             output.flush();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
 
-    @FXML
-    void outPressed(ActionEvent event) {
-        try {
-            output.writeObject("out");
-            output.flush();
+
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -216,11 +207,12 @@ public class BlackJackClientController implements Runnable{
     public void run() {
 
         System.out.print("in run");
-        HashMap<String,Integer> messageFromServer;
+        //HashMap<String,Integer> messageFromServer;
         Deck referenceDeck = new Deck();
         int playerCards = 0; //keep track of the cards the player has
-          //TextArea[] playerCardAreas = {card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12};//hold all the players card positions on the table
-          //TextArea[] dealerCardAreas = {dealerCard1,dealerCard2,dealerCard3,dealerCard4,dealerCard5,dealerCard6}; //hold all the dealers card positions on the table
+        int dealerCards = 0; //keep track of the cards the dealer has
+        int indexDownwardCard;
+        int numberDownwardCardArea;
 
 
         while (isGame){
@@ -228,28 +220,58 @@ public class BlackJackClientController implements Runnable{
             System.out.print("inside run while loop");
             try {
                 System.out.print("in run");
-                messageFromServer = (HashMap<String, Integer>) input.readObject();
 
-                if(!messageFromServer.containsKey("keyCard")){ //when no card is passed in it means that turn has ended, the player can chose if they play again
-                    playAgainButton.setVisible(true);
-                    doubleButton.setVisible(false);
-                    hitButton.setVisible(false);
-                    outButton.setVisible(false);
-                    stayButton.setVisible(false);
-                    for(int i = 0; i < playerCardAreas.length ; i++){
-                        playerCardAreas[i].setVisible(false);
-                    }
-                    for(int e = 0; e < dealerCardAreas.length; e++){
-                        dealerCardAreas[e].setVisible(false);
-                    }
-                }
-                else {
+                HashMap<String,Integer> messageFromServer = (HashMap<String, Integer>) input.readObject();
+
+//                if(!messageFromServer.containsKey("keyPlayerCard")){ //when no card is passed in it means that turn has ended, the player can chose if they play again
+//                    playAgainButton.setVisible(true);
+//
+//                    //when no card is drawn it means the game is over so hide all the game option buttons
+//                    doubleButton.setVisible(false);
+//                    hitButton.setVisible(false);
+//                    stayButton.setVisible(false);
+//                    for(int i = 0; i < playerCardAreas.length ; i++){ //hide all the cards
+//                        playerCardAreas[i].setVisible(false);
+//                    }
+//                    for(int e = 0; e < dealerCardAreas.length; e++){ //hide all the cards
+//                        dealerCardAreas[e].setVisible(false);
+//                    }
+//                }
+                if (messageFromServer.containsKey("keyDownwardCard")){ //first draw
+                    textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
                     bet.setText("Bet: " + messageFromServer.get("keyBet"));
                     dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
 
-                    //show the drawn cards
+//                    //show the drawn cards
+                        playerCardAreas[playerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyPlayerCard")));
+                        playerCardAreas[playerCards].setVisible(true);
+                        playerCards++;
+
+                    dealerCardAreas[dealerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyDealerCard")));
+                    dealerCardAreas[dealerCards].setVisible(true);
+                    dealerCards++;
+
+                    numberDownwardCardArea = dealerCards;
+                    indexDownwardCard = messageFromServer.get("keyDownwardCard");
+                    dealerCardAreas[numberDownwardCardArea].setText("Back of Card");
+                    dealerCardAreas[numberDownwardCardArea].setVisible(true);
+                }
+                else if (messageFromServer.containsKey("keyTurnEnded")){
+
+                }
+                else if (messageFromServer.containsKey("keyPlayerCard")){
+                    playerCardAreas[playerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyPlayerCard")));
+                    playerCardAreas[playerCards].setVisible(true);
+                    playerCards++;
+                }
+                else {
+                    textForUser.setText("Game in progress, pick your option");
+                    betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
+                    bet.setText("Bet: " + messageFromServer.get("keyBet"));
+                    dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
+                    playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
                 }
 
             } catch (IOException | ClassNotFoundException ioException) {

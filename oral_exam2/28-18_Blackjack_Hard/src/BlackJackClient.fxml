@@ -14,9 +14,9 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BlackJackClientController">
   <columnConstraints>
       <ColumnConstraints />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="200.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="205.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="195.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints />
@@ -34,10 +34,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="hitButton" mnemonicParsing="false" onAction="#hitPressed" prefHeight="26.0" prefWidth="107.0" text="HIT" GridPane.columnIndex="1" />
-            <Button fx:id="stayButton" mnemonicParsing="false" onAction="#stayPressed" prefHeight="26.0" prefWidth="104.0" text="STAY" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="doubleButton" mnemonicParsing="false" onAction="#doublePressed" prefHeight="26.0" prefWidth="104.0" text="DOUBLE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -51,14 +52,13 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="doubleButton" mnemonicParsing="false" onAction="#doublePressed" prefHeight="26.0" prefWidth="104.0" text="DOUBLE" />
-            <Button fx:id="outButton" mnemonicParsing="false" onAction="#outPressed" prefHeight="26.0" prefWidth="105.0" text="OUT" GridPane.rowIndex="2" />
+            <Button fx:id="stayButton" mnemonicParsing="false" onAction="#stayPressed" prefHeight="26.0" prefWidth="104.0" text="STAY" />
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="3" GridPane.rowIndex="2">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="34.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="23.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="183.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="27.0" />
         </columnConstraints>
         <rowConstraints>
@@ -84,12 +84,12 @@
                   <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextArea fx:id="dealerCard2" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <TextArea fx:id="dealerCard3" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                  <TextArea fx:id="dealerCard1" editable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <TextArea fx:id="dealerCard4" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                  <TextArea fx:id="dealerCard5" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextArea fx:id="dealerCard6" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextArea fx:id="dealerCard2" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+                  <TextArea fx:id="dealerCard3" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" />
+                  <TextArea fx:id="dealerCard1" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                  <TextArea fx:id="dealerCard4" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="1" />
+                  <TextArea fx:id="dealerCard5" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="dealerCard6" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Text fx:id="headerDealerCards" strokeType="OUTSIDE" strokeWidth="0.0" text="Dealer Cards" textAlignment="CENTER" wrappingWidth="148.474609375" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -117,11 +117,11 @@
                   <DropShadow />
                </effect>
             </TextField>
-            <TextField fx:id="betAvailable" editable="false" text="Bet available: " GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="betAvailable" editable="false" text="Bet available: 10" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <effect>
                   <DropShadow />
                </effect></TextField>
-            <Text fx:id="textForUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Game started" wrappingWidth="157.359375" GridPane.columnIndex="1">
+            <Text fx:id="textForUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Press play to start" wrappingWidth="157.359375" GridPane.columnIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
@@ -158,18 +158,18 @@
             <Insets />
          </GridPane.margin>
          <children>
-            <TextArea fx:id="card1" editable="false" prefHeight="200.0" prefWidth="200.0" />
-            <TextArea fx:id="card2" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-            <TextArea fx:id="card3" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-            <TextArea fx:id="card4" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <TextArea fx:id="card5" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextArea fx:id="card6" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextArea fx:id="card7" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-            <TextArea fx:id="card8" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea fx:id="card9" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextArea fx:id="card10" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-            <TextArea fx:id="card11" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextArea fx:id="card12" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextArea fx:id="card1" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+            <TextArea fx:id="card2" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+            <TextArea fx:id="card3" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" />
+            <TextArea fx:id="card4" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="1" />
+            <TextArea fx:id="card5" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="card6" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextArea fx:id="card7" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="2" />
+            <TextArea fx:id="card8" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="card9" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextArea fx:id="card10" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="3" />
+            <TextArea fx:id="card11" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="card12" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

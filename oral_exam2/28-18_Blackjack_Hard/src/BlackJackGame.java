@@ -11,9 +11,9 @@ public class BlackJackGame {
         startOfGame = true;
     }
 
-    public Cards drawCard(){
-        return gameDeck.getDeck()[randomNumber.nextInt(52)];
-    }
+//    public Cards drawCard(){
+//        return gameDeck.getDeck()[randomNumber.nextInt(52)];
+//    }
 
     public boolean isStartOfGame() {
         return startOfGame;

@@ -26,8 +26,8 @@ public class Deck {
         }
     }
 
-    public Cards[] getDeck() {
-        return deck;
+    public int getCardValue(int index) {
+        return deck[index].getValue();
     }
 
     public String getCardName(int index){

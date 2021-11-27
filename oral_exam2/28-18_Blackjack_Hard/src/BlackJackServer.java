@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -66,12 +67,7 @@ public class BlackJackServer extends JFrame {
         private int cardSum = 0;
         private int dealerSum = 0;
         private boolean isGameOver = false;
-        private int[] informationArray = new int[5];//0 - Bet
-                                                            //1 - Bet available
-                                                            //2 - Player total
-                                                            //3 - Dealer total
-                                                            //4 - Card message
-        private HashMap<String,Integer> information = new HashMap<>();
+        //private HashMap<String,Integer> information = new HashMap<>();
 
         public Player(Socket connection) {
             this.connection = connection;
@@ -99,23 +95,28 @@ public class BlackJackServer extends JFrame {
             int dealerTotal = 0;
             int playerBettingLot = 10;
             int bet = 0;
-            Cards CardDrawn;
+            boolean turnPlayer = false;
+            //Cards CardDrawn;
             Deck gameDeck = new Deck();
-            HashMap<Cards, Integer> usedCards = new HashMap<>();
+            HashSet<Integer> usedCards = new HashSet<>();
             Random randomNumber = new Random();
+            int indexDownwardCard;
 
-            //send the amount available to bet
-            try {
-                information.put("keyPlayerTotal",0);
-                information.put("keyDealerTotal",0);
-                information.put("keyBetAvailable",10);
-                information.put("keyBet",0);
-                information.put("keyCard",0);
-                output.writeObject(information);
-                output.flush();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+
+//            //send the amount available to bet
+//            try {
+//                //initial conditions to start game
+//                information.put("keyPlayerTotal",playerTotal);
+//                information.put("keyDealerTotal",dealerTotal);
+//                information.put("keyBetAvailable",playerBettingLot);
+//                information.put("keyBet",bet);
+////                information.put("keyPlayerCard",0);
+////                information.put("keyDealerCard",0);
+//                output.writeObject(information);
+//                output.flush();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
             //draw cards
 
             String message;
@@ -123,24 +124,111 @@ public class BlackJackServer extends JFrame {
                 while (!isGameOver) {
 
                     try {
+
+                        if(turnPlayer){
+                            //draw cards for player and dealer using the random number generator, while loops combined with a hash set containing the used cards indexes are used to make sure cards  are not repeated in a turn since each client is playing with one standard deck
+                            int indexPlayerCard = randomNumber.nextInt(52);
+                            while (usedCards.contains(indexPlayerCard)) {
+                                indexPlayerCard = randomNumber.nextInt(52);
+                            }
+                            usedCards.add(indexPlayerCard);
+
+                            int indexDealerCard = randomNumber.nextInt(52);
+                            while (usedCards.contains(indexDealerCard)) {
+                                indexDealerCard = randomNumber.nextInt(52);
+                            }
+                            usedCards.add(indexDealerCard);
+
+                             indexDownwardCard = randomNumber.nextInt(52);
+                            while (usedCards.contains(indexDownwardCard)) {
+                                indexDownwardCard = randomNumber.nextInt(52);
+                            }
+                            usedCards.add(indexDownwardCard);
+
+                            playerTotal += gameDeck.getCardValue(indexPlayerCard);
+                            dealerTotal += gameDeck.getCardValue(indexDealerCard);
+
+                            System.out.print("totals" + playerTotal + " " + dealerTotal);
+
+                            bet++;
+                            playerBettingLot--;
+
+                            HashMap<String,Integer> information = new HashMap<>();
+                            //initial conditions to start game
+                            information.put("keyPlayerTotal", playerTotal);
+                            information.put("keyDealerTotal", dealerTotal);
+                            information.put("keyBetAvailable", playerBettingLot);
+                            information.put("keyBet", bet);
+                            information.put("keyPlayerCard", indexPlayerCard);
+                            information.put("keyDealerCard", indexDealerCard);
+                            information.put("keyDownwardCard",indexDownwardCard); //this downward card indicates its the first draw
+
+                            //send data to client
+                            output.writeObject(information);
+                            output.flush();
+
+                            turnPlayer = false;
+                        }
+                        else {
                         message = (String) input.readObject();
-                        gameDetails.setText(gameDetails.getText() + message);
+                        gameDetails.setText(gameDetails.getText() + "\n" + message);
 
-                        if(message == "double"){
+                        if(message.equals("double")){
+                            playerBettingLot -=bet;
+                            bet *= 2;
+
+                            gameDetails.setText(gameDetails.getText() + playerBettingLot + " and the bet is " + bet);
+
+                            HashMap<String,Integer> information = new HashMap<>();
+                            //initial conditions to start game
+                            information.put("keyPlayerTotal", playerTotal);
+                            information.put("keyDealerTotal", dealerTotal);
+                            information.put("keyBetAvailable", playerBettingLot);
+                            information.put("keyBet", bet);
+
+                            output.writeObject(information);
+                            output.flush();
+                        }
+                        if(message.equals("hit")){
+                            int newIndexPlayerCard = randomNumber.nextInt(52);
+                            while (usedCards.contains(newIndexPlayerCard)) {
+                                newIndexPlayerCard = randomNumber.nextInt(52);
+                            }
+                            usedCards.add(newIndexPlayerCard);
+
+                            HashMap<String,Integer> information = new HashMap<>();
+                            //initial conditions to start game
+                            information.put("keyPlayerTotal", playerTotal);
+                            information.put("keyDealerTotal", dealerTotal);
+                            information.put("keyBetAvailable", playerBettingLot);
+                            information.put("keyBet", bet);
+                            information.put("keyPlayerCard", newIndexPlayerCard);
+
+                            output.writeObject(information);
+                            output.flush();
+                        }
+                        if(message.equals("stay")){ //ends the players turn
+
+                            HashMap<String,Integer> information = new HashMap<>();
+                            information.put("keyPlayerTotal", playerTotal);
+                            information.put("keyDealerTotal", dealerTotal);
+                            information.put("keyBetAvailable", playerBettingLot);
+                            information.put("keyBet", bet);
+                            information.put("keyTurnEnded",1);
+
 
                         }
-                        else if(message == "hit"){
-
+                        if (message.equals("playAgain")){
+                            turnPlayer = true;
+                            HashMap<String,Integer> information = new HashMap<>();
+                            playerTotal = 0;
+                            dealerTotal = 0;
+                            playerBettingLot = 10;
+                            bet = 0;
                         }
-                        else if(message == "stay"){
-
                         }
-                        else if (message == "out"){
 
-                        }
-                        else if (message == "playAgain"){
 
-                        }
                     } catch (ClassNotFoundException exception) {
                         exception.printStackTrace();
                     }
