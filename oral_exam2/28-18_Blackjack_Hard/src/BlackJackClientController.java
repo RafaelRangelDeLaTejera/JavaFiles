@@ -325,7 +325,7 @@ public class BlackJackClientController implements Runnable{
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
                     bet.setText("Bet: ");
                     betAvailable.setText("Available to bet: " + messageFromServer.get("keyBetAvailable"));
-                    
+
                     endOfTurn = false;
                 }
 
