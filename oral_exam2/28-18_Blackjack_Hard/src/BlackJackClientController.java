@@ -184,7 +184,7 @@ public class BlackJackClientController implements Runnable{
         try {
             output.writeObject("double");
             output.flush();
-            doubleButton.setVisible(false);//you can only double once
+
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -236,20 +236,6 @@ public class BlackJackClientController implements Runnable{
 
                 HashMap<String,Integer> messageFromServer = (HashMap<String, Integer>) input.readObject();
 
-//                if(!messageFromServer.containsKey("keyPlayerCard")){ //when no card is passed in it means that turn has ended, the player can chose if they play again
-//                    playAgainButton.setVisible(true);
-//
-//                    //when no card is drawn it means the game is over so hide all the game option buttons
-//                    doubleButton.setVisible(false);
-//                    hitButton.setVisible(false);
-//                    stayButton.setVisible(false);
-//                    for(int i = 0; i < playerCardAreas.length ; i++){ //hide all the cards
-//                        playerCardAreas[i].setVisible(false);
-//                    }
-//                    for(int e = 0; e < dealerCardAreas.length; e++){ //hide all the cards
-//                        dealerCardAreas[e].setVisible(false);
-//                    }
-//                }
                 if (messageFromServer.containsKey("keyDownwardCard")){ //first draw
                     textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
@@ -264,12 +250,13 @@ public class BlackJackClientController implements Runnable{
 
                     dealerCardAreas[dealerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyDealerCard")));
                     dealerCardAreas[dealerCards].setVisible(true);
-                    dealerCards++;
+                    dealerCards+=2;
 
-                    numberDownwardCardArea = dealerCards;
+                    numberDownwardCardArea = 1;
                     indexDownwardCard = messageFromServer.get("keyDownwardCard");
                     dealerCardAreas[numberDownwardCardArea].setText("Back of Card");
                     dealerCardAreas[numberDownwardCardArea].setVisible(true);
+
                 }
                 else if (messageFromServer.containsKey("keyPlayerCard")){
                     playerCardAreas[playerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyPlayerCard")));
@@ -281,11 +268,15 @@ public class BlackJackClientController implements Runnable{
                 else if (messageFromServer.containsKey("keyDealerCard")){
                     dealerCardAreas[numberDownwardCardArea].setText(referenceDeck.getCardName(indexDownwardCard)); //turn downward card around
 
-                    dealerCardAreas[dealerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyDealerCard")));
-                    dealerCardAreas[dealerCards].setVisible(true);
-                    dealerCards++;
+                    if (messageFromServer.get("keyDealerCard") != -1){
+                        dealerCardAreas[dealerCards].setText(referenceDeck.getCardName(messageFromServer.get("keyDealerCard")));
+                        dealerCardAreas[dealerCards].setVisible(true);
+                        dealerCards++;
+                    }
+
                 }
                 else {
+                    doubleButton.setVisible(false);//you can only double once
                     textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
                     bet.setText("Bet: " + messageFromServer.get("keyBet"));
@@ -296,6 +287,8 @@ public class BlackJackClientController implements Runnable{
 
                     playerCards = 0;
                     dealerCards = 0;
+                    indexDownwardCard = -1; //to compile
+                    numberDownwardCardArea = -1; //to compile
 
                     //hide all buttons except the play
                     stayButton.setVisible(false);
@@ -306,16 +299,26 @@ public class BlackJackClientController implements Runnable{
                     int playerFinalTotal = messageFromServer.get("keyPlayerTotal");
                     int dealerFinalTotal = messageFromServer.get("keyDealerTotal");
 
-                    if (playerFinalTotal == 21 | (playerFinalTotal < 21 && playerFinalTotal > dealerFinalTotal) | dealerFinalTotal > 21){
+                    if(playerFinalTotal == 21){
+                        textForUser.setText("You have a blackJack! Congratulations, you win!");
+                    }
+                    else if ((playerFinalTotal < 21 && playerFinalTotal > dealerFinalTotal) | dealerFinalTotal > 21){
                         textForUser.setText("Congratulations, you win!");
+                    }
+                    else if (playerFinalTotal > 21){
+                        textForUser.setText("You Bust, the house automatically wins");
                     }
                     else {
                         textForUser.setText("The house wins");
                     }
+
+                    if (messageFromServer.get("keyBetAvailable") < 0){
+                        textForUser.setText(textForUser.getText() + " Ups you have a dept with us");
+                    }
                     dealerTotal.setText("Dealer Total: " + messageFromServer.get("keyDealerTotal"));
                     playerTotal.setText("Player total: " + messageFromServer.get("keyPlayerTotal"));
                     bet.setText("Bet: ");
-                    betAvailable.setText("Available to bet: " + messageFromServer.get("keyBet"));
+                    betAvailable.setText("Available to bet: " + messageFromServer.get("keyBetAvailable"));
                 }
 
             } catch (IOException | ClassNotFoundException ioException) {
@@ -370,3 +373,5 @@ public class BlackJackClientController implements Runnable{
     
 }
 
+//todo automaticly win when 21 reached
+//todo test

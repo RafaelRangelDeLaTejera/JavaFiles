@@ -88,7 +88,7 @@ public class BlackJackServer extends JFrame {
         @Override
         public void run() {
 
-            gameDetails.setText(gameDetails.getText()+"Player " + totalPlayers + " connected\n");
+            gameDetails.setText(gameDetails.getText()+ totalPlayers +"Player " + " connected\n");
 
             //initial conditions for game
             int playerTotal = 0;
@@ -102,22 +102,6 @@ public class BlackJackServer extends JFrame {
             Random randomNumber = new Random();
             int indexDownwardCard = randomNumber.nextInt(52); //initialize to compile
 
-
-//            //send the amount available to bet
-//            try {
-//                //initial conditions to start game
-//                information.put("keyPlayerTotal",playerTotal);
-//                information.put("keyDealerTotal",dealerTotal);
-//                information.put("keyBetAvailable",playerBettingLot);
-//                information.put("keyBet",bet);
-////                information.put("keyPlayerCard",0);
-////                information.put("keyDealerCard",0);
-//                output.writeObject(information);
-//                output.flush();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-            //draw cards
 
             String message;
             try{
@@ -178,8 +162,6 @@ public class BlackJackServer extends JFrame {
                             playerBettingLot -=bet;
                             bet *= 2;
 
-                            gameDetails.setText(gameDetails.getText() + playerBettingLot + " and the bet is " + bet);
-
                             HashMap<String,Integer> information = new HashMap<>();
                             //initial conditions to start game
                             information.put("keyPlayerTotal", playerTotal);
@@ -200,15 +182,26 @@ public class BlackJackServer extends JFrame {
                             playerTotal += gameDeck.getCardValue(newIndexPlayerCard);
 
                             HashMap<String,Integer> information = new HashMap<>();
-                            //initial conditions to start game
-                            information.put("keyPlayerTotal", playerTotal);
-                            information.put("keyDealerTotal", dealerTotal);
-                            information.put("keyBetAvailable", playerBettingLot);
-                            information.put("keyBet", bet);
-                            information.put("keyPlayerCard", newIndexPlayerCard);
 
-                            if (playerTotal>21){ //player busts
-                                information.put("keyTurnEnded",1);
+                            if (playerTotal<21){
+                                //initial conditions to start game
+                                information.put("keyPlayerTotal", playerTotal);
+                                information.put("keyDealerTotal", dealerTotal);
+                                information.put("keyBetAvailable", playerBettingLot);
+                                information.put("keyBet", bet);
+                                information.put("keyPlayerCard", newIndexPlayerCard);
+                            }
+                            else { //end game if player busts or gets a blackjack
+                                if (playerTotal == 21 ){
+                                    playerBettingLot += bet*2;
+                                }
+
+                                bet=0;
+                                information.put("keyPlayerTotal", playerTotal);
+                                information.put("keyDealerTotal", dealerTotal);
+                                information.put("keyBetAvailable", playerBettingLot);
+                                information.put("keyBet", bet);
+                                information.put("keyTurnEnded",1); //indication to end the turn
                             }
 
                             output.writeObject(information);
@@ -218,37 +211,48 @@ public class BlackJackServer extends JFrame {
 
                             dealerTotal += gameDeck.getCardValue(indexDownwardCard); //add the value of the card that was upside down
 
+                            if (dealerTotal >= 17){
+                                HashMap<String, Integer> information = new HashMap<>();
+                                information.put("keyPlayerTotal", playerTotal);
+                                information.put("keyDealerTotal", dealerTotal);
+                                information.put("keyBetAvailable", playerBettingLot);
+                                information.put("keyBet", bet);
+                                information.put("keyDealerCard", -1);
+
+                                output.writeObject(information);
+                                output.flush();
+                            }
+                            else {
                             while  (dealerTotal < 17)
                                 {
-                                    int indexDealerCard = randomNumber.nextInt(52);
-                                    while (usedCards.contains(indexDealerCard)) {
-                                        indexDealerCard = randomNumber.nextInt(52);
-                                    }
-                                    usedCards.add(indexDealerCard);
+                                    int newIndexDealerCard = randomNumber.nextInt(52);
 
-                                    dealerTotal += gameDeck.getCardValue(indexDealerCard);
+                                    while (usedCards.contains(newIndexDealerCard)) {
+                                        newIndexDealerCard = randomNumber.nextInt(52);
+                                    }
+                                    usedCards.add(newIndexDealerCard);
+
+                                    dealerTotal += gameDeck.getCardValue(newIndexDealerCard);
 
                                     HashMap<String, Integer> information = new HashMap<>();
                                     information.put("keyPlayerTotal", playerTotal);
                                     information.put("keyDealerTotal", dealerTotal);
                                     information.put("keyBetAvailable", playerBettingLot);
                                     information.put("keyBet", bet);
-                                    information.put("keyDealerCard", indexDealerCard);
+                                    information.put("keyDealerCard", newIndexDealerCard);
 
                                     output.writeObject(information);
                                     output.flush();
                                 }
+                            }
 
                             HashMap<String, Integer> information = new HashMap<>();
 
 
                             if (playerTotal == 21 | (playerTotal < 21 && playerTotal > dealerTotal) | dealerTotal > 21){
-                                playerBettingLot += bet;
+                                playerBettingLot += bet*2;
 
 
-                            }
-                            else {
-                                playerBettingLot -= bet;
                             }
 
                             bet=0;
@@ -268,6 +272,7 @@ public class BlackJackServer extends JFrame {
                             HashMap<String,Integer> information = new HashMap<>();
                             playerTotal = 0;
                             dealerTotal = 0;
+                            bet = 0;
                         }
                         }
 
@@ -311,9 +316,6 @@ public class BlackJackServer extends JFrame {
             }
         }
     }
-
-
 }
 
-//todo draw dealers cards if not 17
-//todo refresh card areas
+//todo turn dealer card around
