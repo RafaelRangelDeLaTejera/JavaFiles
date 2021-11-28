@@ -12,17 +12,43 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * BlackJackServer class that extends the JFrame class, so it works as a server application to which clients will establish a connection with to play blackJack, the
+ * server runs all the logic of the game while the client updates the GUI as needed
+ */
 public class BlackJackServer extends JFrame {
 
-    private  int totalPlayers = 0;
-    private ArrayList<Player> players = new ArrayList<>();
-    private ServerSocket dealer; // server socket to listen to clients and establich connections
-    private ExecutorService game;
-    private JTextArea gameDetails; // show messages about the game
 
-    // set up simple GUI that will display the events of the game
+    /**
+     * total players int member to hold the total amount of player clients connected to the server
+     */
+    private  int totalPlayers = 0;
+
+    /**
+     * ArrayList of type players, this will hold all of the player client threads that have connected the server
+     */
+    private ArrayList<Player> players = new ArrayList<>();
+
+    /**
+     * ServerSocket to listen to clients and establish connections
+     */
+    private ServerSocket dealer;
+
+    /**
+     * Executor service object to create the thread pool for all the connected clients, each has its own player thread
+     */
+    private ExecutorService game;
+
+    /**
+     * JTextArea game details which is the only component of the server gui to display what the players are doing
+     */
+    private JTextArea gameDetails;
+
+    /**
+     * BlackJackServer constructor that sets up the gui and initializes the server socket with a specific port and limits the connection queue to 100
+     */
     public BlackJackServer() {
-        super("Server");
+        super("Server"); //call the super class constructor to start the gui
 
         gameDetails = new JTextArea(); // create enterField
         gameDetails.setEditable(false);
@@ -41,6 +67,10 @@ public class BlackJackServer extends JFrame {
         }
     }
 
+    /**
+     * method to be called in the main method once the GUI is set up. this will Start the server and started listening for connections, it will accept client connections
+     * and execute that player thread for each client connected
+     */
     public void startServer(){
         while(true){
             try // wait for connection, create Player, start runnable
@@ -55,16 +85,31 @@ public class BlackJackServer extends JFrame {
 
     }
 
-
-    // private inner class Player manages each Player as a runnable so that program can run in parallel
+    /**
+     * private inner class Player that implements Runnable interface to manage each Player as a thread so that clients can run in parallel
+     */
     public  class Player implements Runnable {
-        private Socket connection; // connection to client
-        //these streams will write arrays to the clients
-        private ObjectInputStream input; // input from client
-        private ObjectOutputStream output; // output to client
-        private boolean isGameOver = false;
-        //private HashMap<String,Integer> information = new HashMap<>();
 
+        /**
+         * socket to establish connection with client
+         */
+        private Socket connection;
+
+        /**
+         * input stream that will read a string from client according to the user interaction with the GUI
+         */
+        private ObjectInputStream input;
+
+        /**
+         * output stream that will write a hash map with keys indicating the client what to display on the GUI
+         */
+        private ObjectOutputStream output;
+
+
+        /**
+         * player constructor, it establishes a connection with the servers using the passed in socket, it also starts the streams from the socket
+         * @param connection this socket will be used to connect with the clients
+         */
         public Player(Socket connection) {
             this.connection = connection;
 
@@ -81,6 +126,12 @@ public class BlackJackServer extends JFrame {
 
         }
 
+        /**
+         * overriden run method that implements the logic of the game. This method is constantly trying to read from the client and when it reads in
+         * from the input stream it used the read in String to perform a certain operation and then send write a hashmap to the client using the output
+         * stream, this map will contain keys with values the client will use to determine what to do. Each key indicates something to do and the values
+         * are used to update GUI stats
+         */
         @Override
         public void run() {
 
@@ -101,14 +152,15 @@ public class BlackJackServer extends JFrame {
 
             String message;
             try{
-                while (!isGameOver) {
+                while (true) {
 
                     try {
 
-                        if(turnPlayer){
+                        if(turnPlayer){ //if the player has started their turn, first do this to set up the game
 
                             //draw cards for player and dealer using the random number generator, while loops combined with a hash set containing the used cards indexes are used to make sure cards  are not repeated in a turn since each client is playing with one standard deck
                             int indexPlayerCard = randomNumber.nextInt(52);
+
                             while (usedCards.contains(indexPlayerCard)) {
                                 indexPlayerCard = randomNumber.nextInt(52);
                             }
@@ -126,15 +178,13 @@ public class BlackJackServer extends JFrame {
                             }
                             usedCards.add(indexDownwardCard);
 
+                            //update player, dealer totals, bet and betting lot available
                             playerTotal += gameDeck.getCardValue(indexPlayerCard);
                             dealerTotal += gameDeck.getCardValue(indexDealerCard);
-
-                            System.out.print("totals" + playerTotal + " " + dealerTotal);
-
                             bet++;
                             playerBettingLot--;
 
-                            HashMap<String,Integer> information = new HashMap<>();
+                            HashMap<String,Integer> information = new HashMap<>(); //declare and initialize new hashmap to pass in the information for the client to update the GUI
                             //initial conditions to start game
                             information.put("keyPlayerTotal", playerTotal);
                             information.put("keyDealerTotal", dealerTotal);
@@ -148,27 +198,32 @@ public class BlackJackServer extends JFrame {
                             output.writeObject(information);
                             output.flush();
 
-                            turnPlayer = false;
+                            turnPlayer = false; //indicate the initial set up was completed
                         }
                         else {
-                        message = (String) input.readObject();
+
+                        message = (String) input.readObject(); //read in from the client and indicate on the server GUI what the player pressed
                         gameDetails.setText(gameDetails.getText() + "\n" + message);
 
-                        if(message.equals("double")){
+                        if(message.equals("double")){ //if the player pressed the double button in the client app
+
+                            //double the bet
                             playerBettingLot -=bet;
                             bet *= 2;
 
-                            HashMap<String,Integer> information = new HashMap<>();
-                            //initial conditions to start game
+                            HashMap<String,Integer> information = new HashMap<>(); //declare and initialize new hashmap to pass in the information for the client to update the GUI
                             information.put("keyPlayerTotal", playerTotal);
                             information.put("keyDealerTotal", dealerTotal);
                             information.put("keyBetAvailable", playerBettingLot);
                             information.put("keyBet", bet);
 
+                            //send data to client
                             output.writeObject(information);
                             output.flush();
                         }
-                        if(message.equals("hit")){
+                        if(message.equals("hit")){ //if player pressed hit button
+
+                            //draw a new card for player
                             int newIndexPlayerCard = randomNumber.nextInt(52);
                             while (usedCards.contains(newIndexPlayerCard)) {
                                 newIndexPlayerCard = randomNumber.nextInt(52);
@@ -177,19 +232,19 @@ public class BlackJackServer extends JFrame {
 
                             playerTotal += gameDeck.getCardValue(newIndexPlayerCard);
 
-                            if (playerTotal == 21 ){
+                            if (playerTotal == 21 ){ //if the player reaches 21 they win
                                 playerBettingLot += bet*2;
                             }
 
 
-                            HashMap<String,Integer> information = new HashMap<>();
+                            HashMap<String,Integer> information = new HashMap<>(); //declare and initialize new hashmap to pass in the information for the client to update the GUI
 
 
                                 information.put("keyPlayerTotal", playerTotal);
                                 information.put("keyDealerTotal", dealerTotal);
                                 information.put("keyBetAvailable", playerBettingLot);
                                 information.put("keyBet", bet);
-                                information.put("keyPlayerCard", newIndexPlayerCard);
+                                information.put("keyPlayerCard", newIndexPlayerCard); //this key will specify the client that a new card was drawn
 
 
                             output.writeObject(information);
@@ -207,13 +262,13 @@ public class BlackJackServer extends JFrame {
                                 information.put("keyDealerTotal", dealerTotal);
                                 information.put("keyBetAvailable", playerBettingLot);
                                 information.put("keyBet", bet);
-                                information.put("keyDealerCard", -1);
+                                information.put("keyDealerCard", -1); //this key with the value -1 will indicate the client to flip the upside down card
 
                                 output.writeObject(information);
                                 output.flush();
                             }
                             else {
-                            while  (dealerTotal < 17)
+                            while  (dealerTotal < 17) //draw a card for the dealer and send it until dealer total is greater than 17
                                 {
                                     int newIndexDealerCard = randomNumber.nextInt(52);
 
@@ -229,17 +284,17 @@ public class BlackJackServer extends JFrame {
                                     information.put("keyDealerTotal", dealerTotal);
                                     information.put("keyBetAvailable", playerBettingLot);
                                     information.put("keyBet", bet);
-                                    information.put("keyDealerCard", newIndexDealerCard);
+                                    information.put("keyDealerCard", newIndexDealerCard); //this key will indicate have the upside down card faced up and draw a new card
 
                                     output.writeObject(information);
                                     output.flush();
                                 }
                             }
 
-                            HashMap<String, Integer> information = new HashMap<>();
+                            HashMap<String, Integer> information = new HashMap<>(); //new hash map to write for client
 
 
-                            if (playerTotal == 21 | (playerTotal < 21 && playerTotal > dealerTotal) | dealerTotal > 21){
+                            if (playerTotal == 21 | (playerTotal < 21 && playerTotal >= dealerTotal) | dealerTotal > 21){ //if player wins give him the prize bet
                                 playerBettingLot += bet*2;
                             }
 
@@ -254,10 +309,13 @@ public class BlackJackServer extends JFrame {
                             output.flush();
 
                         }
-                        if (message.equals("playAgain")){
+                        if (message.equals("playAgain")){ //if player presses the play again button
+
                             usedCards = new HashSet<>(); //start again with a complete deck
-                            turnPlayer = true;
-                            HashMap<String,Integer> information = new HashMap<>();
+
+                            turnPlayer = true; //to set up the game before the turn
+
+                            //reset stats
                             playerTotal = 0;
                             dealerTotal = 0;
                             bet = 0;
@@ -278,19 +336,9 @@ public class BlackJackServer extends JFrame {
             }
         }
 
-        // send message to client
-        private void sendData(String message) {
-            try // send data to client
-            {
-                output.writeObject("SERVER>>> " + message);
-                output.flush(); // flush output to client
-                gameDetails.setText(gameDetails.getText()+ "\nSERVER>>> " + message);
-            } catch (IOException ioException) {
-                gameDetails.setText(gameDetails.getText()+ "\nerror sending -> " + message);
-            }
-        }
-
-        // close streams and socket
+        /**
+         * close connection method to close the socket and streams when the server is turned off
+         */
         private void closeConnection() {
             gameDetails.setText(gameDetails.getText()+"\nTerminating connection with player \n");
 
@@ -305,5 +353,3 @@ public class BlackJackServer extends JFrame {
         }
     }
 }
-
-//todo turn dealer card around
