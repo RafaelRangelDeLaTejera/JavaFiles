@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"CircularBufferCoefficients"},{"p":"<Unnamed>","l":"CircularBufferRoots"},{"p":"<Unnamed>","l":"Master"},{"p":"<Unnamed>","l":"Slave"}]

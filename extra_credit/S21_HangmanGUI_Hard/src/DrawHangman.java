@@ -3,75 +3,113 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * class extends the JPanel class to display and implement the hangman game
+ */
 public class DrawHangman extends JPanel {
 
-    //todo
-
+    /**
+     * string letter the player entered
+     */
     private String guess = null;
+
+    /**
+     * number of guesses the player has left
+     */
     private int guessesLeft = 6;
-    private JTextField inputLetter = new JTextField(2); //text field to enter the letter guess
-    private JTextField inputWord = new JTextField(10); //text field to enter the word to be guessed
+
+    /**
+     * text field to enter the letter guess
+     */
+    private JTextField inputLetter = new JTextField(2);
+
+    /**
+     * text field to enter the word to be guessed
+     */
+    private JTextField inputWord = new JTextField(10);
+
+    /**
+     * string that holds the letters the user has guessed
+     */
     private String lettersGuessed = null;
+
+    /**
+     * string for the word to be drawn
+     */
     private String drawWord = null;
-    private JLabel letterInputLabel = new JLabel("Enter the letter and click enter: "); //lable for the text field to input the letter
+
+    /**
+     * label for the text field to input the letter
+     */
+    private JLabel letterInputLabel = new JLabel("Enter the letter and click enter: ");
+
+    /**
+     * button to start over once the game is over
+     */
     private JButton continueButton = new JButton();
+
+    /**
+     * label for the continueButton
+     */
     private JLabel buttonLabel = new JLabel();
+
+    /**
+     * label for the text field where the user will enter the word to be guessed
+     */
     private JLabel wordInputLabel = new JLabel("Enter word to be guessed by player");
 
+    /**
+     * string that stores the word to be guessed
+     */
+    private String wordToBeGuessed;
 
+    /**
+     * getter for the number of guesses the player has left
+     * @return the int guesses left
+     */
     public int getGuessesLeft() {
         return guessesLeft;
     }
 
+    /**
+     * no argument constructor that sets up the GUI and implements the game logic
+     */
     public DrawHangman() {
 
-        inputWord.addActionListener(new SetWord());
+        //add input word field and label (also assign this label to that field ) and display components to set up the game
+        inputWord.addActionListener(new SetWord()); //add action listener to input word for when the player writes in the text field
         wordInputLabel.setLabelFor(inputWord);
         wordInputLabel.setVisible(true);
         inputWord.setVisible(true);
         add(wordInputLabel);
         add(inputWord);
 
-
-        //todo
+        //add the buttons to the panel but dont show them at the beginning
         buttonLabel.setLabelFor(continueButton);
         buttonLabel.setVisible(false);
         continueButton.setVisible(false);
         add(buttonLabel);
         add(continueButton);
-        //todo
-        inputLetter.addActionListener(new HangmanHandler());
+
+        inputLetter.addActionListener(new HangmanHandler());//add action listener to the inputLetter field for when the user inputs text on the text field
 
         letterInputLabel.setLabelFor(inputLetter); //have the created label be for the inputLetter JTextField object
         //set label and text field to true
         letterInputLabel.setVisible(false);
         inputLetter.setVisible(false);
 
-        continueButton.addActionListener(new GameOverButton());
+        continueButton.addActionListener(new GameOverButton()); //add action listener to the continue button for when it is pressed
 
         //add label and text field to panel
         add(letterInputLabel);
         add(inputLetter);
 
-//        JTextField inputLetter = new JTextField(2); //text field to enter the letter guess
-//        JLabel letterInputLabel = new JLabel("Enter the letter and click enter: "); //lable for the text field to input the letter
-//
-//        letterInputLabel.setLabelFor(inputLetter); //have the created label be for the inputLetter JTextField object
-//        //set label and text field to true
-//        letterInputLabel.setVisible(true);
-//        inputLetter.setVisible(true);
-//
-//        //todo
-//        inputLetter.addActionListener(new HangmanHandler());
-//
-//        //add label and text field to panel
-//        add(letterInputLabel);
-//        add(inputLetter);
     }
 
-    private String wordToBeGuessed;
-    //HangmanHandler handler = new HangmanHandler();
-
+    /**
+     * overridden paint component that updates the panel for when the player interacts with the GUI
+     * @param g Graphics object for graphics context to allow application to draw
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -87,18 +125,10 @@ public class DrawHangman extends JPanel {
         g2d.fillRect(getWidth()/5,getHeight()/9+20,20,400);
         g2d.fillRect(getWidth()/5-90,getHeight()/9+420,200,20);
 
-//todo
-
-
-        //todo
-
-//        add(letterInputLabel);
-//        add(inputLetter);
-
-        //todo
 
         g2d.setStroke(new BasicStroke(8.0f));//set 2d graphics object stroke to a wider one
 
+        //draw hangman figure according to the players guesses
         if (guessesLeft == 5){
             g2d.drawOval(getWidth()/5+360,getHeight()/9+120,60,60);//draw head
         }
@@ -136,20 +166,15 @@ public class DrawHangman extends JPanel {
             g2d.drawLine(getWidth()/5+390,getHeight()/9+230,getWidth()/5+420,getHeight()/9+190);//draw right leg
             g2d.drawLine(getWidth()/5+390,getHeight()/9+230,getWidth()/5+360,getHeight()/9+190);//draw left leg
 
-            buttonLabel.setText("You lost, press button to play again");
+            buttonLabel.setText("You lost, press button to play again");//let the player know they lost
 
+            //hide text fields and show the button for player to continue playing
             inputLetter.setVisible(false);
             letterInputLabel.setVisible(false);
             buttonLabel.setVisible(true);
             continueButton.setVisible(true);
 
-
-
         }
-
-//todo
-
-
 
         Font textFont = new Font("Arial", Font.BOLD, 20);
         g2d.setFont(textFont);
@@ -172,27 +197,16 @@ public class DrawHangman extends JPanel {
         }
 
 
-//display the guesses the user has left
+        //display the guesses the user has left
         g2d.drawString("Guesses Left: " + guessesLeft ,getWidth()/8,getHeight()/9+520);
 
 
-        //todo
-
-        String addLetter;
-
-//        if (wordToBeGuessed.contains(guess)){
-//            for (int count = 0; count < wordToBeGuessed.length(); count++){
-//
-//            }
-//        }
-
-    if (wordToBeGuessed != null && !wordToBeGuessed.isEmpty())
-    {
-        if (drawWord == null){
-            drawWord = " _";
-            for (int count = 1; count < wordToBeGuessed.length(); count++) //go over all the lettres of the word
-            {drawWord = drawWord + " _";}
-        }
+        if (wordToBeGuessed != null && !wordToBeGuessed.isEmpty()) {
+            if (drawWord == null){
+                drawWord = " _";
+                for (int count = 1; count < wordToBeGuessed.length(); count++) //go over all the lettres of the word
+                {drawWord = drawWord + " _";}
+            }
         else{
 
 
@@ -210,13 +224,11 @@ public class DrawHangman extends JPanel {
             }
         }
 
+            g2d.drawString("Word: " + drawWord, getWidth() / 5 + 200, getHeight() / 9 + 420); //Draw the word with lines for the missing letters
 
-        g2d.drawString("Word: " + drawWord, getWidth() / 5 + 200, getHeight() / 9 + 420); //Draw the word with lines for the missing letters
+        }
 
-    }
-
-
-    //todo win state
+        //when word is guessed
         if (drawWord != null){
             if (!drawWord.contains("_")){
                 buttonLabel.setText("You Won, press button to play again");
@@ -231,8 +243,15 @@ public class DrawHangman extends JPanel {
 
     }
 
+    /**
+     * inner class that implements ActionListener interface designed for the text field input letter.
+     */
     private class HangmanHandler implements ActionListener {
 
+        /**
+         * method for the action performed, this will read in the input letter and check if it was a correct guess or not
+         * @param event when the user interacts and triggers an event in the field
+         */
         @Override
         public void actionPerformed(ActionEvent event) {
 
@@ -248,7 +267,15 @@ public class DrawHangman extends JPanel {
         }
     }
 
+    /**
+     * inner class that implements the ActionListener interface to handle events for the input word field
+     */
     private class SetWord implements ActionListener {
+
+        /**
+         * method that will read in the input word on the text field and then update the gui to start a new game with that new word
+         * @param event when the user interacts and triggers an event in the field
+         */
         @Override
         public void actionPerformed(ActionEvent event){
             wordToBeGuessed = inputWord.getText();
@@ -259,13 +286,21 @@ public class DrawHangman extends JPanel {
             inputLetter.setVisible(true);
             letterInputLabel.setVisible(true);
 
-            repaint();
+            repaint(); //update the GUI
 
 
         }
     }
 
+    /**
+     * inner class that implements the Action Listener interface to handle events for the continueButton
+     */
     private class GameOverButton implements ActionListener {
+
+        /**
+         * this method will detect when the user preses a button and start a new game
+         * @param event when the user interacts and triggers an event in the field
+         */
         @Override
         public void actionPerformed(ActionEvent event){
 
@@ -284,7 +319,7 @@ public class DrawHangman extends JPanel {
 
             inputWord.setText(null);
 
-            repaint();
+            repaint(); //update the gui
         }
     }
 

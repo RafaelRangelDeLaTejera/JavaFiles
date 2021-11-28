@@ -2,8 +2,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUNIT test class for the optimization algorithm with several test cases
+ */
 class ThanksgivingStomachOptimizationTest {
 
+    /**
+     * test the optimization algorithm with several test cases
+     */
     @Test
     void optimizationAlgorithm() {
         FoodItem turkey = new FoodItem("turkey");

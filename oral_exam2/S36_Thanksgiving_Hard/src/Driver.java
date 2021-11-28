@@ -1,7 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * driver class for the ThanksgivingStomachOptimization class, this class implements a command line interface for user to to optimize their thanksgiving dinner
+ */
 public class Driver {
 
+    /**
+     * main method to run command line interface implementing the thanksgivingStomachOptimization class
+     * @param args for when the program is executed from the command line and special arguments are passed in
+     */
     public static void main(String[] args) {
 
         /* create input object of the scanner class to read in from the user

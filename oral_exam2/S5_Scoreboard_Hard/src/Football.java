@@ -1,8 +1,21 @@
+/**
+ * Football class that extends from the Sports super class
+ */
 public class Football extends Sports{
+
+    /**
+     * football constructor, calls the super constructor from the sports base class and passes in the passed in strings
+     * @param team1 string holding the name of the first team
+     * @param team2 string holding the name of the second team
+     */
     public Football(String team1, String team2) {
         super(team1, team2);
     }
 
+    /**
+     * method to add the score according to the passed in option from the getScoringMethods called from the command line interface, these are all Football scoring methods
+     * @param scoringMethodNo scoring method option
+     */
     @Override
     public void addScore(int scoringMethodNo) {
         if (scoringMethodNo == 1){
@@ -41,6 +54,10 @@ public class Football extends Sports{
 
     }
 
+    /**
+     * method  that returns the string with the options of the scoring methods of the football class
+     * @return string with the scoring methods specific to a football game
+     */
     @Override
     public String getScoringMethods() {
         return  "1 for " + getTeams(1) + " touchdown\n" +
@@ -56,16 +73,27 @@ public class Football extends Sports{
                 "11 to end quarter\n";
     }
 
+    /**
+     * method to get the duration of a football game period
+     * @return string holding the duration of the football period which is "15 minutes"
+     */
     @Override
     public String getLengthOfPeriod() {
         return "15 minutes";
     }
 
+    /**
+     * method to get the name of the football game period
+     * @return string holding the name of the football game period which is "quarter"
+     */
     @Override
     public String getPeriodName() {
         return "quarter";
     }
 
+    /**
+     * check if the game is over, if the 4 periods of the football have been completed, then the game over method is set to true
+     */
     @Override
     public void checkGameOver() {
         if (getCurrentPeriod()==5){

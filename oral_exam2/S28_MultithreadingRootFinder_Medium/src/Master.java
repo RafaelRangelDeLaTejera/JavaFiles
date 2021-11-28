@@ -5,8 +5,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * main thread class to either generate and solve 30 sets of quadratic equations or 3000 and print the statistics
+ */
 public class Master {
 
+    /**
+     * main method thread that first prompts the user to choose to either generate and solve 30 sets of quadratic equations or 3000 and print the statistics
+     * @param args for when the program is executed from the command line and special arguments are passed in
+     * @throws InterruptedException when the main thread is interrupted
+     */
     public static void main(String[] args) throws InterruptedException{
 
         Random randomNumber = new Random();//object to create random numbers for coefficients
@@ -56,14 +64,14 @@ public class Master {
                 }
             }
         }
-        else if (option == 2){
+        else if (option == 2){ //generate 3000 sets of coefficients and solve
             for (int i = 0; i < 3000; i++) {
 
                 try {
 
                     sharedBufferCoefficients.putCoefficients(randomNumber.nextDouble(), randomNumber.nextDouble(), randomNumber.nextDouble());
 
-                    String[] roots = sharedBufferRoots.getRoots();
+                    String[] roots = sharedBufferRoots.getRoots(); //get the roots to free the buffer
 
                 } catch (Exception e) {
                     System.out.print("In exception master");
@@ -71,9 +79,9 @@ public class Master {
                 }
             }
 
-            HashMap<Integer,Integer> threads = Slave.getSlaveThreads();
+            HashMap<Integer,Integer> threads = Slave.getSlaveThreads(); //hash map to hold the slave threads
 
-            for (int x = 1; x <= 10; x++){
+            for (int x = 1; x <= 10; x++){ //print statistics of how many equations each of the 10 slaves solved
                 System.out.print("slave " + x + " solved " + threads.get(x) + " sets\n");
             }
 
