@@ -53,7 +53,7 @@
                   <Font size="27.0" />
                </font>
             </Text>
-            <TextField fx:id="textOutput" GridPane.columnIndex="1" />
+            <TextField fx:id="textOutput" editable="false" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Text fill="#dad0d0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write the morse code to decipher " textAlignment="CENTER" wrappingWidth="599.7294921875">

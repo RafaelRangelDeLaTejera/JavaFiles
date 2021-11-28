@@ -6,13 +6,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * application to decipher morse code and output it ar alphanumeric characters
+ */
 public class DecipherMorseCodeApp extends Application {
 
+    /**
+     * main method that launches the app
+     * @param args for when the program is executed from the command line and special arguments are passed in
+     */
     public static void main(String[] args){
         Application.launch(args); //launch the NumeralConverter application
-
     }
 
+    /**
+     * method called to set up the GUI app, here the fxml file is loaded and the stage is set to show the app
+     * @param stage stage where the app will show
+     * @throws Exception in case the GUI cant be set up
+     */
     @Override
     public void start(Stage stage) throws Exception {
         try {
