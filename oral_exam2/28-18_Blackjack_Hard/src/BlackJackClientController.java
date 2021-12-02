@@ -268,6 +268,8 @@ public class BlackJackClientController implements Runnable{
     @FXML
     void playAgainPressed(ActionEvent event) {
 
+
+
         try {
             output.writeObject("playAgain"); // send the playAgain string instruction to the server
             output.flush();
@@ -275,26 +277,7 @@ public class BlackJackClientController implements Runnable{
             ioException.printStackTrace();
         }
 
-        try {
-            //set up the GUI with no cards showing
-            for(int i = 0; i < playerCardAreas.length ; i++){
-                playerCardAreas[i].setVisible(false);
-                playerCardAreas[i].clear();
-            }
-            for(int e = 0; e < dealerCardAreas.length; e++){
-                dealerCardAreas[e].setVisible(false);
-                dealerCardAreas[e].clear();
-            }
 
-            playAgainButton.setVisible(false);
-            doubleButton.setVisible(true);
-            hitButton.setVisible(true);
-            stayButton.setVisible(true);
-            headerYourCards.setVisible(true);
-            headerDealerCards.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace(); //in case the Gui is not properly set up when this method attempts to modify it
-        }
 
 
     }
@@ -354,8 +337,8 @@ public class BlackJackClientController implements Runnable{
         Deck referenceDeck = new Deck(); //deck to use as reference for card names
         int playerCards = 0; //keep track of the cards the player has, this will also indicate which new card field to occupy
         int dealerCards = 0; //keep track of the cards the dealer has
-        int indexDownwardCard = -1; //to compile
-        int numberDownwardCardArea = -1; //to compile
+        int indexDownwardCard = 0; //card index from deck for the upside down card
+        int numberDownwardCardArea = 1; //index of the card area assigned to the upside down card
         boolean endOfTurn = false; //boolean that will indicate if the current turn has ended
 
 
@@ -366,6 +349,28 @@ public class BlackJackClientController implements Runnable{
                 HashMap<String,Integer> messageFromServer = (HashMap<String, Integer>) input.readObject(); //hash map to read in the servers instructions
 
                 if (messageFromServer.containsKey("keyDownwardCard")){ //first draw to start the game
+
+                    try {
+                        //set up the GUI with no cards showing
+                        for(int i = 0; i < playerCardAreas.length ; i++){
+                            playerCardAreas[i].setVisible(false);
+                            playerCardAreas[i].clear();
+                        }
+                        for(int e = 0; e < dealerCardAreas.length; e++){
+                            dealerCardAreas[e].setVisible(false);
+                            dealerCardAreas[e].clear();
+                        }
+
+                        playAgainButton.setVisible(false);
+                        doubleButton.setVisible(true);
+                        hitButton.setVisible(true);
+                        stayButton.setVisible(true);
+                        headerYourCards.setVisible(true);
+                        headerDealerCards.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace(); //in case the Gui is not properly set up when this method attempts to modify it
+                    }
+
                     textForUser.setText("Game in progress, pick your option");
                     betAvailable.setText("Available to Bet: " + messageFromServer.get("keyBetAvailable"));
                     bet.setText("Bet: " + messageFromServer.get("keyBet"));
@@ -438,8 +443,8 @@ public class BlackJackClientController implements Runnable{
                     //reset certain fields
                     playerCards = 0;
                     dealerCards = 0;
-                    indexDownwardCard = -1; //to compile
-                    numberDownwardCardArea = -1; //to compile
+                    indexDownwardCard = 0; //to compile
+                    numberDownwardCardArea = 1; //to compile
 
                     //hide all buttons except the play
                     try{
